@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="7">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="10">
  <tileset firstgid="1" name="tileset_1" tilewidth="16" tileheight="16" tilecount="300" columns="20">
   <image source="tileset_1.png" width="320" height="240"/>
+ </tileset>
+ <tileset firstgid="301" name="player" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../img/player_stand.png" width="32" height="32"/>
  </tileset>
  <layer name="background" width="20" height="15">
   <data encoding="csv">
@@ -27,5 +30,8 @@
   <object id="3" x="288" y="0" width="32" height="240"/>
   <object id="5" x="0" y="208" width="288" height="32"/>
   <object id="6" x="0" y="32" width="32" height="176"/>
+ </objectgroup>
+ <objectgroup name="player">
+  <object id="8" gid="301" x="80" y="128" width="32" height="32"/>
  </objectgroup>
 </map>
