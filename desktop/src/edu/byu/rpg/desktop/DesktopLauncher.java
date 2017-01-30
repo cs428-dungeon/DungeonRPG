@@ -7,7 +7,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import edu.byu.rpg.RpgGame;
 
 /**
- * This is the main desktop launcher for our game.  On construction, it creates an instance of our RpgGame class and
+ * This is the main desktop launcher for our game.  On construction, it creates an instance of {@link RpgGame} and
  * runs it.
  *
  * All the game's external configurations options (i.e. screen resolution) go in the constructor of this class.
@@ -25,6 +25,6 @@ public class DesktopLauncher {
         Gdx.app = new LwjglApplication(new RpgGame(), config);
 
         // Set the log level ("debug" for dev, "info" for testing, "none" for production)
-        Gdx.app.setLogLevel(Application.LOG_NONE);
+        Gdx.app.setLogLevel(Application.LOG_DEBUG);
     }
 }
