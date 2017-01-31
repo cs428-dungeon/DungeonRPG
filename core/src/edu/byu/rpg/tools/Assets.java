@@ -37,7 +37,7 @@ public class Assets {
     }
 
     /**
-     * Subroutine of `load()`, used for loading images.
+     * Subroutine of {@link Assets#load()}, used for loading images.
      * @param name The name of the PNG file (without path or extension).
      */
     public void loadTexture(String name) {
@@ -54,7 +54,7 @@ public class Assets {
     }
 
     /**
-     * Subroutine of `load()`, used for loading Tiled maps.
+     * Subroutine of {@link Assets#load()}, used for loading Tiled maps.
      * @param name The name of the TMX file (without path or extension).
      */
     public void loadMap(String name) {
