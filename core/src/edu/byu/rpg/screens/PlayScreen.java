@@ -4,11 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import edu.byu.rpg.RpgGame;
 import edu.byu.rpg.entities.ActorStaging;
 import edu.byu.rpg.entities.base.Solid;
+import edu.byu.rpg.entities.player.Player;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.World;
 
@@ -69,9 +71,14 @@ public class PlayScreen extends ScreenBase {
 
         // TODO: Load all Tiled objects into the game world.
         // TODO: Remove ActorStaging object when done testing engine loop.
-        new ActorStaging(game, world, 32, 32);
+//        new ActorStaging(game, world, 32, 32);
 
         try {
+            // load player
+            for (TiledMapTileMapObject playerTile : map.getLayers().get("player").getObjects().getByType(TiledMapTileMapObject.class)) {
+                new Player(game, world, (int)playerTile.getX(), (int)playerTile.getY());
+            }
+
             // load solid level geometry
             for (MapObject rectMapObj : map.getLayers().get("solids").getObjects().getByType(RectangleMapObject.class)) {
                 // get rectangle and make solid level geometry out of it

@@ -26,14 +26,14 @@ public class Body {
      */
     public Vector2 offset;
 
-    /** The x and y velocity of this body in meters/sec. */
+    /** The x and y velocity of this body in m/s. */
     public Vector2 velocity;
-    /** The x and y acceleration of this body in meters/sec. */
+    /** The x and y acceleration of this body in m/s-squared. */
     public Vector2 acceleration;
     /** The x and y friction of this body. Not a friction constant, just a "negative" acceleration.
-     * Default is 4 meters/seconds squared. */
+     * Default is 3 m/s-squared. */
     public float friction;
-    /** The maximum rate at which this body will move in any direction.  The default is 6.5 m/s. */
+    /** The maximum rate at which this body will move in any direction.  The default is 5.8 m/s. */
     public float maxSpeed;
 
     /**
@@ -114,7 +114,7 @@ public class Body {
      * Resets all movement to 0.  Does not affect position, dimensions, or hitbox offset.
      */
     public void reset() {
-        maxSpeed = 6.5f;
+        maxSpeed = 5.8f;
         velocity = new Vector2();
         acceleration = new Vector2();
         friction = 3f;

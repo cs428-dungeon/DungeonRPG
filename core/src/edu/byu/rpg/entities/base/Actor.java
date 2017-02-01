@@ -18,8 +18,8 @@ public abstract class Actor extends DrawableEntity {
     /** Whether or not this body should collide with level geometry. Defaults to true.*/
     public boolean isSolid;
 
-    /** Local instance of {@link World} */
-    private World world;
+    /** Local instance of {@link World}, used for collision checking. */
+    protected World world;
 
     /**
      * Set the physics body for this actor, and adds it to {@link RpgGame#engine} as a drawable entity.
