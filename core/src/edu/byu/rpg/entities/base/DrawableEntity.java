@@ -12,13 +12,19 @@ import edu.byu.rpg.components.DrawComponent;
 public abstract class DrawableEntity extends UpdatableEntity {
 
     /**
+     * Stored instance of {@link DrawComponent}, so that {@link DrawComponent#zIndex} can be updated dynamically.
+     */
+    protected DrawComponent drawComponent;
+
+    /**
      * Automatically registers this entity with {@link RpgGame#engine}, and also adds a {@link DrawComponent}
      * to this entity.
      * @param game Our main game class.
      */
     public DrawableEntity(RpgGame game) {
         super(game);
-        add(new DrawComponent(this));
+        drawComponent = new DrawComponent(this);
+        add(drawComponent);
     }
 
     /**
