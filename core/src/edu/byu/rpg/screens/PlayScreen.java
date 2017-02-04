@@ -8,7 +8,6 @@ import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import edu.byu.rpg.RpgGame;
-import edu.byu.rpg.entities.ActorStaging;
 import edu.byu.rpg.entities.base.Solid;
 import edu.byu.rpg.entities.player.Player;
 import edu.byu.rpg.physics.Body;
@@ -69,10 +68,7 @@ public class PlayScreen extends ScreenBase {
         TiledMap map = game.assets.getMap(name);
         mapRenderer = new OrthogonalTiledMapRenderer(map);
 
-        // TODO: Load all Tiled objects into the game world.
-        // TODO: Remove ActorStaging object when done testing engine loop.
-//        new ActorStaging(game, world, 32, 32);
-
+        // Loads objects from tiled map
         try {
             // load player
             for (TiledMapTileMapObject playerTile : map.getLayers().get("player").getObjects().getByType(TiledMapTileMapObject.class)) {
