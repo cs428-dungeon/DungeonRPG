@@ -9,6 +9,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import edu.byu.rpg.RpgGame;
 import edu.byu.rpg.entities.base.Solid;
+import edu.byu.rpg.entities.enemies.Scarab;
 import edu.byu.rpg.entities.player.Player;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.World;
@@ -73,6 +74,12 @@ public class PlayScreen extends ScreenBase {
             // load player
             for (TiledMapTileMapObject playerTile : map.getLayers().get("player").getObjects().getByType(TiledMapTileMapObject.class)) {
                 new Player(game, world, (int)playerTile.getX(), (int)playerTile.getY());
+            }
+
+            // TODO: need to create an enemy controller object that spawns a random enemy, given map location.
+            // load enemies
+            for (TiledMapTileMapObject enemyTile : map.getLayers().get("enemies").getObjects().getByType(TiledMapTileMapObject.class)) {
+                new Scarab(game, world, (int)enemyTile.getX(), (int)enemyTile.getY());
             }
 
             // load solid level geometry

@@ -2,6 +2,7 @@ package edu.byu.rpg.entities.base;
 
 import edu.byu.rpg.RpgGame;
 import edu.byu.rpg.physics.Body;
+import edu.byu.rpg.physics.ICollideable;
 import edu.byu.rpg.physics.World;
 import edu.byu.rpg.tools.Utils;
 
@@ -10,16 +11,16 @@ import edu.byu.rpg.tools.Utils;
  *
  * @see <a href="http://mattmakesgames.tumblr.com/post/127890619821/towerfall-physics">Matt Thorson's Blog</a>
  */
-public abstract class Actor extends DrawableEntity {
+public abstract class Actor extends DrawableEntity implements ICollideable {
 
     /** This actor's physics body. */
     public Body body;
 
-    /** Whether or not this body should collide with level geometry. Defaults to true.*/
-    public boolean isSolid;
-
     /** Local instance of {@link World}, used for collision checking. */
     protected World world;
+
+    /** If solid, this object moves through level geometry.  Defaults to <tt>true</tt>. */
+    protected boolean isSolid;
 
     /**
      * Set the physics body for this actor, and adds it to {@link RpgGame#engine} as a drawable entity.
@@ -60,7 +61,7 @@ public abstract class Actor extends DrawableEntity {
         }
 
         // update z-index (for depth illusion)
-        drawComponent.zIndex = (int)body.position.x;
+        drawComponent.zIndex = (int)body.position.y;
     }
 
     /**
@@ -74,7 +75,7 @@ public abstract class Actor extends DrawableEntity {
         body.position.x += body.velocity.x * delta * Body.PIXELS_PER_METER;
 
         // check for collision, and move back by steps if necessary
-        while (world.collideWithSolid(body) != null) {
+        while (world.collideCheck(World.Type.SOLID, body)) {
             body.position.x = Utils.approach(body.position.x, prevX, 1);
         }
     }
@@ -90,10 +91,13 @@ public abstract class Actor extends DrawableEntity {
         body.position.y += body.velocity.y * delta * Body.PIXELS_PER_METER;
 
         // check for collision and move back if necessary
-        while (world.collideWithSolid(body) != null) {
+        while (world.collideCheck(World.Type.SOLID, body)) {
             body.position.y = Utils.approach(body.position.y, prevY, 1);
         }
     }
 
-
+    @Override
+    public boolean collide(Body otherBody) {
+        return body.collide(otherBody);
+    }
 }
