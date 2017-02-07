@@ -29,6 +29,7 @@ public abstract class PlayerBullet extends Actor implements Pool.Poolable, Colli
      * @param game Our game class.
      * @param world The physics world.
      * @param body A physics {@link Body} that defines this bullet's hitbox.
+     * @param pool The bullet pool that this bullet belongs to.
      */
     public PlayerBullet(RpgGame game, World world, Body body, Pool<PlayerBullet> pool) {
         super(game, world, body);

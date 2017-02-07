@@ -29,7 +29,9 @@ public class AnimationManager {
     /** Whether or not the animation should face right or be flipped. */
     private boolean faceRight;
 
-    /** Sets local instance of {@link RpgGame} and resets the animations map. */
+    /** Sets local instance of {@link RpgGame} and resets the animations map.
+     * @param game Our main game class.
+     */
     public AnimationManager(final RpgGame game) {
         this.game = game;
     }

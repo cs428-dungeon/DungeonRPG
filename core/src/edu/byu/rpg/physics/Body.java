@@ -126,7 +126,7 @@ public class Body {
 
     /**
      * Gets the center x-coordinate of hitbox.
-     * @return
+     * @return The x-coordinate of the center of the hitbox.
      */
     public float getCenterX() {
         return position.x + offset.x + (size.x / 2);
@@ -134,7 +134,7 @@ public class Body {
 
     /**
      * Gets center of y-coordinate of hitbox.
-     * @return
+     * @return The y-coordinate of the center of the hitbox.
      */
     public float getCenterY() {
         return position.y + offset.y + (size.y / 2);
