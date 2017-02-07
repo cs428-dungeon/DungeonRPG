@@ -1,0 +1,29 @@
+Running All Test classes:
+    From Intellij:
+        In order to run a test class from intellij Right click the test sources folder and say run all tests.
+    From Gradle:
+        If you are compiling from the command line in order to run all tests you would use the command gradlew test.
+
+Running and Creating Test Suites:
+             Think of a test suite as being something like UnitTestSuite, ComponentTestSuite. You create a test class
+             that runs more than one test class, but less than every test class
+             We will want to do these in order to organize our tests well.
+
+    From Intellij:
+        You can create test suite classes that will run only certain test classes, you can see UnitTestSuite.class
+        as an example. To run from Intellij just right click the testSuite class and click run
+    From Gradle:
+        This is a bit more complicated. Once you have created a test Suite go into the DungeonRPG build.gradle and
+        create a task that looks like this:
+
+        task JunitSuite(type: Test) {
+                include '**/UnitTestSuite.class'
+                reports.junitXml.destination = "$buildDir/test-results/YourOutputFile"
+                reports.html.destination = "$buildDir/test-results/YourOutputFile"
+            }
+
+        then you can run from the command line by doing gradlew clean JunitSuite(or whatever you named your task above).
+
+     Even though we will most likely all be running tests from inside intellij, I think it would be beneficial if we had gradle commands
+     for our test suites. This is more for industry standard type stuff than it is for what we need. Its good practice.
+
