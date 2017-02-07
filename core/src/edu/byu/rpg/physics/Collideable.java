@@ -2,10 +2,10 @@ package edu.byu.rpg.physics;
 
 /**
  * The basis for an object that can be stored and processed by {@link World}.
- * An object that implements {@link ICollideable} can handle post-collision logic,
+ * An object that implements {@link Collideable} can handle post-collision logic,
  * such as flinching/taking damage, and so forth.
  */
-public interface ICollideable {
+public interface Collideable {
 
     /**
      * Checks whether or not this collideable is intersecting another hitbox.

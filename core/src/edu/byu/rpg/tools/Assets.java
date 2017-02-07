@@ -28,6 +28,7 @@ public class Assets {
         loadTexture("player_stand");
         loadTexture("shadow_32");
         loadTexture("scarab");
+        loadTexture("basic_bullet");
 
         // load maps
         manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));

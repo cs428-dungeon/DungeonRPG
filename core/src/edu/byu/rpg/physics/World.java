@@ -10,19 +10,19 @@ import java.util.HashMap;
 public class World {
 
     /** Defines collision group classes. */
-    public static enum Type { SOLID, PLAYER, ENEMY }
+    public static enum Type { SOLID, PLAYER, PLAYER_BULLET, ENEMY }
 
     /** Private map of type to collision group. */
-    private HashMap<Type, ArrayList<ICollideable>> groups;
+    private HashMap<Type, ArrayList<Collideable>> groups;
 
     /**
      * Initializes the collision groups map.
      */
     public World() {
-        groups = new HashMap<Type, ArrayList<ICollideable>>();
+        groups = new HashMap<Type, ArrayList<Collideable>>();
         // create new collision group for each type.
         for (Type type : Type.values()) {
-            groups.put(type, new ArrayList<ICollideable>());
+            groups.put(type, new ArrayList<Collideable>());
         }
     }
 
@@ -31,8 +31,8 @@ public class World {
      * @param type The type of group you want to add this object to.
      * @param collideable The object to add to the collision group.
      */
-    public void add(Type type, ICollideable collideable) {
-        ArrayList<ICollideable> group = groups.get(type);
+    public void add(Type type, Collideable collideable) {
+        ArrayList<Collideable> group = groups.get(type);
         group.add(collideable);
     }
 
@@ -41,8 +41,8 @@ public class World {
      * @param type The type of group you want to remove this object from.
      * @param collideable The object to remove from the collision group.
      */
-    public void remove(Type type, ICollideable collideable) {
-        ArrayList<ICollideable> group = groups.get(type);
+    public void remove(Type type, Collideable collideable) {
+        ArrayList<Collideable> group = groups.get(type);
         group.remove(collideable);
     }
 
@@ -50,11 +50,11 @@ public class World {
      * Checks for collisions against the group of the specified type.
      * @param type The type of the group you want to check for collisions against.
      * @param otherBody The {@link Body} object you want to check against the group.
-     * @return The first {@link ICollideable} to overlap <tt>otherBody</tt>, or <tt>null</tt>.
+     * @return The first {@link Collideable} to overlap <tt>otherBody</tt>, or <tt>null</tt>.
      */
-    public ICollideable collide(Type type, Body otherBody) {
-        ArrayList<ICollideable> group = groups.get(type);
-        for (ICollideable collideable : group) {
+    public Collideable collide(Type type, Body otherBody) {
+        ArrayList<Collideable> group = groups.get(type);
+        for (Collideable collideable : group) {
             if (collideable.collide(otherBody)) return collideable;
         }
         return null;
@@ -77,11 +77,11 @@ public class World {
 //     * <tt>types</tt> parameter.
 //     * @param types An array of types to check against.
 //     * @param otherBody The {@link Body} object you want to check against the groups.
-//     * @return The first {@link ICollideable} to overlap <tt>otherBody</tt>, or <tt>null</tt>.
+//     * @return The first {@link Collideable} to overlap <tt>otherBody</tt>, or <tt>null</tt>.
 //     */
-//    public ICollideable collide(Type[] types, Body otherBody) {
+//    public Collideable collide(Type[] types, Body otherBody) {
 //        for (int i = 0; i < types.length; i++) {
-//            ICollideable collisionObj = collide(types[i], otherBody);
+//            Collideable collisionObj = collide(types[i], otherBody);
 //            if (collisionObj != null) return collisionObj;
 //        }
 //        return null;

@@ -36,6 +36,9 @@ public class Body {
     /** The maximum rate at which this body will move in any direction.  The default is 5.8 m/s. */
     public float maxSpeed;
 
+    /** Collisions are only registered if this body is alive.  <tt>true</tt> by default. **/
+    public boolean alive;
+
     /**
      * Sets the dimensions of this body, with no offset.  All other properties default to 0.
      * @param x The world x-position of the body.
@@ -47,6 +50,8 @@ public class Body {
         position = new Vector2(x, y);
         size = new Vector2(width, height);
         offset = Vector2.Zero;
+        maxSpeed = 5.8f;
+        alive = true;
         reset();
     }
 
@@ -63,6 +68,8 @@ public class Body {
         position = new Vector2(x, y);
         size = new Vector2(width, height);
         offset = new Vector2(ox, oy);
+        maxSpeed = 5.8f;
+        alive = true;
         reset();
     }
 
@@ -99,6 +106,13 @@ public class Body {
      * @return True if overlapping, false if not overlapping.
      */
     public boolean collide(Body otherBody) {
+        if (equals(otherBody)) {
+            return false;
+        }
+        if (!alive || !otherBody.alive) {
+            return false;
+        }
+
         Rectangle rect = new Rectangle(position.x + offset.x, position.y + offset.y, size.x, size.y);
         Rectangle otherRect = new Rectangle(
                 otherBody.position.x + otherBody.offset.x,
@@ -111,10 +125,25 @@ public class Body {
     }
 
     /**
+     * Gets the center x-coordinate of hitbox.
+     * @return
+     */
+    public float getCenterX() {
+        return position.x + offset.x + (size.x / 2);
+    }
+
+    /**
+     * Gets center of y-coordinate of hitbox.
+     * @return
+     */
+    public float getCenterY() {
+        return position.y + offset.y + (size.y / 2);
+    }
+
+    /**
      * Resets all movement to 0.  Does not affect position, dimensions, or hitbox offset.
      */
     public void reset() {
-        maxSpeed = 5.8f;
         velocity = new Vector2();
         acceleration = new Vector2();
         friction = 3f;

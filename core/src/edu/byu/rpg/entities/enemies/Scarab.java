@@ -1,17 +1,18 @@
 package edu.byu.rpg.entities.enemies;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.byu.rpg.RpgGame;
 import edu.byu.rpg.entities.base.Actor;
 import edu.byu.rpg.physics.Body;
-import edu.byu.rpg.physics.ICollideable;
+import edu.byu.rpg.physics.Collideable;
 import edu.byu.rpg.physics.World;
 
 /**
  * Enemy for testing out collisions/hurting player
  */
-public class Scarab extends Actor implements ICollideable {
+public class Scarab extends Actor implements Collideable {
 
     private Texture scarabTexture;
 
@@ -35,5 +36,6 @@ public class Scarab extends Actor implements ICollideable {
     @Override
     public void takeDamage(float damage) {
         // take damage here.
+        Gdx.app.debug(this.getClass().getSimpleName(), "Just took damage.");
     }
 }

@@ -2,7 +2,7 @@ package edu.byu.rpg.entities.base;
 
 import edu.byu.rpg.RpgGame;
 import edu.byu.rpg.physics.Body;
-import edu.byu.rpg.physics.ICollideable;
+import edu.byu.rpg.physics.Collideable;
 import edu.byu.rpg.physics.World;
 import edu.byu.rpg.tools.Utils;
 
@@ -11,7 +11,7 @@ import edu.byu.rpg.tools.Utils;
  *
  * @see <a href="http://mattmakesgames.tumblr.com/post/127890619821/towerfall-physics">Matt Thorson's Blog</a>
  */
-public abstract class Actor extends DrawableEntity implements ICollideable {
+public abstract class Actor extends DrawableEntity implements Collideable {
 
     /** This actor's physics body. */
     public Body body;

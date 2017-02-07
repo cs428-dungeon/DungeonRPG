@@ -13,12 +13,19 @@ import edu.byu.rpg.components.UpdateComponent;
 public abstract class UpdatableEntity extends Entity {
 
     /**
+     * Local instance of {@link RpgGame} for easy access to
+     * {@link RpgGame#engine}, {@link RpgGame#assets}, and {@link RpgGame#batch}
+     */
+    protected RpgGame game;
+
+    /**
      * Automatically registers this entity with {@link RpgGame#engine}
      * @param game Our main game class.
      */
     public UpdatableEntity(RpgGame game) {
         add(new UpdateComponent(this));
         game.engine.addEntity(this);
+        this.game = game;
     }
 
     /**
