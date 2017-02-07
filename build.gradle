@@ -57,7 +57,7 @@ project(":core") {
         testCompile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
         testCompile "com.badlogicgames.ashley:ashley:$ashleyVersion"
     }
-    task JunitSuite(type: Test) {
+    task UnitTestSuite(type: Test) {
         include '**/UnitTestSuite.class'
         reports.junitXml.destination = "$buildDir/test-results/JunitSuiteExample"
         reports.html.destination = "$buildDir/test-results/JunitSuiteExample"
