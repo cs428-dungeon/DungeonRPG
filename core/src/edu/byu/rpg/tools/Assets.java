@@ -31,7 +31,7 @@ public class Assets {
         loadTexture("player/legs_walk_down");
         loadTexture("player/shadow");
 
-        loadTexture("scarab");
+        loadTexture("scarab_stand");
         loadTexture("basic_bullet");
 
         loadTexture("effects/shadow_64");
