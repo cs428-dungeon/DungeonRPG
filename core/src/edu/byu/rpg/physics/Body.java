@@ -36,8 +36,8 @@ public class Body {
     /** The maximum rate at which this body will move in any direction.  The default is 5.8 m/s. */
     public float maxSpeed;
 
-    /** Collisions are only registered if this body is alive.  <tt>true</tt> by default. **/
-    public boolean alive;
+    /** Collisions are only registered if this body is collideable.  <tt>true</tt> by default. **/
+    public boolean collideable;
 
     /**
      * Sets the dimensions of this body, with no offset.  All other properties default to 0.
@@ -51,7 +51,7 @@ public class Body {
         size = new Vector2(width, height);
         offset = Vector2.Zero;
         maxSpeed = 5.8f;
-        alive = true;
+        collideable = true;
         reset();
     }
 
@@ -69,7 +69,7 @@ public class Body {
         size = new Vector2(width, height);
         offset = new Vector2(ox, oy);
         maxSpeed = 5.8f;
-        alive = true;
+        collideable = true;
         reset();
     }
 
@@ -109,7 +109,7 @@ public class Body {
         if (equals(otherBody)) {
             return false;
         }
-        if (!alive || !otherBody.alive) {
+        if (!collideable || !otherBody.collideable) {
             return false;
         }
 

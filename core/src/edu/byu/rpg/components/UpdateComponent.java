@@ -1,6 +1,7 @@
 package edu.byu.rpg.components;
 
 import com.badlogic.ashley.core.Component;
+import edu.byu.rpg.entities.base.Updatable;
 import edu.byu.rpg.entities.base.UpdatableEntity;
 
 /**
@@ -11,9 +12,9 @@ import edu.byu.rpg.entities.base.UpdatableEntity;
 public class UpdateComponent implements Component {
 
     /** The entity whose update logic should be executed in the game engine's update loop */
-    public UpdatableEntity updatable;
+    public Updatable updatable;
 
-    public UpdateComponent(UpdatableEntity updatable) {
+    public UpdateComponent(Updatable updatable) {
         this.updatable = updatable;
     }
 

@@ -25,10 +25,16 @@ public class Assets {
      */
     public void load() {
         // load all textures
-        loadTexture("player_stand");
-        loadTexture("shadow_32");
+        loadTexture("player/body_stand_down");
+        loadTexture("player/body_walk_down");
+        loadTexture("player/legs_stand_down");
+        loadTexture("player/legs_walk_down");
+        loadTexture("player/shadow");
+
         loadTexture("scarab");
         loadTexture("basic_bullet");
+
+        loadTexture("effects/shadow_64");
 
         // load maps
         manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));

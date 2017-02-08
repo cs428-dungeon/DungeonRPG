@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.byu.rpg.RpgGame;
 import edu.byu.rpg.entities.base.Actor;
+import edu.byu.rpg.entities.effects.Shadow;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.Collideable;
 import edu.byu.rpg.physics.World;
@@ -15,12 +16,14 @@ import edu.byu.rpg.physics.World;
 public class Scarab extends Actor implements Collideable {
 
     private Texture scarabTexture;
+    private Shadow shadow;
 
     public Scarab(RpgGame game, World world, int x, int y) {
         super(game, world, new Body(x, y, 11, 8, 45, 16));
         // add to enemies collision group
         world.add(World.Type.ENEMY, this);
         scarabTexture = game.assets.getTexture("scarab");
+        shadow = new Shadow(game, game.assets.getTexture("effects/shadow_64"), body);
     }
 
     @Override

@@ -18,7 +18,7 @@ public class AnimationManager {
 
     /** Map of animation objects. */
     private HashMap<String, Animation<TextureRegion>> animations;
-    /** The current animation's asset key (filename without path or ext). */
+    /** The current animation's asset key (filepath from /assets, without ext). */
     private String currentAnimation;
 
     /** Current animation time elapsed. */
@@ -34,11 +34,12 @@ public class AnimationManager {
      */
     public AnimationManager(final RpgGame game) {
         this.game = game;
+        reset();
     }
 
     /**
      * Parses a spritesheet into an animation and adds it to {@link AnimationManager#animations}
-     * @param key The key of the img resource (the filename without path and ext).
+     * @param key The key of the img resource (the filepath from /assets, without ext).
      * @param rows How many rows make up the spritesheet.
      * @param cols How many columns make up the spritesheet.
      * @param fps The frames per second for this animation.
@@ -76,7 +77,7 @@ public class AnimationManager {
 
     /**
      * Plays the animation specified by <tt>key</tt>.  If that animation is already playing, nothing happens.
-     * @param key The key of the img resource (the filename without path and ext).
+     * @param key The key of the img resource (the filepath from /assets without ext).
      * @param loop <tt>true</tt> if this animation should loop, <tt>false</tt> if it should stop animating on the
      *             last frame.
      */
@@ -107,7 +108,7 @@ public class AnimationManager {
      * @param x The x-position to draw the current animation at.
      * @param y The y-position to draw the current animation at.
      */
-    public void draw(float deltaTime, int x, int y) {
+    public void draw(float deltaTime, float x, float y) {
         // get current animation and update its frame time
         Animation<TextureRegion> animation = animations.get(currentAnimation);
         if (animation == null) {
@@ -138,6 +139,14 @@ public class AnimationManager {
                     "There is no animation named " + currentAnimation + ".");
             return false;
         }
+    }
+
+    /**
+     * Sets the total time (useful for when you need to sync up two separate animations).
+     * @param totalTime The new total time.
+     */
+    public void setTotalTime(float totalTime) {
+        this.totalTime = totalTime;
     }
 
     /**

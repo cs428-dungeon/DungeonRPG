@@ -5,8 +5,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import edu.byu.rpg.RpgGame;
 import edu.byu.rpg.entities.base.Actor;
+import edu.byu.rpg.entities.effects.Shadow;
 import edu.byu.rpg.entities.player.weapons.base.PlayerWeapon;
 import edu.byu.rpg.entities.player.weapons.basic.BasicWeapon;
+import edu.byu.rpg.graphics.AnimationManager;
 import edu.byu.rpg.input.InputManager;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.Collideable;
@@ -17,9 +19,9 @@ import edu.byu.rpg.physics.World;
  */
 public class Player extends Actor implements Collideable {
 
-    //TODO: replace with animation manager class when built.
-    //TODO: separate animations - one for feet and one for upper body
-    private Texture playerTexture;
+    // animations
+    private AnimationManager torsoAnims;
+    private AnimationManager legsAnims;
 
     // physics constants
     private final float ACCEL_CONST = 2.5f;
@@ -38,7 +40,6 @@ public class Player extends Actor implements Collideable {
         super(game, world, new Body(x, y, 8, 0, 16, 16));
         // add to player collision group
         world.add(World.Type.PLAYER, this);
-        playerTexture = game.assets.getTexture("player_stand");
 
         // damage variables
         invincibleClock = 0;
@@ -47,6 +48,19 @@ public class Player extends Actor implements Collideable {
 
         // equip basic weapon
         equipWeapon(new BasicWeapon(game, world));
+
+        // init animations
+        legsAnims = new AnimationManager(game);
+        torsoAnims = new AnimationManager(game);
+
+        legsAnims.add("player/legs_stand_down", 1, 1, 0);
+        legsAnims.add("player/legs_walk_down", 1, 8, 10);
+
+        torsoAnims.add("player/body_stand_down", 1, 1, 0);
+        torsoAnims.add("player/body_walk_down", 1, 8, 10);
+
+        // create a shadow
+        new Shadow(game, game.assets.getTexture("player/shadow"), body);
     }
 
     @Override
@@ -57,6 +71,15 @@ public class Player extends Actor implements Collideable {
 
         // check for collisions with enemies, traps, etc.
         handleEnemyCollisions();
+
+        // play animations
+        if (body.velocity.len() > 0) {
+            legsAnims.play("player/legs_walk_down", true);
+            torsoAnims.play("player/body_walk_down", true);
+        } else {
+            legsAnims.play("player/legs_stand_down", true);
+            torsoAnims.play("player/body_stand_down", true);
+        }
 
         // right stick = bullets
         float rightXAxis = InputManager.getRightXAxis();
@@ -83,7 +106,7 @@ public class Player extends Actor implements Collideable {
 
         // get center of hitbox
         float x = body.getCenterX();
-        float y = body.getCenterY();
+        float y = body.position.y + body.size.y;
 
         // fire weapon
         weapon.fire(x, y, xDir, yDir);
@@ -105,7 +128,9 @@ public class Player extends Actor implements Collideable {
         }
 
         if (!flashing) {
-            batch.draw(playerTexture, body.position.x, body.position.y);
+            // draw legs first, then torso
+            legsAnims.draw(delta, body.position.x, body.position.y);
+            torsoAnims.draw(delta, body.position.x, body.position.y);
         }
     }
 
