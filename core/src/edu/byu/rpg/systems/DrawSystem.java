@@ -46,7 +46,7 @@ public class DrawSystem extends SortedIteratingSystem {
     private static class ZComparator implements Comparator<Entity> {
         @Override
         public int compare(Entity e1, Entity e2) {
-            return (int)Math.signum(Mappers.dm.get(e1).zIndex - Mappers.dm.get(e2).zIndex);
+            return (int)Math.signum(Mappers.dm.get(e2).zIndex - Mappers.dm.get(e1).zIndex);
         }
     }
 }

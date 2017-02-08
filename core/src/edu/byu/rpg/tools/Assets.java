@@ -25,8 +25,16 @@ public class Assets {
      */
     public void load() {
         // load all textures
-        loadTexture("player_stand");
-        loadTexture("shadow_32");
+        loadTexture("player/body_stand_down");
+        loadTexture("player/body_walk_down");
+        loadTexture("player/legs_stand_down");
+        loadTexture("player/legs_walk_down");
+        loadTexture("player/shadow");
+
+        loadTexture("scarab");
+        loadTexture("basic_bullet");
+
+        loadTexture("effects/shadow_64");
 
         // load maps
         manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
@@ -37,7 +45,7 @@ public class Assets {
     }
 
     /**
-     * Subroutine of `load()`, used for loading images.
+     * Subroutine of {@link Assets#load()}, used for loading images.
      * @param name The name of the PNG file (without path or extension).
      */
     public void loadTexture(String name) {
@@ -54,7 +62,7 @@ public class Assets {
     }
 
     /**
-     * Subroutine of `load()`, used for loading Tiled maps.
+     * Subroutine of {@link Assets#load()}, used for loading Tiled maps.
      * @param name The name of the TMX file (without path or extension).
      */
     public void loadMap(String name) {

@@ -18,7 +18,7 @@ public class DestroySystem extends IteratingSystem {
     /**
      * Assigns this system a priority of 2, meaning it will be executed last during each update loop (after
      * {@link UpdateSystem} and {@link DrawSystem}).
-     * @param game
+     * @param game Our main game class.
      */
     public DestroySystem(RpgGame game) {
         super(Family.all(DestroyComponent.class).get(), 2);
