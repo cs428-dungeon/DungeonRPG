@@ -30,4 +30,14 @@ public class Solid implements Collideable {
      */
     @Override
     public void takeDamage(float damage) {}
+
+    /**
+     * Solids be default don't deal any damage, so this just returns 0.  (This could be overridden
+     * if we wanted to make a solid set of spikes or other type of trap.)
+     * @return 0, because solids don't hurt other entities.
+     */
+    @Override
+    public float getDamage() {
+        return 0;
+    }
 }

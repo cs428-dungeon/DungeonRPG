@@ -47,6 +47,16 @@ public class World {
     }
 
     /**
+     * Removes a collideable object from any group that they are a part of.
+     * @param collideable The object to remove from the world.
+     */
+    public void remove(Collideable collideable) {
+        for (Type type : Type.values()) {
+            remove(type, collideable);
+        }
+    }
+
+    /**
      * Checks for collisions against the group of the specified type.
      * @param type The type of the group you want to check for collisions against.
      * @param otherBody The {@link Body} object you want to check against the group.
