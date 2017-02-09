@@ -23,6 +23,8 @@ public class Scarab extends Actor implements Collideable {
     private final float dirTime = 0.9f;
     private float dirClock;
 
+    private float health;
+
     public Scarab(RpgGame game, World world, int x, int y) {
         super(game, world, new Body(x, y, 11, 8, 45, 16));
         // add to enemies collision group
@@ -41,6 +43,9 @@ public class Scarab extends Actor implements Collideable {
 
         // setup random direction
         setRandomAcceleration();
+
+        // init health
+        health = 5;
     }
 
     @Override
@@ -77,9 +82,18 @@ public class Scarab extends Actor implements Collideable {
     }
 
     @Override
+    public float getDamage() {
+        return 1;
+    }
+
+    @Override
     public void takeDamage(float damage) {
         // take damage here.
-        Gdx.app.debug(this.getClass().getSimpleName(), "Just took damage.");
+        health -= damage;
+
+        if (health <= 0) {
+            destroy();
+        }
     }
 
     private void setRandomAcceleration() {
@@ -90,5 +104,12 @@ public class Scarab extends Actor implements Collideable {
         y *= (Math.random() > 0.5) ? -1 : 1;
 
         body.acceleration.set(x, y);
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        shadow.destroy();
+        world.remove(this);
     }
 }

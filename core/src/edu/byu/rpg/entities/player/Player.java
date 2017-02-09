@@ -19,14 +19,16 @@ import edu.byu.rpg.physics.World;
  */
 public class Player extends Actor implements Collideable {
 
-    // animations
+    // animations and graphics
     private AnimationManager torsoAnims;
     private AnimationManager legsAnims;
+    private Shadow shadow;
 
     // physics constants
     private final float ACCEL_CONST = 2.5f;
 
     // taking damage, flashing, being invincible, etc.
+    private float health;
     private final float invincibleTime = 1.5f;
     private float invincibleClock;
     private final float flashTime = 0.05f;
@@ -42,6 +44,7 @@ public class Player extends Actor implements Collideable {
         world.add(World.Type.PLAYER, this);
 
         // damage variables
+        health = 3;
         invincibleClock = 0;
         flashClock = 0;
         flashing = false;
@@ -60,7 +63,7 @@ public class Player extends Actor implements Collideable {
         torsoAnims.add("player/body_walk_down", 1, 8, 10);
 
         // create a shadow
-        new Shadow(game, game.assets.getTexture("player/shadow"), body);
+        shadow = new Shadow(game, game.assets.getTexture("player/shadow"), body);
     }
 
     @Override
@@ -142,9 +145,9 @@ public class Player extends Actor implements Collideable {
         if (invincibleClock > 0) return;
 
         // check for collisions with enemies, and get hurt if hit.
-        if (world.collideCheck(World.Type.ENEMY, body)) {
-            // TODO: need to figure out the damage based on enemy's stats
-            takeDamage(1);
+        Collideable enemy = world.collide(World.Type.ENEMY, body);
+        if (enemy != null) {
+            takeDamage(enemy.getDamage());
         }
     }
 
@@ -161,15 +164,47 @@ public class Player extends Actor implements Collideable {
     }
 
     /**
+     * By default, player doesn't deal damage to things by touching them. (Possible upgrade idea for later???)
+     * @return 0, because player doesn't hurt stuff by default.
+     */
+    @Override
+    public float getDamage() {
+        return 0;
+    }
+
+    /**
      * Reduce health by specified damage amount, and become invincible for a bit.
      * @param damage The amount of damage to inflict on this object.
      */
     @Override
     public void takeDamage(float damage) {
-        // TODO: subtract health here when that gets added.
-        invincibleClock = invincibleTime;
-        flashing = true;
+        // take damage
+        health -= damage;
+
         // "bounce" off the enemy
         body.velocity.scl(-1f);
+
+        // die
+        if (health <= 0) {
+            die();
+        }
+        // go invincible
+        invincibleClock = invincibleTime;
+        flashing = true;
+    }
+
+    /**
+     * Kills the player.  Called when player's health is below or equal to 0
+     */
+    private void die() {
+        // TODO: create some death sequence/animation, don't call destroy until after it's complete.
+        destroy();
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        world.remove(this);
+        shadow.destroy();
     }
 }

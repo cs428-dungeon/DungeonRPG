@@ -12,12 +12,18 @@ public interface Collideable {
      * @param otherBody The other {@link Body} to check for collisions.
      * @return <tt>true</tt> if colliding, <tt>false</tt> if not.
      */
-    public boolean collide(Body otherBody);
+    boolean collide(Body otherBody);
 
     /**
      * Damages this object by <tt>damage</tt> amount.
      * @param damage The amount of damage to inflict on this object.
      */
-    public void takeDamage(float damage);
+    void takeDamage(float damage);
+
+    /**
+     * Return the amount of damage this collideable deals.
+     * @return The float amount of damage this collideable deals.
+     */
+    float getDamage();
 
 }

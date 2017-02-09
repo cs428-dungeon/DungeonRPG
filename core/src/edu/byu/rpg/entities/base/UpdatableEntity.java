@@ -30,9 +30,10 @@ public abstract class UpdatableEntity extends Entity implements Updatable {
 
     /**
      * This function destroys this entity by adding a {@link DestroyComponent} to it.
+     * Objects that are also added to a {@link edu.byu.rpg.physics.World} should override this method and
+     * remove themselves from from the physics world.
      */
     public void destroy() {
         add(new DestroyComponent());
-        // TODO: Consider also removing from the physics world so we don't have memory leaks.
     }
 }
