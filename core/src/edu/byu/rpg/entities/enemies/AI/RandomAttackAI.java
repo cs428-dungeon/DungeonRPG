@@ -9,7 +9,7 @@ public class RandomAttackAI implements AttackAI {
     private float attackSpeed;
     private float attackDamage;
 
-    public RandomAttackAI(float attackSpeed, float attackDamage, Body body){
+    public RandomAttackAI(float attackSpeed, float attackDamage){
 
     }
 

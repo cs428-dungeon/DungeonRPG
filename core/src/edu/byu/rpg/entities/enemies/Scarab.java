@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.byu.rpg.RpgGame;
 import edu.byu.rpg.entities.base.Actor;
 import edu.byu.rpg.entities.effects.Shadow;
+import edu.byu.rpg.entities.enemies.AI.AttackAI;
+import edu.byu.rpg.entities.enemies.AI.MovementAI;
 import edu.byu.rpg.graphics.AnimationManager;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.Collideable;
@@ -22,10 +24,11 @@ public class Scarab extends Actor implements Collideable {
 
     private final float dirTime = 0.9f;
     private float dirClock;
+    private MovementAI movementAI;
 
     private float health;
 
-    public Scarab(RpgGame game, World world, int x, int y) {
+    public Scarab(RpgGame game, World world, int x, int y, MovementAI movementAI, AttackAI attackAI) {
         super(game, world, new Body(x, y, 11, 8, 45, 16));
         // add to enemies collision group
         world.add(World.Type.ENEMY, this);
@@ -42,7 +45,8 @@ public class Scarab extends Actor implements Collideable {
         dirClock = dirTime;
 
         // setup random direction
-        setRandomAcceleration();
+        this.movementAI = movementAI;
+        movementAI.move(body);
 
         // init health
         health = 5;
@@ -55,7 +59,7 @@ public class Scarab extends Actor implements Collideable {
 
         // movement timer
         if (dirClock < 0) {
-            setRandomAcceleration();
+            movementAI.move(body);
             dirClock = dirTime;
         } else {
             dirClock -= delta;
@@ -64,7 +68,7 @@ public class Scarab extends Actor implements Collideable {
         // check for collisions with other enemies, change direction if hit.
         // (this prevents overlap)
         if (world.collideCheck(World.Type.ENEMY, body)) {
-            setRandomAcceleration();
+            movementAI.move(body);
         }
 
         // set animation
@@ -94,16 +98,6 @@ public class Scarab extends Actor implements Collideable {
         if (health <= 0) {
             destroy();
         }
-    }
-
-    private void setRandomAcceleration() {
-        float x = (float)Math.random() * accelConst;
-        x *= (Math.random() > 0.5) ? -1 : 1;
-
-        float y = (float)Math.random() * accelConst;
-        y *= (Math.random() > 0.5) ? -1 : 1;
-
-        body.acceleration.set(x, y);
     }
 
     @Override
