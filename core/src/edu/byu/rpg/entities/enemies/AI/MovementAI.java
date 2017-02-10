@@ -11,7 +11,8 @@ public interface MovementAI extends EnemyAI {
 
     /**
      * changes the X and Y coordinates for the Body passed in.
-     * @param body The {@link Body} that is going to be moved.
+     * @param enemyBody The {@link Body} that corresponds to where the enemy is at the moment move is called.
+     * @param playerBody The {@Link Body} that corresponds to where the player is at the moment move is called.
      */
-    public void move(Body body);
+    public void move(Body enemyBody, Body playerBody);
 }

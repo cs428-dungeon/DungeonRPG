@@ -11,7 +11,8 @@ public interface AttackAI extends EnemyAI {
 
     /**
      * causes an attack to origionate from the Body specified
-     * @param body The {@link Body} that is the origin of the attack.
+     * @param enemyBody The {@link Body} that corresponds to where the enemy is at the moment move is called.
+     * @param playerBody The {@Link Body} that corresponds to where the player is at the moment move is called.
      */
-    public void attack(Body body);
+    public void attack(Body enemyBody, Body playerBody);
 }
