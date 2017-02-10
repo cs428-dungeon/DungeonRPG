@@ -10,14 +10,11 @@ import java.util.Random;
  * Created by Andrew on 2/10/2017.
  */
 public class AIController {
-    private Random randomGenerator;
-    private ArrayList<MovementAI> movementAIs;
-    private ArrayList<AttackAI> attackAIs;
+    private Random randomGenerator = new Random();
+    private ArrayList<MovementAI> movementAIs = new ArrayList<MovementAI>();
+    private ArrayList<AttackAI> attackAIs = new ArrayList<AttackAI>();
 
     public AIController(){
-        movementAIs = new ArrayList<MovementAI>();
-        attackAIs = new ArrayList<AttackAI>();
-        randomGenerator = new Random();
     }
 
     public void addMovementAI(MovementAI movementAI){

@@ -1,6 +1,5 @@
 package edu.byu.rpg.entities.enemies;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.byu.rpg.RpgGame;
 import edu.byu.rpg.entities.base.Actor;
