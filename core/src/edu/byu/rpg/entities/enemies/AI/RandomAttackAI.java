@@ -19,7 +19,7 @@ public class RandomAttackAI implements AttackAI {
     }
 
     @Override
-    public void attack(Body body) {
+    public void attack(Body enemyBody, Body playerBody) {
 
     }
 }

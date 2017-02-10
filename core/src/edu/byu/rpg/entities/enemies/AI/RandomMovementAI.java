@@ -20,14 +20,14 @@ public class RandomMovementAI implements MovementAI {
     }
 
     @Override
-    public void move(Body body) {
+    public void move(Body enemyBody, Body playerBody) {
         float x = (float)Math.random() * movementSpeed;
         x *= (Math.random() > 0.5) ? -1 : 1;
 
         float y = (float)Math.random() * movementSpeed;
         y *= (Math.random() > 0.5) ? -1 : 1;
 
-        body.acceleration.set(x, y);
+        enemyBody.acceleration.set(x, y);
     }
 
 }
