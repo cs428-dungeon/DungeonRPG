@@ -45,7 +45,8 @@ public class Scarab extends Actor implements Collideable {
 
         // setup random direction
         this.movementAI = movementAI;
-        movementAI.move(body);
+        //grab the players body and pass it in for the AI to use.
+        movementAI.move(body, world);
 
         // init health
         health = 5;
@@ -58,7 +59,7 @@ public class Scarab extends Actor implements Collideable {
 
         // movement timer
         if (dirClock < 0) {
-            movementAI.move(body);
+            movementAI.move(body, world);
             dirClock = dirTime;
         } else {
             dirClock -= delta;
@@ -66,8 +67,9 @@ public class Scarab extends Actor implements Collideable {
 
         // check for collisions with other enemies, change direction if hit.
         // (this prevents overlap)
+
         if (world.collideCheck(World.Type.ENEMY, body)) {
-            movementAI.move(body);
+            movementAI.move(body, world);
         }
 
         // set animation

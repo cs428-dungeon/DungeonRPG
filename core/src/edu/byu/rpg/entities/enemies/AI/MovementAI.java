@@ -1,6 +1,7 @@
 package edu.byu.rpg.entities.enemies.AI;
 
 import edu.byu.rpg.physics.Body;
+import edu.byu.rpg.physics.World;
 
 /**
  * The basis for an object that represents specifically the AI of how an enemy moves.
@@ -12,7 +13,7 @@ public interface MovementAI extends EnemyAI {
     /**
      * changes the X and Y coordinates for the Body passed in.
      * @param enemyBody The {@link Body} that corresponds to where the enemy is at the moment move is called.
-     * @param playerBody The {@Link Body} that corresponds to where the player is at the moment move is called.
+     * @param world The {@Link World} that world that contains all the other entities that can be used in calculations.
      */
-    public void move(Body enemyBody, Body playerBody);
+    public void move(Body enemyBody, World world);
 }

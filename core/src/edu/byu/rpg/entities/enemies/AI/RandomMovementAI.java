@@ -2,6 +2,7 @@ package edu.byu.rpg.entities.enemies.AI;
 
 import edu.byu.rpg.graphics.AnimationManager;
 import edu.byu.rpg.physics.Body;
+import edu.byu.rpg.physics.World;
 
 /**
  * Created by Andrew on 2/8/2017.
@@ -20,7 +21,7 @@ public class RandomMovementAI implements MovementAI {
     }
 
     @Override
-    public void move(Body enemyBody, Body playerBody) {
+    public void move(Body enemyBody, World world) {
         float x = (float)Math.random() * movementSpeed;
         x *= (Math.random() > 0.5) ? -1 : 1;
 
