@@ -20,7 +20,7 @@ public abstract class PlayerWeapon extends UpdatableEntity {
     /** Cooldown clock.  If greater than 0, weapon will not fireBullets. */
     private float cooldownClock;
 
-    /** The amount of damage each bullet does. */
+    /** The amount of damage each bullet does. Defaults to 1 */
     protected float damage;
 
     /**
@@ -32,6 +32,7 @@ public abstract class PlayerWeapon extends UpdatableEntity {
     public PlayerWeapon(RpgGame game) {
         super(game);
         this.cooldownTime = 0.35f;
+        damage = 1;
     }
 
     /**

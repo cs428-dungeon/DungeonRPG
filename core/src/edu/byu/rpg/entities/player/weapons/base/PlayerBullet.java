@@ -38,7 +38,8 @@ public abstract class PlayerBullet extends Entity implements Updatable, Drawable
     /** Local instance of bullet pool, used to deactivate this bullet on collision. */
     private Pool<PlayerBullet> pool;
 
-    /** The amount of damage this bullet inflicts. */
+    /** The amount of damage this bullet inflicts. This is determined by this bullet's
+     * {@link PlayerWeapon}, every time it calls {@link PlayerBullet#init(float, float, float, float, float)}.*/
     private float damage;
 
     /**
@@ -68,8 +69,8 @@ public abstract class PlayerBullet extends Entity implements Updatable, Drawable
         // set pool
         this.pool = pool;
 
-        // damage defaults to 1
-        damage = 1;
+        // set default damage (so not null)
+        this.damage = 1;
     }
 
     /**
@@ -85,7 +86,7 @@ public abstract class PlayerBullet extends Entity implements Updatable, Drawable
     public void init(float x, float y, float xDir, float yDir, float damage) {
         body.collideable = true;
         float cX = x - (body.size.x / 2);
-        float cY = y - (body.size.y / 2);
+        float cY = y - (body.size.y);
         body.position.set(cX, cY);
         body.velocity.set(xDir * body.maxSpeed, yDir * body.maxSpeed);
         this.damage = damage;
@@ -173,4 +174,9 @@ public abstract class PlayerBullet extends Entity implements Updatable, Drawable
      */
     @Override
     public void takeDamage(float damage) {}
+
+    @Override
+    public float getDamage() {
+        return damage;
+    }
 }
