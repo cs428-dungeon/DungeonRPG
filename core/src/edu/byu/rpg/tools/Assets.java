@@ -1,7 +1,11 @@
 package edu.byu.rpg.tools;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.MusicLoader;
+import com.badlogic.gdx.assets.loaders.SoundLoader;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -40,6 +44,9 @@ public class Assets {
         manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         manager.load("maps/0.tmx", TiledMap.class);
 
+        // load music
+        loadMusic("opening");
+
         // Block any further logic until the manager has finished loading.
         manager.finishLoading();
     }
@@ -77,6 +84,38 @@ public class Assets {
     public TiledMap getMap(String name) {
         return manager.get("maps/" + name + ".tmx");
     }
+
+    /**
+     * Subroutine of {@link Assets#load()}, used for loading sound effects.
+     * @param name The name of the OGG file (without path or extension).
+     */
+    public void loadSound(String name) {
+        manager.setLoader(Sound.class, new SoundLoader(new InternalFileHandleResolver()));
+        manager.load("audio/sound/" + name + ".ogg", Sound.class);
+    }
+
+    /**
+     * Used to retrieve a pre-loaded OGG sound effect.
+     * @param name The name of the sound file (without path or extension).
+     * @return The pre-loaded sound.
+     */
+    public Sound getSound(String name) { return manager.get("audio/sound/" + name + ".ogg");}
+
+    /**
+     * Subroutine of {@link Assets#load()}, used for loading music.
+     * @param name The name of the OGG file (without path or extension).
+     */
+    public void loadMusic(String name) {
+        manager.setLoader(Music.class, new MusicLoader(new InternalFileHandleResolver()));
+        manager.load("audio/music/" + name + ".ogg", Music.class);
+    }
+
+    /**
+     * Used to retrieve pre-loaded OGG music.
+     * @param name The name of the music file (without path or extension).
+     * @return The pre-loaded music.
+     */
+    public Music getMusic(String name) { return manager.get("audio/music/" + name + ".ogg");}
 
     /**
      * This class disposes of all our loaded assets.  It should be called within the `dispose()` function of our
