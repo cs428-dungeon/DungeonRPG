@@ -11,7 +11,10 @@ import edu.byu.rpg.RpgGame;
 import edu.byu.rpg.entities.base.Solid;
 import edu.byu.rpg.entities.enemies.AI.RandomAttackAI;
 import edu.byu.rpg.entities.enemies.AI.RandomMovementAI;
+import edu.byu.rpg.entities.enemies.MonsterType;
 import edu.byu.rpg.entities.enemies.Scarab;
+import edu.byu.rpg.entities.enemies.controllers.AIController;
+import edu.byu.rpg.entities.enemies.controllers.EnemyController;
 import edu.byu.rpg.entities.player.Player;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.World;
@@ -70,19 +73,22 @@ public class PlayScreen extends ScreenBase {
         world = new World();
         TiledMap map = game.assets.getMap(name);
         mapRenderer = new OrthogonalTiledMapRenderer(map);
-
         // Loads objects from tiled map
         try {
             // load player
             for (TiledMapTileMapObject playerTile : map.getLayers().get("player").getObjects().getByType(TiledMapTileMapObject.class)) {
                 new Player(game, world, (int)playerTile.getX(), (int)playerTile.getY());
             }
-
-            // TODO: need to create an enemy controller object that spawns a random enemy, given map location.
-            // load enemies
-            for (TiledMapTileMapObject enemyTile : map.getLayers().get("enemies").getObjects().getByType(TiledMapTileMapObject.class)) {
-                new Scarab(game, world, (int)enemyTile.getX(), (int)enemyTile.getY(), new RandomMovementAI(1.0f), new RandomAttackAI(1.0f,1.0f));
-            }
+            AIController aiController = new AIController();
+            aiController.addMovementAI(new RandomMovementAI(1.0f));
+            aiController.addAttackAI(new RandomAttackAI(1.0f, 1.0f));
+            // TODO: need to create an enemy controller object that spawns a random enemy, given map location;
+            // create enemyController with the enemy tiles in it.
+            EnemyController enemyController = new EnemyController(aiController, map.getLayers().get("enemies").getObjects().getByType(TiledMapTileMapObject.class));
+            // add the types of monsters the enemyController should be able to spawn.
+            enemyController.addEnemy(MonsterType.SCARAB);
+            // spawn the random monsters
+            enemyController.spawnRandomMonsters(game, world);
 
             // load solid level geometry
             for (MapObject rectMapObj : map.getLayers().get("solids").getObjects().getByType(RectangleMapObject.class)) {

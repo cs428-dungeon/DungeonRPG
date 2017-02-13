@@ -1,6 +1,7 @@
 package edu.byu.rpg.entities.enemies.AI;
 
 import edu.byu.rpg.physics.Body;
+import edu.byu.rpg.physics.World;
 
 /**
  * Created by Andrew on 2/8/2017.
@@ -19,7 +20,7 @@ public class RandomAttackAI implements AttackAI {
     }
 
     @Override
-    public void attack(Body enemyBody, Body playerBody) {
+    public void attack(Body enemyBody, World world) {
 
     }
 }
