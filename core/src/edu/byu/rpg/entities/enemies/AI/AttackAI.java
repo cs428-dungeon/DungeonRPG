@@ -1,5 +1,6 @@
 package edu.byu.rpg.entities.enemies.AI;
 
+import edu.byu.rpg.entities.enemies.weapons.base.EnemyWeapon;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.World;
 
@@ -14,6 +15,12 @@ public interface AttackAI extends EnemyAI {
      * causes an attack to origionate from the Body specified
      * @param enemyBody The {@link Body} that corresponds to where the enemy is at the moment move is called.
      * @param world The {@Link World} that corresponds to the world that contains other entities you might interact with.
+     * @param weapon The{@Link EnemyWeapon} that will be firing off the attack.
      */
-    public void attack(Body enemyBody, World world);
+    public void attack(Body enemyBody, World world, EnemyWeapon weapon);
+
+    public float getAttackSpeed();
+
+    public float getAttackDamage();
+
 }

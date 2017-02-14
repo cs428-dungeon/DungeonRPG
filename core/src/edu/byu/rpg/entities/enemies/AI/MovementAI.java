@@ -16,4 +16,6 @@ public interface MovementAI extends EnemyAI {
      * @param world The {@Link World} that world that contains all the other entities that can be used in calculations.
      */
     public void move(Body enemyBody, World world);
+
+    public float getMovementSpeed();
 }

@@ -31,4 +31,9 @@ public class RandomMovementAI implements MovementAI {
         enemyBody.acceleration.set(x, y);
     }
 
+    @Override
+    public float getMovementSpeed() {
+        return movementSpeed;
+    }
+
 }

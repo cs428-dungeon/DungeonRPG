@@ -79,10 +79,12 @@ public class PlayScreen extends ScreenBase {
             for (TiledMapTileMapObject playerTile : map.getLayers().get("player").getObjects().getByType(TiledMapTileMapObject.class)) {
                 new Player(game, world, (int)playerTile.getX(), (int)playerTile.getY());
             }
+
+            // TODO: need to create an enemy controller object that spawns a random enemy, given map location;
+            //create an AIController and give it an attackAI and a movementAI;
             AIController aiController = new AIController();
             aiController.addMovementAI(new RandomMovementAI(1.0f));
             aiController.addAttackAI(new RandomAttackAI(1.0f, 1.0f));
-            // TODO: need to create an enemy controller object that spawns a random enemy, given map location;
             // create enemyController with the enemy tiles in it.
             EnemyController enemyController = new EnemyController(aiController, map.getLayers().get("enemies").getObjects().getByType(TiledMapTileMapObject.class));
             // add the types of monsters the enemyController should be able to spawn.
