@@ -8,17 +8,18 @@ import edu.byu.rpg.physics.World;
  * Created by Andrew on 2/8/2017.
  */
 public class RandomAttackAI implements AttackAI {
-    private float attackSpeed;
-    private float attackDamage;
+    private float attackSpeed = 2.0f;
+    private float attackDamage = 2.0f;
 
-    public RandomAttackAI(float attackSpeed, float attackDamage){
-        this.attackSpeed = attackSpeed;
-        this.attackDamage = attackDamage;
+    public RandomAttackAI(){
 
     }
 
     @Override
     public void scale(float scaleAmount) {
+        //scale up attack speed and damage
+        attackSpeed = attackSpeed * scaleAmount;
+        attackDamage = attackDamage * scaleAmount;
 
     }
 

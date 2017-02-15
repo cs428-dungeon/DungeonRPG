@@ -11,6 +11,7 @@ import edu.byu.rpg.RpgGame;
 import edu.byu.rpg.entities.base.Solid;
 import edu.byu.rpg.entities.enemies.AI.RandomAttackAI;
 import edu.byu.rpg.entities.enemies.AI.RandomMovementAI;
+import edu.byu.rpg.entities.enemies.AI.ThreeBulletAttackAI;
 import edu.byu.rpg.entities.enemies.MonsterType;
 import edu.byu.rpg.entities.enemies.Scarab;
 import edu.byu.rpg.entities.enemies.controllers.AIController;
@@ -83,8 +84,9 @@ public class PlayScreen extends ScreenBase {
             // TODO: need to create an enemy controller object that spawns a random enemy, given map location;
             //create an AIController and give it an attackAI and a movementAI;
             AIController aiController = new AIController();
-            aiController.addMovementAI(new RandomMovementAI(1.0f));
-            aiController.addAttackAI(new RandomAttackAI(1.0f, 1.0f));
+            aiController.addMovementAI(new RandomMovementAI());
+            aiController.addAttackAI(new RandomAttackAI());
+            aiController.addAttackAI(new ThreeBulletAttackAI());
             // create enemyController with the enemy tiles in it.
             EnemyController enemyController = new EnemyController(aiController, map.getLayers().get("enemies").getObjects().getByType(TiledMapTileMapObject.class));
             // add the types of monsters the enemyController should be able to spawn.

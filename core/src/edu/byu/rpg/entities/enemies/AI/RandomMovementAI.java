@@ -9,11 +9,10 @@ import edu.byu.rpg.physics.World;
  */
 public class RandomMovementAI implements MovementAI {
 
-    private float movementSpeed;
+    private float movementSpeed = 1.0f;
 
-    public RandomMovementAI(float movementSpeed){
-        this.movementSpeed = movementSpeed;
-    }
+    public RandomMovementAI(){}
+
     @Override
     public void scale(float scaleAmount) {
         movementSpeed = movementSpeed  * scaleAmount;

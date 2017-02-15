@@ -2,6 +2,7 @@ package edu.byu.rpg.entities.enemies.weapons.attacks;
 
 import com.badlogic.gdx.utils.Pool;
 import edu.byu.rpg.RpgGame;
+import edu.byu.rpg.entities.enemies.weapons.attacks.BasicEnemyBullet;
 import edu.byu.rpg.entities.enemies.weapons.base.EnemyAttack;
 import edu.byu.rpg.entities.enemies.weapons.base.EnemyWeapon;
 import edu.byu.rpg.physics.World;
@@ -16,7 +17,7 @@ public class BasicEnemyWeapon extends EnemyWeapon {
         attackPool = new Pool<EnemyAttack>() {
             @Override
             protected EnemyAttack newObject() {
-                return new BasicEnemyAttack(game, world, attackPool);
+                return new BasicEnemyBullet(game, world, attackPool);
             }
         };
     }

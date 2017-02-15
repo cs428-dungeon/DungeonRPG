@@ -17,5 +17,9 @@ public interface MovementAI extends EnemyAI {
      */
     public void move(Body enemyBody, World world);
 
+    /**
+     *
+     * @return a float corresponding to how fast the enemy using this AI moves.
+     */
     public float getMovementSpeed();
 }

@@ -19,8 +19,14 @@ public interface AttackAI extends EnemyAI {
      */
     public void attack(Body enemyBody, World world, EnemyWeapon weapon);
 
+    /**
+     * @return return's a float corresponding to the attack speed of this attack.
+     */
     public float getAttackSpeed();
 
+    /**
+     * @return returns a float corresponding to the damage that this attack does.
+     */
     public float getAttackDamage();
 
 }

@@ -41,7 +41,7 @@ public class EnemyController {
 
     public void spawnMonster(RpgGame game, World world, TiledMapTileMapObject enemyTile, MonsterType monsterType){
         switch(monsterType){
-            case SCARAB: Scarab scarab = new Scarab(game, world, (int)enemyTile.getX(), (int)enemyTile.getY(), new RandomMovementAI(1.0f), new RandomAttackAI(1.0f,1.0f));
+            case SCARAB: Scarab scarab = new Scarab(game, world, (int)enemyTile.getX(), (int)enemyTile.getY(), aiController.getRandomMovementAI(), aiController.getRandomAttackAI());
 
         }
     }

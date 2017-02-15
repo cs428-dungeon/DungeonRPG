@@ -44,13 +44,11 @@ public class AIController {
     }
 
     public MovementAI getRandomMovementAI(){
-        int index = randomGenerator.nextInt(movementAIs.size());
-        return movementAIs.get(index);
+        return movementAIs.get(randomGenerator.nextInt(movementAIs.size()));
     }
 
     public AttackAI getRandomAttackAI(){
-        int index = randomGenerator.nextInt(movementAIs.size());
-        return attackAIs.get(index);
+        return attackAIs.get(randomGenerator.nextInt(attackAIs.size()));
     }
 
     public ArrayList<MovementAI> getMovementAIs(){

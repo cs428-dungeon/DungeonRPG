@@ -43,6 +43,13 @@ public abstract class EnemyAttack extends Entity implements Updatable, Drawable,
      * {@link EnemyWeapon}, every time it calls {@link EnemyAttack#init(float, float, float, float, float)}.*/
     private float damage;
 
+    /** The time that this bullet is allowed to live(just in case something happens and it gets stuck etc...)
+     *  This is final and cannot be changed.
+     */
+    private final float maxTimeToLive = 7;
+    private float TimeToLive;
+
+
     /**
      * Calls {@link Actor}'s constructor, initializes the body.
      * @param game Our game class.
@@ -72,6 +79,7 @@ public abstract class EnemyAttack extends Entity implements Updatable, Drawable,
 
         // set default damage (so not null)
         this.damage = 1;
+        this.TimeToLive = maxTimeToLive;
     }
 
     /**
@@ -128,7 +136,7 @@ public abstract class EnemyAttack extends Entity implements Updatable, Drawable,
         float prevX = body.position.x;
         float prevY = body.position.y;
         body.updatePosition(delta);
-
+        TimeToLive -=delta;
         // check for collisions
         if (collideCheck()) {
 
@@ -146,6 +154,11 @@ public abstract class EnemyAttack extends Entity implements Updatable, Drawable,
 
             // destroy this bullet
             pop();
+        }
+        //check if the bullet has been alive for too long, if it has destroy it and reset the timer.
+        else if(TimeToLive < 0){
+            pop();
+            TimeToLive = maxTimeToLive;
         }
     }
 

@@ -11,11 +11,11 @@ import edu.byu.rpg.physics.World;
 /**
  * Starter ranged attack for enemies.  A basic bullet with no special abilities.
  */
-public class BasicEnemyAttack extends EnemyAttack {
+public class BasicEnemyBullet extends EnemyAttack {
 
     Texture bulletTexture;
 
-    public BasicEnemyAttack(RpgGame game, World world, Pool<EnemyAttack> pool) {
+    public BasicEnemyBullet(RpgGame game, World world, Pool<EnemyAttack> pool) {
         super(game, world, new Body(0, 0, 8, 8), pool);
         bulletTexture = game.assets.getTexture("basic_bullet");
     }
