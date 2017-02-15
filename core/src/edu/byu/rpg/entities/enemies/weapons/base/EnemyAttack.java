@@ -8,7 +8,6 @@ import edu.byu.rpg.components.UpdateComponent;
 import edu.byu.rpg.entities.base.Actor;
 import edu.byu.rpg.entities.base.Drawable;
 import edu.byu.rpg.entities.base.Updatable;
-import edu.byu.rpg.entities.enemies.AI.EnemyAI;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.Collideable;
 import edu.byu.rpg.physics.World;

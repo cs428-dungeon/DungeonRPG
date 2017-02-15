@@ -1,6 +1,5 @@
 package edu.byu.rpg.entities.enemies.AI;
 
-import edu.byu.rpg.graphics.AnimationManager;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.World;
 

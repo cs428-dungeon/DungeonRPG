@@ -13,7 +13,6 @@ import edu.byu.rpg.entities.enemies.AI.RandomAttackAI;
 import edu.byu.rpg.entities.enemies.AI.RandomMovementAI;
 import edu.byu.rpg.entities.enemies.AI.ThreeBulletAttackAI;
 import edu.byu.rpg.entities.enemies.MonsterType;
-import edu.byu.rpg.entities.enemies.Scarab;
 import edu.byu.rpg.entities.enemies.controllers.AIController;
 import edu.byu.rpg.entities.enemies.controllers.EnemyController;
 import edu.byu.rpg.entities.player.Player;
