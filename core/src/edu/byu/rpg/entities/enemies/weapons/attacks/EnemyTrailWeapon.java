@@ -7,16 +7,16 @@ import edu.byu.rpg.entities.enemies.weapons.base.EnemyWeapon;
 import edu.byu.rpg.physics.World;
 
 /**
- * Created by Andrew on 2/14/2017.
+ * Created by Andrew on 2/15/2017.
  */
-public class BasicEnemyWeapon extends EnemyWeapon {
+public class EnemyTrailWeapon extends EnemyWeapon {
 
-    public BasicEnemyWeapon(final RpgGame game, final World world) {
+    public EnemyTrailWeapon(final RpgGame game, final World world) {
         super(game);
         attackPool = new Pool<EnemyAttack>() {
             @Override
             protected EnemyAttack newObject() {
-                return new BasicEnemyBullet(game, world, attackPool);
+                return new BasicFireTrail(game, world, attackPool);
             }
         };
     }

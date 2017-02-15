@@ -6,7 +6,7 @@ import edu.byu.rpg.entities.base.Actor;
 import edu.byu.rpg.entities.effects.Shadow;
 import edu.byu.rpg.entities.enemies.AI.AttackAI;
 import edu.byu.rpg.entities.enemies.AI.MovementAI;
-import edu.byu.rpg.entities.enemies.weapons.attacks.BasicEnemyWeapon;
+import edu.byu.rpg.entities.enemies.weapons.attacks.EnemyTrailWeapon;
 import edu.byu.rpg.entities.enemies.weapons.base.EnemyWeapon;
 import edu.byu.rpg.graphics.AnimationManager;
 import edu.byu.rpg.physics.Body;
@@ -46,7 +46,7 @@ public class Scarab extends Actor implements Collideable {
         anims.add("scarab_stand", 1, 7, 10);
         shadow = new Shadow(game, game.assets.getTexture("effects/shadow_64"), body);
         //equip weapon
-        equipWeapon(new BasicEnemyWeapon(game, world));
+        equipWeapon(attackAI.getWeapon());
 
         //set up the attack AI and get attack speed and damage.
         this.attackAI = attackAI;
@@ -79,7 +79,7 @@ public class Scarab extends Actor implements Collideable {
 
         //attack timer
         if(attackClock < 0){
-            attackAI.attack(body, world, weapon);
+            attackAI.attack(body, world);
             attackClock = attackTime;
         } else {
             attackClock -= delta;

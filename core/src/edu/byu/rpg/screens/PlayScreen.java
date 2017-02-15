@@ -10,12 +10,13 @@ import com.badlogic.gdx.math.Rectangle;
 import edu.byu.rpg.RpgGame;
 import edu.byu.rpg.audio.AudioManager;
 import edu.byu.rpg.entities.base.Solid;
-import edu.byu.rpg.entities.enemies.AI.RandomAttackAI;
+import edu.byu.rpg.entities.enemies.AI.BulletAttackAI;
 import edu.byu.rpg.entities.enemies.AI.RandomMovementAI;
 import edu.byu.rpg.entities.enemies.AI.ThreeBulletAttackAI;
 import edu.byu.rpg.entities.enemies.MonsterType;
 import edu.byu.rpg.entities.enemies.controllers.AIController;
 import edu.byu.rpg.entities.enemies.controllers.EnemyController;
+import edu.byu.rpg.entities.enemies.weapons.attacks.EnemyBulletWeapon;
 import edu.byu.rpg.entities.player.Player;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.World;
@@ -87,8 +88,9 @@ public class PlayScreen extends ScreenBase {
             //create an AIController and give it an attackAI and a movementAI;
             AIController aiController = new AIController();
             aiController.addMovementAI(new RandomMovementAI());
-            aiController.addAttackAI(new RandomAttackAI());
-            aiController.addAttackAI(new ThreeBulletAttackAI());
+            aiController.addAttackAI(new BulletAttackAI(new EnemyBulletWeapon(game,world)));
+            aiController.addAttackAI(new ThreeBulletAttackAI(new EnemyBulletWeapon(game,world)));
+            //aiController.addAttackAI(new FireTrailAI());
             // create enemyController with the enemy tiles in it.
             EnemyController enemyController = new EnemyController(aiController, map.getLayers().get("enemies").getObjects().getByType(TiledMapTileMapObject.class));
             // add the types of monsters the enemyController should be able to spawn.

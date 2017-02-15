@@ -45,7 +45,7 @@ public abstract class EnemyAttack extends Entity implements Updatable, Drawable,
     /** The time that this bullet is allowed to live(just in case something happens and it gets stuck etc...)
      *  This is final and cannot be changed.
      */
-    private final float maxTimeToLive = 7;
+    private float maxTimeToLive = 7;
     private float TimeToLive;
 
 
@@ -168,6 +168,10 @@ public abstract class EnemyAttack extends Entity implements Updatable, Drawable,
     private boolean collideCheck() {
         return (world.collideCheck(World.Type.PLAYER, body)
                 || world.collideCheck(World.Type.SOLID, body));
+    }
+
+    public void setTimeToLive(float maxTimeToLive){
+        this.maxTimeToLive = maxTimeToLive;
     }
 
     /**
