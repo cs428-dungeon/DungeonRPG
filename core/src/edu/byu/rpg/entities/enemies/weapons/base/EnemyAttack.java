@@ -171,6 +171,7 @@ public abstract class EnemyAttack extends Entity implements Updatable, Drawable,
     }
 
     public void setTimeToLive(float maxTimeToLive){
+        TimeToLive = maxTimeToLive;
         this.maxTimeToLive = maxTimeToLive;
     }
 

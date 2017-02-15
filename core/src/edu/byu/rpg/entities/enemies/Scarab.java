@@ -6,6 +6,8 @@ import edu.byu.rpg.entities.base.Actor;
 import edu.byu.rpg.entities.effects.Shadow;
 import edu.byu.rpg.entities.enemies.AI.AttackAI;
 import edu.byu.rpg.entities.enemies.AI.MovementAI;
+import edu.byu.rpg.entities.enemies.weapons.WeaponType;
+import edu.byu.rpg.entities.enemies.weapons.attacks.EnemyBulletWeapon;
 import edu.byu.rpg.entities.enemies.weapons.attacks.EnemyTrailWeapon;
 import edu.byu.rpg.entities.enemies.weapons.base.EnemyWeapon;
 import edu.byu.rpg.graphics.AnimationManager;
@@ -46,7 +48,9 @@ public class Scarab extends Actor implements Collideable {
         anims.add("scarab_stand", 1, 7, 10);
         shadow = new Shadow(game, game.assets.getTexture("effects/shadow_64"), body);
         //equip weapon
-        equipWeapon(attackAI.getWeapon());
+        //TODO add a weapon type enum or something that links the kind of attackAI it got to the weapon it needs.
+        //TODO create an enum that goes in the AI that tells the monster which kind of weapon to equip.
+        equipWeapon(attackAI.getWeaponType());
 
         //set up the attack AI and get attack speed and damage.
         this.attackAI = attackAI;
@@ -79,7 +83,7 @@ public class Scarab extends Actor implements Collideable {
 
         //attack timer
         if(attackClock < 0){
-            attackAI.attack(body, world);
+            attackAI.attack(body, world, weapon);
             attackClock = attackTime;
         } else {
             attackClock -= delta;
@@ -105,13 +109,18 @@ public class Scarab extends Actor implements Collideable {
     /**
      * Sets the current weapon object, destroying any existing equipped weapons.
      * Useful when the Player walks over a powerup, or buys a new weapon from a shop.
-     * @param newWeapon The new weapon to equip.
+     * @param weaponType The new weapontype to equip.
      */
-    public void equipWeapon(EnemyWeapon newWeapon) {
+    public void equipWeapon(WeaponType weaponType) {
         if (weapon != null) {
             weapon.destroy();
         }
-        this.weapon = newWeapon;
+        switch(weaponType){
+            case BULLET: this.weapon = new EnemyBulletWeapon(game, world);
+                         break;
+            case TRAIL:  this.weapon = new EnemyTrailWeapon(game, world);
+                         break;
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package edu.byu.rpg.entities.enemies.AI;
 
+import edu.byu.rpg.entities.enemies.weapons.WeaponType;
 import edu.byu.rpg.entities.enemies.weapons.attacks.EnemyTrailWeapon;
 import edu.byu.rpg.entities.enemies.weapons.base.EnemyWeapon;
 import edu.byu.rpg.physics.Body;
@@ -11,11 +12,10 @@ import edu.byu.rpg.physics.World;
 public class FireTrailAI implements AttackAI {
     private float attackSpeed = .5f;
     private float attackDamage = 1.0f;
-    private EnemyWeapon weapon;
+    private WeaponType weaponType = WeaponType.TRAIL;
 
-    public FireTrailAI(EnemyTrailWeapon weapon){
-        this.weapon = weapon;
-    }
+    public FireTrailAI(){}
+
     @Override
     public void scale(float scaleAmount) {
         attackSpeed = attackSpeed * scaleAmount;
@@ -23,7 +23,7 @@ public class FireTrailAI implements AttackAI {
     }
 
     @Override
-    public void attack(Body enemyBody, World world) {
+    public void attack(Body enemyBody, World world,EnemyWeapon weapon) {
 
         if (weapon == null) return;
 
@@ -52,7 +52,8 @@ public class FireTrailAI implements AttackAI {
     }
 
     @Override
-    public EnemyWeapon getWeapon() {
-        return weapon;
+    public WeaponType getWeaponType() {
+        return weaponType;
     }
+
 }

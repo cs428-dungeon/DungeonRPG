@@ -1,5 +1,6 @@
 package edu.byu.rpg.entities.enemies.AI;
 
+import edu.byu.rpg.entities.enemies.weapons.WeaponType;
 import edu.byu.rpg.entities.enemies.weapons.attacks.EnemyBulletWeapon;
 import edu.byu.rpg.entities.enemies.weapons.base.EnemyWeapon;
 import edu.byu.rpg.physics.Body;
@@ -12,10 +13,9 @@ public class ThreeBulletAttackAI implements AttackAI {
 
     private float attackSpeed = 2.0f;
     private float attackDamage = 2.0f;
-    private EnemyWeapon weapon;
+    private WeaponType weaponType = WeaponType.BULLET;
 
-    public ThreeBulletAttackAI(EnemyBulletWeapon weapon){
-        this.weapon = weapon;
+    public ThreeBulletAttackAI(){
     }
 
     @Override
@@ -25,7 +25,7 @@ public class ThreeBulletAttackAI implements AttackAI {
     }
 
     @Override
-    public void attack(Body enemyBody, World world) {
+    public void attack(Body enemyBody, World world, EnemyWeapon weapon) {
 
         if (weapon == null) return;
 
@@ -77,7 +77,8 @@ public class ThreeBulletAttackAI implements AttackAI {
     }
 
     @Override
-    public EnemyWeapon getWeapon() {
-        return null;
+    public WeaponType getWeaponType() {
+        return weaponType;
     }
+
 }

@@ -19,7 +19,7 @@ public class BasicFireTrail extends EnemyAttack {
         super(game, world, new Body(0, 0, 8, 8), pool);
         bulletTexture = game.assets.getTexture("basic_bullet");
         this.body.maxSpeed =0;
-        setTimeToLive(2.0f);
+        setTimeToLive(4.0f);
 
     }
 

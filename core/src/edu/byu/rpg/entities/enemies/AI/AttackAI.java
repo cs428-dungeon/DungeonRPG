@@ -1,5 +1,6 @@
 package edu.byu.rpg.entities.enemies.AI;
 
+import edu.byu.rpg.entities.enemies.weapons.WeaponType;
 import edu.byu.rpg.entities.enemies.weapons.base.EnemyWeapon;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.World;
@@ -16,7 +17,7 @@ public interface AttackAI extends EnemyAI {
      * @param enemyBody The {@link Body} that corresponds to where the enemy is at the moment move is called.
      * @param world The {@Link World} that corresponds to the world that contains other entities you might interact with.
      */
-    public void attack(Body enemyBody, World world);
+    public void attack(Body enemyBody, World world, EnemyWeapon weapon);
 
     /**
      * @return return's a float corresponding to the attack speed of this attack.
@@ -30,8 +31,7 @@ public interface AttackAI extends EnemyAI {
 
     /**
      *
-     * @return returns the {@link EnemyWeapon} that this attack uses.
+     * @return returns a {@link WeaponType} that corresponds to the weapon that this attackAI relies on.
      */
-    public EnemyWeapon getWeapon();
-
+    public WeaponType getWeaponType();
 }
