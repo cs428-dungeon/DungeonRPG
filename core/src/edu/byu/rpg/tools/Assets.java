@@ -45,7 +45,6 @@ public class Assets {
         manager.load("maps/0.tmx", TiledMap.class);
 
         // load music
-        loadMusic("opening");
         loadMusic("floor 1");
 
         // load sounds

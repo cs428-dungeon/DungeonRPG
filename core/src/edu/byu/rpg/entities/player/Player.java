@@ -81,9 +81,9 @@ public class Player extends Actor implements Collideable {
 
         // play animations
         if (body.velocity.len() > 0) {
+            game.audio.playSound(walkingSound);
             legsAnims.play("player/legs_walk_down", true);
             torsoAnims.play("player/body_walk_down", true);
-            game.audio.playSound(walkingSound);
         } else {
             legsAnims.play("player/legs_stand_down", true);
             torsoAnims.play("player/body_stand_down", true);
