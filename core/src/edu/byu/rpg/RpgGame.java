@@ -1,6 +1,7 @@
 package edu.byu.rpg;
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.byu.rpg.audio.AudioManager;
@@ -21,8 +22,8 @@ public class RpgGame extends Game {
 	/** The single asset loader that will be used to load all assets, and retrieve them throughout the game */
 	public Assets assets;
 
-	/** The single audio manager that will be used to manipulate all audio usage throughout the game */
-	public AudioManager audioManager;
+	/** The single audio manager that will be used to play and manage any and all audio*/
+	public AudioManager audio;
 
 	/** The single sprite batch that will be used to draw all throughout the game.*/
 	public SpriteBatch batch;
@@ -35,13 +36,11 @@ public class RpgGame extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		assets = new Assets();
+		audio = new AudioManager(assets);
 		// TODO: When we're ready to draw a loading/splash screen, this is where we'll do it.
 		assets.load();
-		audioManager = new AudioManager(assets);
 		// TODO: When we have a menu screen, we'll launch into that instead of going straight to PlayScreen
-		audioManager.startMusic("opening"); // only here for testing
 		setScreen(new PlayScreen(this));
-		audioManager.stopMusic(); // only here for testing
 	}
 
 	/**

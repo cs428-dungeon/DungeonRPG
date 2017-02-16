@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import edu.byu.rpg.RpgGame;
+import edu.byu.rpg.audio.AudioManager;
 import edu.byu.rpg.entities.base.Actor;
 import edu.byu.rpg.entities.effects.Shadow;
 import edu.byu.rpg.entities.player.weapons.base.PlayerWeapon;
@@ -23,6 +24,9 @@ public class Player extends Actor implements Collideable {
     private AnimationManager torsoAnims;
     private AnimationManager legsAnims;
     private Shadow shadow;
+
+    // audio
+    private String walkingSound = "footstep";
 
     // physics constants
     private final float ACCEL_CONST = 2.5f;
@@ -79,6 +83,7 @@ public class Player extends Actor implements Collideable {
         if (body.velocity.len() > 0) {
             legsAnims.play("player/legs_walk_down", true);
             torsoAnims.play("player/body_walk_down", true);
+            game.audio.playSound(walkingSound);
         } else {
             legsAnims.play("player/legs_stand_down", true);
             torsoAnims.play("player/body_stand_down", true);

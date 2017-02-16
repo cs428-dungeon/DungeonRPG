@@ -46,6 +46,11 @@ public class Assets {
 
         // load music
         loadMusic("opening");
+        loadMusic("floor 1");
+
+        // load sounds
+        loadSound("footstep");
+        loadSound("bullet");
 
         // Block any further logic until the manager has finished loading.
         manager.finishLoading();
@@ -90,8 +95,8 @@ public class Assets {
      * @param name The name of the OGG file (without path or extension).
      */
     public void loadSound(String name) {
-        manager.setLoader(Sound.class, new SoundLoader(new InternalFileHandleResolver()));
-        manager.load("audio/sound/" + name + ".ogg", Sound.class);
+        manager.setLoader(Music.class, new MusicLoader(new InternalFileHandleResolver()));
+        manager.load("audio/sound/" + name + ".ogg", Music.class);
     }
 
     /**
@@ -99,7 +104,7 @@ public class Assets {
      * @param name The name of the sound file (without path or extension).
      * @return The pre-loaded sound.
      */
-    public Sound getSound(String name) { return manager.get("audio/sound/" + name + ".ogg");}
+    public Music getSound(String name) { return manager.get("audio/sound/" + name + ".ogg");}
 
     /**
      * Subroutine of {@link Assets#load()}, used for loading music.

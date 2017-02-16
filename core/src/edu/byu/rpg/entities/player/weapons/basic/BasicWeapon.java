@@ -11,6 +11,8 @@ import edu.byu.rpg.physics.World;
  */
 public class BasicWeapon extends PlayerWeapon {
 
+    private String fireSound = "bullet";
+
     public BasicWeapon(final RpgGame game, final World world) {
         super(game);
         bulletPool = new Pool<PlayerBullet>() {
@@ -24,6 +26,7 @@ public class BasicWeapon extends PlayerWeapon {
     @Override
     protected void fireBullets(float x, float y, float xDir, float yDir) {
         PlayerBullet bullet = bulletPool.obtain();
+        game.audio.playSound(fireSound);
         bullet.init(x, y, xDir, yDir, damage);
     }
 }
