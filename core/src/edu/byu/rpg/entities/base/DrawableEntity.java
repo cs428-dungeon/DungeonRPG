@@ -1,6 +1,5 @@
 package edu.byu.rpg.entities.base;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.byu.rpg.RpgGame;
 import edu.byu.rpg.components.DrawComponent;
 
