@@ -8,6 +8,7 @@ import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import edu.byu.rpg.RpgGame;
+import edu.byu.rpg.audio.AudioManager;
 import edu.byu.rpg.entities.base.Solid;
 import edu.byu.rpg.entities.enemies.AI.RandomAttackAI;
 import edu.byu.rpg.entities.enemies.AI.RandomMovementAI;
@@ -29,6 +30,8 @@ public class PlayScreen extends ScreenBase {
 
     /** Automatically draws any tiles (not objects) from our Tiled map to the screen. */
     private OrthogonalTiledMapRenderer mapRenderer;
+
+    private String music = "floor 1";
 
     /**
      * Loads the player into the first room of the dungeon.
@@ -99,6 +102,8 @@ public class PlayScreen extends ScreenBase {
                 Rectangle rect = ((RectangleMapObject) rectMapObj).getRectangle();
                 new Solid(world, new Body((int) rect.x, (int) rect.y, (int) rect.width, (int) rect.height));
             }
+            game.audio.playMusic(music, true);
+
         } catch (NullPointerException e) {
             Gdx.app.debug(this.getClass().getSimpleName(), e.getMessage());
         }

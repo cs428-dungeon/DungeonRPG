@@ -2,6 +2,7 @@ package edu.byu.rpg.entities.base;
 
 import com.badlogic.ashley.core.Entity;
 import edu.byu.rpg.RpgGame;
+import edu.byu.rpg.audio.AudioManager;
 import edu.byu.rpg.components.DestroyComponent;
 import edu.byu.rpg.components.UpdateComponent;
 
@@ -14,7 +15,7 @@ public abstract class UpdatableEntity extends Entity implements Updatable {
 
     /**
      * Local instance of {@link RpgGame} for easy access to
-     * {@link RpgGame#engine}, {@link RpgGame#assets}, and {@link RpgGame#batch}
+     * {@link RpgGame#engine}, {@link RpgGame#assets}, {@Link RpgGame#audio}, and {@link RpgGame#batch}
      */
     protected RpgGame game;
 
