@@ -1,5 +1,6 @@
-package edu.byu.rpg.entities.enemies.AI;
+package edu.byu.rpg.entities.enemies.AI.Movement;
 
+import edu.byu.rpg.entities.enemies.AI.EnemyAI;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.World;
 

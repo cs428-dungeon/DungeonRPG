@@ -1,6 +1,9 @@
 package edu.byu.rpg.entities.enemies.controllers;
 
-import edu.byu.rpg.entities.enemies.AI.*;
+import edu.byu.rpg.entities.enemies.AI.Attacks.*;
+import edu.byu.rpg.entities.enemies.AI.Movement.MovementAI;
+import edu.byu.rpg.entities.enemies.AI.Movement.MovementType;
+import edu.byu.rpg.entities.enemies.AI.Movement.RandomMovementAI;
 
 import java.util.ArrayList;
 import java.util.Random;

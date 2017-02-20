@@ -1,4 +1,4 @@
-package edu.byu.rpg.entities.enemies.AI;
+package edu.byu.rpg.entities.enemies.AI.Movement;
 
 /**
  * Created by Andrew on 2/20/2017.
