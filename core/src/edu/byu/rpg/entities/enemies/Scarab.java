@@ -4,9 +4,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.byu.rpg.RpgGame;
 import edu.byu.rpg.entities.base.Actor;
 import edu.byu.rpg.entities.effects.Shadow;
-import edu.byu.rpg.entities.enemies.AI.AttackAI;
-import edu.byu.rpg.entities.enemies.AI.MovementAI;
-import edu.byu.rpg.entities.enemies.weapons.attacks.BasicEnemyWeapon;
+import edu.byu.rpg.entities.enemies.AI.Attacks.AttackAI;
+import edu.byu.rpg.entities.enemies.AI.Movement.MovementAI;
+import edu.byu.rpg.entities.enemies.weapons.WeaponType;
+import edu.byu.rpg.entities.enemies.weapons.attacks.EnemyBulletWeapon;
+import edu.byu.rpg.entities.enemies.weapons.attacks.EnemyHomingBulletWeapon;
+import edu.byu.rpg.entities.enemies.weapons.attacks.EnemyTrailWeapon;
 import edu.byu.rpg.entities.enemies.weapons.base.EnemyWeapon;
 import edu.byu.rpg.graphics.AnimationManager;
 import edu.byu.rpg.physics.Body;
@@ -45,13 +48,15 @@ public class Scarab extends Actor implements Collideable {
         anims = new AnimationManager(game);
         anims.add("scarab_stand", 1, 7, 10);
         shadow = new Shadow(game, game.assets.getTexture("effects/shadow_64"), body);
-        //equip weapon
-        equipWeapon(new BasicEnemyWeapon(game, world));
 
         //set up the attack AI and get attack speed and damage.
         this.attackAI = attackAI;
         attackTime = attackClock =  attackAI.getAttackSpeed();
+        //equip weapon
+        equipWeapon(attackAI.getWeaponType());
+        //set weapon damage
         weapon.setDamage(attackAI.getAttackDamage());
+
 
         // setup random direction
         this.movementAI = movementAI;
@@ -59,6 +64,7 @@ public class Scarab extends Actor implements Collideable {
         dirClock = dirTime = movementAI.getMovementSpeed();
         //grab the players body and pass it in for the AI to use.
         movementAI.move(body, world);
+
 
         // init health
         health = 5;
@@ -79,7 +85,7 @@ public class Scarab extends Actor implements Collideable {
 
         //attack timer
         if(attackClock < 0){
-            attackAI.attack(body, world, weapon);
+            attackAI.attack(body, world);
             attackClock = attackTime;
         } else {
             attackClock -= delta;
@@ -105,13 +111,21 @@ public class Scarab extends Actor implements Collideable {
     /**
      * Sets the current weapon object, destroying any existing equipped weapons.
      * Useful when the Player walks over a powerup, or buys a new weapon from a shop.
-     * @param newWeapon The new weapon to equip.
+     * @param weaponType The new weapontype to equip.
      */
-    public void equipWeapon(EnemyWeapon newWeapon) {
+    public void equipWeapon(WeaponType weaponType) {
         if (weapon != null) {
             weapon.destroy();
         }
-        this.weapon = newWeapon;
+        switch(weaponType){
+            case BULLET: this.weapon = new EnemyBulletWeapon(game, world);
+                         break;
+            case HOMING_BULLET: this.weapon = new EnemyHomingBulletWeapon(game, world);
+                         break;
+            case TRAIL:  this.weapon = new EnemyTrailWeapon(game, world);
+                         break;
+        }
+        attackAI.setWeapon(this.weapon);
     }
 
     @Override

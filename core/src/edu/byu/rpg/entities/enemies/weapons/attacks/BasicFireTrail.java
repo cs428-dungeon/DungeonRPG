@@ -9,20 +9,31 @@ import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.World;
 
 /**
- * Starter ranged attack for enemies.  A basic bullet with no special abilities.
+ * Created by Andrew on 2/15/2017.
  */
-public class BasicEnemyBullet extends EnemyAttack {
+public class BasicFireTrail extends EnemyAttack {
 
     Texture bulletTexture;
 
-    public BasicEnemyBullet(RpgGame game, World world, Pool<EnemyAttack> pool) {
-        super(game, world, new Body(0, 0, 8, 8), pool, World.Type.ENEMY_BULLET);
+    public BasicFireTrail(RpgGame game, World world, Pool<EnemyAttack> pool) {
+        super(game, world, new Body(0, 0, 8, 8), pool, World.Type.ENEMY_TRAIL);
         bulletTexture = game.assets.getTexture("basic_bullet");
-        this.body.maxSpeed = 5.5f;
+        this.body.maxSpeed = 0;
+        setTimeToLive(4.0f);
+
     }
 
     @Override
     public void draw(float delta, SpriteBatch batch) {
         batch.draw(bulletTexture, body.position.x, body.position.y);
     }
-}
+
+    @Override
+    public boolean collideCheck(){
+        return (world.collideCheck(World.Type.PLAYER, body)
+                || world.collideCheck(World.Type.ENEMY_TRAIL, body)
+                || world.collideCheck(World.Type.SOLID, body));
+        }
+    }
+
+

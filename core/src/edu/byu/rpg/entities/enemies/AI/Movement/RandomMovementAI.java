@@ -1,5 +1,6 @@
-package edu.byu.rpg.entities.enemies.AI;
+package edu.byu.rpg.entities.enemies.AI.Movement;
 
+import edu.byu.rpg.entities.enemies.AI.Movement.MovementAI;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.World;
 
@@ -8,7 +9,7 @@ import edu.byu.rpg.physics.World;
  */
 public class RandomMovementAI implements MovementAI {
 
-    private float movementSpeed = 1.0f;
+    private float movementSpeed = 2.0f;
 
     public RandomMovementAI(){}
 

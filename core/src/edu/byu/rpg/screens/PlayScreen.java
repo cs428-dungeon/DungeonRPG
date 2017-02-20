@@ -8,11 +8,9 @@ import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import edu.byu.rpg.RpgGame;
-import edu.byu.rpg.audio.AudioManager;
 import edu.byu.rpg.entities.base.Solid;
-import edu.byu.rpg.entities.enemies.AI.RandomAttackAI;
-import edu.byu.rpg.entities.enemies.AI.RandomMovementAI;
-import edu.byu.rpg.entities.enemies.AI.ThreeBulletAttackAI;
+import edu.byu.rpg.entities.enemies.AI.Attacks.AttackType;
+import edu.byu.rpg.entities.enemies.AI.Movement.MovementType;
 import edu.byu.rpg.entities.enemies.MonsterType;
 import edu.byu.rpg.entities.enemies.controllers.AIController;
 import edu.byu.rpg.entities.enemies.controllers.EnemyController;
@@ -86,9 +84,11 @@ public class PlayScreen extends ScreenBase {
             // TODO: need to create an enemy controller object that spawns a random enemy, given map location;
             //create an AIController and give it an attackAI and a movementAI;
             AIController aiController = new AIController();
-            aiController.addMovementAI(new RandomMovementAI());
-            aiController.addAttackAI(new RandomAttackAI());
-            aiController.addAttackAI(new ThreeBulletAttackAI());
+            aiController.addMovementAI(MovementType.Random);
+            aiController.addAttackAI(AttackType.ONE_BULLET);
+            aiController.addAttackAI(AttackType.THREE_BULLET);
+            aiController.addAttackAI(AttackType.HOMING_BULLET);
+            aiController.addAttackAI(AttackType.FIRE_TRAIL);
             // create enemyController with the enemy tiles in it.
             EnemyController enemyController = new EnemyController(aiController, map.getLayers().get("enemies").getObjects().getByType(TiledMapTileMapObject.class));
             // add the types of monsters the enemyController should be able to spawn.
