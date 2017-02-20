@@ -23,7 +23,7 @@ public class EnemyHomingBullet extends EnemyAttack {
         super(game, world, new Body(0, 0, 8, 8), pool, World.Type.ENEMY_BULLET);
         bulletTexture = game.assets.getTexture("basic_bullet");
         this.TimeToLive = maxTimeToLive;
-        this.body.maxSpeed = 2.5f;
+        this.body.maxSpeed = 3.5f;
     }
 
     @Override

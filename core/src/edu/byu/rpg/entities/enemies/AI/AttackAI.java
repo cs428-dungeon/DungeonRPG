@@ -34,10 +34,10 @@ public interface AttackAI extends EnemyAI {
      * @return returns a {@link WeaponType} that corresponds to the weapon that this attackAI relies on.
      */
     public WeaponType getWeaponType();
-
     /**
      * set the weapon in the attackAI
      * @param weapon
      */
     public void setWeapon(EnemyWeapon weapon);
+
 }

@@ -63,5 +63,4 @@ public class FireTrailAI implements AttackAI {
         this.weapon = weapon;
 
     }
-
 }

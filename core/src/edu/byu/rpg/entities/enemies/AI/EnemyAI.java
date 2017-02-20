@@ -1,7 +1,5 @@
 package edu.byu.rpg.entities.enemies.AI;
 
-import edu.byu.rpg.entities.enemies.weapons.base.EnemyWeapon;
-
 /**
  * The basis for an object that represents the AI that dictates how an enemny functions
  * An object that implements {@link EnemyAI) can handle scaling an enemy through different

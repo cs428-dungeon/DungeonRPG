@@ -24,7 +24,6 @@ public class EnemyBulletWeapon extends EnemyWeapon {
                 return new BasicEnemyBullet(game, world, attackPool);
             }
         };
-
     }
 
     @Override

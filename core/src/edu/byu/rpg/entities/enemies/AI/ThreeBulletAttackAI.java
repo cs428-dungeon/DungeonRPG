@@ -24,7 +24,7 @@ public class ThreeBulletAttackAI implements AttackAI {
         attackSpeed = attackSpeed * scaleAmount;
         attackDamage = attackDamage * scaleAmount;
         weapon.scale(scaleAmount);
-    }
+}
 
     @Override
     public void attack(Body enemyBody, World world) {
@@ -87,5 +87,4 @@ public class ThreeBulletAttackAI implements AttackAI {
     public void setWeapon(EnemyWeapon weapon) {
         this.weapon = weapon;
     }
-
 }

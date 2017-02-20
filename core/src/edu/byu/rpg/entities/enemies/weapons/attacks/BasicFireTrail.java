@@ -35,3 +35,5 @@ public class BasicFireTrail extends EnemyAttack {
                 || world.collideCheck(World.Type.SOLID, body));
         }
     }
+
+

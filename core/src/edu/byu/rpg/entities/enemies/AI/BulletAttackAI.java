@@ -57,7 +57,6 @@ public class BulletAttackAI implements AttackAI {
     public WeaponType getWeaponType() {
         return weaponType;
     }
-
     @Override
     public void setWeapon(EnemyWeapon weapon){this.weapon = weapon;}
 }

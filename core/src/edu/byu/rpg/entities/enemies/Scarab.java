@@ -76,7 +76,7 @@ public class Scarab extends Actor implements Collideable {
         super.update(delta);
 
         // movement timer
-        if (dirClock < 0 && movementAI != null) {
+        if (dirClock < 0) {
             movementAI.move(body, world);
             dirClock = dirTime;
         } else {
