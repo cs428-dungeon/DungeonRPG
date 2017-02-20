@@ -16,8 +16,9 @@ public class BasicEnemyBullet extends EnemyAttack {
     Texture bulletTexture;
 
     public BasicEnemyBullet(RpgGame game, World world, Pool<EnemyAttack> pool) {
-        super(game, world, new Body(0, 0, 8, 8), pool);
+        super(game, world, new Body(0, 0, 8, 8), pool, World.Type.ENEMY_BULLET);
         bulletTexture = game.assets.getTexture("basic_bullet");
+        this.body.maxSpeed = 5.5f;
     }
 
     @Override

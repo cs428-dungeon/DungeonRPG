@@ -12,19 +12,19 @@ import java.util.Random;
 /**
  * Created by Andrew on 2/14/2017.
  */
-public class EnemyBulletWeapon extends EnemyWeapon {
+public class EnemyHomingBulletWeapon extends EnemyWeapon {
 
     private ArrayList<EnemyAttack> attackType;
 
-    public EnemyBulletWeapon(final RpgGame game, final World world) {
+    public EnemyHomingBulletWeapon(final RpgGame game, final World world) {
         super(game);
+        this.setCooldownTime(0.0f);
         attackPool = new Pool<EnemyAttack>() {
             @Override
             protected EnemyAttack newObject() {
-                return new BasicEnemyBullet(game, world, attackPool);
+                return new EnemyHomingBullet(game, world, attackPool);
             }
         };
-
     }
 
     @Override

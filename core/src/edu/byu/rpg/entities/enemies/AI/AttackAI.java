@@ -17,7 +17,7 @@ public interface AttackAI extends EnemyAI {
      * @param enemyBody The {@link Body} that corresponds to where the enemy is at the moment move is called.
      * @param world The {@Link World} that corresponds to the world that contains other entities you might interact with.
      */
-    public void attack(Body enemyBody, World world, EnemyWeapon weapon);
+    public void attack(Body enemyBody, World world);
 
     /**
      * @return return's a float corresponding to the attack speed of this attack.
@@ -34,4 +34,10 @@ public interface AttackAI extends EnemyAI {
      * @return returns a {@link WeaponType} that corresponds to the weapon that this attackAI relies on.
      */
     public WeaponType getWeaponType();
+
+    /**
+     * set the weapon in the attackAI
+     * @param weapon
+     */
+    public void setWeapon(EnemyWeapon weapon);
 }

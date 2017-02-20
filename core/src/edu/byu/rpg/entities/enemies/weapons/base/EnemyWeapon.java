@@ -3,6 +3,7 @@ package edu.byu.rpg.entities.enemies.weapons.base;
 import com.badlogic.gdx.utils.Pool;
 import edu.byu.rpg.RpgGame;
 import edu.byu.rpg.entities.base.UpdatableEntity;
+import edu.byu.rpg.entities.enemies.weapons.attacks.EnemyHomingBullet;
 
 /**
  * Contains an attack pool and any logic needed to fire off attacks from the enemy.
@@ -110,5 +111,11 @@ public abstract class EnemyWeapon extends UpdatableEntity {
         if (cooldownClock >= 0) {
             cooldownClock -= delta;
         }
+    }
+
+    public void scale(float scaleAmount){
+        EnemyAttack attack = attackPool.obtain();
+        attack.setMaxSpeed(attack.getMaxSpeed() * scaleAmount);
+
     }
 }

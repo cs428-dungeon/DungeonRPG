@@ -1,5 +1,7 @@
 package edu.byu.rpg.physics;
 
+import edu.byu.rpg.entities.player.Player;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,7 +12,7 @@ import java.util.HashMap;
 public class World {
 
     /** Defines collision group classes. */
-    public static enum Type { SOLID, PLAYER, PLAYER_BULLET, ENEMY, ENEMY_ATTACK }
+    public static enum Type { SOLID, PLAYER, PLAYER_BULLET, ENEMY, ENEMY_BULLET, ENEMY_TRAIL }
 
     /** Private map of type to collision group. */
     private HashMap<Type, ArrayList<Collideable>> groups;
@@ -80,6 +82,28 @@ public class World {
         return (collide(type, otherBody) != null);
     }
 
+    /**
+     * Checks for collisions against the group of the specified type.
+     * @param otherBody The {@link Body} the body you want to get the distance to the player.
+     * @return <tt>true</tt> if a collision happened, <tt>false</tt> if no.
+     */
+    public float xDistanceToPlayer(Body otherBody){
+        ArrayList<Collideable> group = groups.get(Type.PLAYER);
+        for (Collideable collideable : group) {
+            Player player = (Player)collideable;
+            return player.body.getCenterX() - otherBody.getCenterX();
+        }
+        return 0.0f;
+    }
+
+    public float yDistanceToPlayer(Body otherBody) {
+        ArrayList<Collideable> group = groups.get(Type.PLAYER);
+        for (Collideable collideable : group) {
+            Player player = (Player)collideable;
+            return player.body.getCenterY() - otherBody.getCenterY();
+        }
+        return 0.0f;
+    }
 //    /**
 //     * Checks for collisions against all the specified groups.  <strong>Note:</strong> This
 //     * function will only return the first <tt>collideable</tt> to intersect <tt>otherBody</tt>,

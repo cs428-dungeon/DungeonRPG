@@ -14,6 +14,7 @@ public class ThreeBulletAttackAI implements AttackAI {
     private float attackSpeed = 2.0f;
     private float attackDamage = 2.0f;
     private WeaponType weaponType = WeaponType.BULLET;
+    private EnemyWeapon weapon;
 
     public ThreeBulletAttackAI(){
     }
@@ -22,21 +23,22 @@ public class ThreeBulletAttackAI implements AttackAI {
     public void scale(float scaleAmount) {
         attackSpeed = attackSpeed * scaleAmount;
         attackDamage = attackDamage * scaleAmount;
+        weapon.scale(scaleAmount);
     }
 
     @Override
-    public void attack(Body enemyBody, World world, EnemyWeapon weapon) {
+    public void attack(Body enemyBody, World world) {
 
         if (weapon == null) return;
 
         weapon.setCooldownTime(0.0f);
         // get bullet direction and influence by player velocity
-        float middleXDir = enemyBody.velocity.x;
-        float middleYDir = enemyBody.velocity.y;
-        float rightXDir = enemyBody.velocity.x;
-        float rightYDir = enemyBody.velocity.y;
-        float leftXDir = enemyBody.velocity.x;
-        float leftYDir = enemyBody.velocity.y;
+        float middleXDir = world.xDistanceToPlayer(enemyBody);
+        float middleYDir = world.yDistanceToPlayer(enemyBody);
+        float rightXDir = world.xDistanceToPlayer(enemyBody);
+        float rightYDir = world.yDistanceToPlayer(enemyBody);
+        float leftXDir = world.xDistanceToPlayer(enemyBody);
+        float leftYDir = world.yDistanceToPlayer(enemyBody);
 
         // get center of hitbox
         float x = enemyBody.getCenterX();
@@ -79,6 +81,11 @@ public class ThreeBulletAttackAI implements AttackAI {
     @Override
     public WeaponType getWeaponType() {
         return weaponType;
+    }
+
+    @Override
+    public void setWeapon(EnemyWeapon weapon) {
+        this.weapon = weapon;
     }
 
 }

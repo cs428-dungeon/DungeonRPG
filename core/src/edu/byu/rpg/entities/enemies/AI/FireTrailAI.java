@@ -13,6 +13,7 @@ public class FireTrailAI implements AttackAI {
     private float attackSpeed = .5f;
     private float attackDamage = 1.0f;
     private WeaponType weaponType = WeaponType.TRAIL;
+    private EnemyWeapon weapon;
 
     public FireTrailAI(){}
 
@@ -20,10 +21,11 @@ public class FireTrailAI implements AttackAI {
     public void scale(float scaleAmount) {
         attackSpeed = attackSpeed * scaleAmount;
         attackDamage = attackDamage * scaleAmount;
+        weapon.scale(scaleAmount);
     }
 
     @Override
-    public void attack(Body enemyBody, World world,EnemyWeapon weapon) {
+    public void attack(Body enemyBody, World world) {
 
         if (weapon == null) return;
 
@@ -54,6 +56,12 @@ public class FireTrailAI implements AttackAI {
     @Override
     public WeaponType getWeaponType() {
         return weaponType;
+    }
+
+    @Override
+    public void setWeapon(EnemyWeapon weapon) {
+        this.weapon = weapon;
+
     }
 
 }

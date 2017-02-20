@@ -8,6 +8,7 @@ import edu.byu.rpg.entities.enemies.AI.AttackAI;
 import edu.byu.rpg.entities.enemies.AI.MovementAI;
 import edu.byu.rpg.entities.enemies.weapons.WeaponType;
 import edu.byu.rpg.entities.enemies.weapons.attacks.EnemyBulletWeapon;
+import edu.byu.rpg.entities.enemies.weapons.attacks.EnemyHomingBulletWeapon;
 import edu.byu.rpg.entities.enemies.weapons.attacks.EnemyTrailWeapon;
 import edu.byu.rpg.entities.enemies.weapons.base.EnemyWeapon;
 import edu.byu.rpg.graphics.AnimationManager;
@@ -47,15 +48,15 @@ public class Scarab extends Actor implements Collideable {
         anims = new AnimationManager(game);
         anims.add("scarab_stand", 1, 7, 10);
         shadow = new Shadow(game, game.assets.getTexture("effects/shadow_64"), body);
-        //equip weapon
-        //TODO add a weapon type enum or something that links the kind of attackAI it got to the weapon it needs.
-        //TODO create an enum that goes in the AI that tells the monster which kind of weapon to equip.
-        equipWeapon(attackAI.getWeaponType());
 
         //set up the attack AI and get attack speed and damage.
         this.attackAI = attackAI;
         attackTime = attackClock =  attackAI.getAttackSpeed();
+        //equip weapon
+        equipWeapon(attackAI.getWeaponType());
+        //set weapon damage
         weapon.setDamage(attackAI.getAttackDamage());
+
 
         // setup random direction
         this.movementAI = movementAI;
@@ -63,6 +64,7 @@ public class Scarab extends Actor implements Collideable {
         dirClock = dirTime = movementAI.getMovementSpeed();
         //grab the players body and pass it in for the AI to use.
         movementAI.move(body, world);
+
 
         // init health
         health = 5;
@@ -74,7 +76,7 @@ public class Scarab extends Actor implements Collideable {
         super.update(delta);
 
         // movement timer
-        if (dirClock < 0) {
+        if (dirClock < 0 && movementAI != null) {
             movementAI.move(body, world);
             dirClock = dirTime;
         } else {
@@ -83,7 +85,7 @@ public class Scarab extends Actor implements Collideable {
 
         //attack timer
         if(attackClock < 0){
-            attackAI.attack(body, world, weapon);
+            attackAI.attack(body, world);
             attackClock = attackTime;
         } else {
             attackClock -= delta;
@@ -118,9 +120,12 @@ public class Scarab extends Actor implements Collideable {
         switch(weaponType){
             case BULLET: this.weapon = new EnemyBulletWeapon(game, world);
                          break;
+            case HOMING_BULLET: this.weapon = new EnemyHomingBulletWeapon(game, world);
+                         break;
             case TRAIL:  this.weapon = new EnemyTrailWeapon(game, world);
                          break;
         }
+        attackAI.setWeapon(this.weapon);
     }
 
     @Override

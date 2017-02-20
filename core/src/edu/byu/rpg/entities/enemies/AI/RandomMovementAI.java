@@ -8,7 +8,7 @@ import edu.byu.rpg.physics.World;
  */
 public class RandomMovementAI implements MovementAI {
 
-    private float movementSpeed = 1.0f;
+    private float movementSpeed = 2.0f;
 
     public RandomMovementAI(){}
 
