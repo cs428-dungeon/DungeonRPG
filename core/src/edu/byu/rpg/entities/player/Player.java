@@ -12,6 +12,7 @@ import edu.byu.rpg.input.InputManager;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.Collideable;
 import edu.byu.rpg.physics.World;
+import java.lang.Math;
 
 /**
  * The player-controlled character.
@@ -23,6 +24,14 @@ public class Player extends Actor implements Collideable {
     private AnimationManager legsAnims;
     private Shadow shadow;
 
+    // character stats
+    private float health;
+    private float maxHealth;
+    //private float hunger;
+    private int playerExperience;
+    private int playerLevel;
+    private int luck;
+
     // audio
     private String walkingSound = "footstep";
 
@@ -30,7 +39,6 @@ public class Player extends Actor implements Collideable {
     private final float ACCEL_CONST = 2.5f;
 
     // taking damage, flashing, being invincible, etc.
-    private float health;
     private final float invincibleTime = 1.5f;
     private float invincibleClock;
     private final float flashTime = 0.05f;
@@ -45,8 +53,14 @@ public class Player extends Actor implements Collideable {
         // add to player collision group
         world.add(World.Type.PLAYER, this);
 
+        // character stats
+        maxHealth = health = 3;
+        //hunger = 100;
+        playerExperience = 0;
+        playerLevel = 1;
+        luck = 1;
+
         // damage variables
-        health = 3;
         invincibleClock = 0;
         flashClock = 0;
         flashing = false;
@@ -71,9 +85,11 @@ public class Player extends Actor implements Collideable {
     @Override
     public void update(float delta) {
         // get input and update velocity, then position
+        // TODO: Integrate speedBoost when temporary powerups are implemented
         body.acceleration.x = ACCEL_CONST * InputManager.getLeftXAxis();
         body.acceleration.y = ACCEL_CONST * InputManager.getLeftYAxis();
 
+        // TODO: Check for collisions with weapons, boosts, and recovery items
         // check for collisions with enemies, traps, etc.
         handleEnemyCollisions();
 
@@ -195,6 +211,48 @@ public class Player extends Actor implements Collideable {
         invincibleClock = invincibleTime;
         flashing = true;
     }
+
+    private void heal(float recover) {
+        health += recover;
+        if (health > maxHealth) { health = maxHealth; }
+    }
+
+    // Levels are calculated using a square root, rounded down. Currently, there is no level cap.
+    private int experienceNeededToLevelUp() { return (int) Math.floor(40 * Math.sqrt((float) playerLevel - 1)); }
+
+    private void addExperience(int experience){
+        playerExperience += experience;
+        if (playerExperience >= experienceNeededToLevelUp()){
+            levelUp();
+        }
+    }
+
+    private void levelUp() {
+        /*
+        TODO: Trigger events (animation, stat rolls, etc.)
+        TODO: Return Array or Map of changes for UI to display (or trigger here)
+        */
+        ++playerLevel;
+
+        // Luck cannot increase more than 2 per level
+        int luckIncrease = 0;
+        for (int i = 0; i < luck; i++) {
+            if (randomRollAverage() >= Math.random()) {
+                ++luckIncrease;
+            }
+        }
+        luck += luckIncrease;
+
+        double healthIncrease = 0;
+        for (int i = 0; i < luck; i++) {
+            double roll = randomRollAverage() + randomRollAverage() + randomRollAverage();
+            if (healthIncrease < roll) { healthIncrease = roll; }
+        }
+        maxHealth += healthIncrease;
+        health += healthIncrease;
+    }
+
+    private double randomRollAverage(){ return (Math.random() + Math.random()) / 2; }
 
     /**
      * Kills the player.  Called when player's health is below or equal to 0
