@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="52">
+ <tileset firstgid="1" name="tileset_1" tilewidth="16" tileheight="16" tilecount="206" columns="7">
+  <image source="tileset_5.png" width="112" height="112"/>
+ </tileset>
+ <tileset firstgid="301" name="player" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../../img/player_stand.png" width="32" height="36"/>
+ </tileset>
+ <tileset firstgid="302" name="scarab" tilewidth="64" tileheight="32" tilecount="1" columns="1">
+  <image source="../../img/scarab.png" width="64" height="32"/>
+ </tileset>
+ <layer name="background" width="20" height="15">
+  <data encoding="csv">
+1,2,3,4,3,3,3,4,4,27,24,26,23,3,3,3,4,5,6,7,
+8,9,10,11,10,10,13,4,9,41,24,26,37,10,10,10,11,12,13,14,
+15,16,17,18,18,19,23,4,27,17,25,25,18,18,18,18,18,19,20,21,
+39,41,24,25,25,26,37,39,41,24,25,25,25,25,25,25,25,26,20,21,
+18,18,25,25,25,25,18,18,18,25,25,25,25,25,25,25,32,33,20,21,
+32,32,25,25,25,25,25,25,32,32,32,25,25,25,25,26,9,11,41,21,
+11,13,24,25,25,25,25,26,9,11,13,24,25,25,25,26,23,28,28,28,
+15,16,31,32,25,25,25,26,23,46,27,24,25,25,25,26,37,39,13,21,
+15,37,11,13,24,25,25,26,37,39,41,24,25,25,25,25,18,19,37,39,
+15,22,22,27,24,25,25,25,18,18,18,25,25,25,25,25,25,25,18,18,
+15,9,39,41,24,25,25,25,25,32,32,32,25,25,25,25,25,25,32,32,
+22,23,17,18,25,25,25,25,26,9,11,13,24,25,25,25,25,26,9,11,
+29,30,31,32,32,32,32,32,33,23,46,27,31,32,32,25,25,33,34,35,
+36,37,38,38,38,38,38,38,38,41,46,37,38,38,13,24,26,9,41,42,
+43,44,45,45,45,45,45,45,45,45,46,45,45,45,27,24,26,23,48,49
+</data>
+ </layer>
+ <objectgroup name="player">
+  <object id="8" gid="301" x="208.333" y="176.167" width="32" height="31.6667"/>
+ </objectgroup>
+ <objectgroup name="enemies">
+  <object id="10" gid="302" x="192" y="80" width="64" height="32"/>
+  <object id="11" gid="302" x="64" y="208" width="64" height="32"/>
+  <object id="13" gid="302" x="32" y="112" width="64" height="32"/>
+ </objectgroup>
+ <objectgroup name="solids">
+  <object id="28" x="96" y="32" width="48" height="32"/>
+  <object id="31" x="256" y="80" width="32" height="48"/>
+  <object id="32" x="144" y="176" width="48" height="32"/>
+  <object id="33" x="32" y="128" width="32" height="48"/>
+  <object id="35" x="128" y="96" width="48" height="48"/>
+  <object id="37" x="192" y="0" width="128" height="32"/>
+  <object id="40" x="288" y="32" width="32" height="112"/>
+  <object id="41" x="288" y="176" width="32" height="64"/>
+  <object id="42" x="272" y="208" width="16" height="32"/>
+  <object id="43" x="0" y="208" width="240" height="32"/>
+  <object id="44" x="0" y="96" width="32" height="112"/>
+  <object id="45" x="0" y="0" width="32" height="64"/>
+  <object id="46" x="32" y="0" width="128" height="32"/>
+  <object id="48" x="160" y="0" width="32"/>
+  <object id="49" x="320" y="144" height="32"/>
+  <object id="50" x="240" y="240" width="32"/>
+  <object id="51" x="0" y="64" height="32"/>
+ </objectgroup>
+</map>

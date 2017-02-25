@@ -108,4 +108,5 @@ public class PlayScreen extends ScreenBase {
             Gdx.app.debug(this.getClass().getSimpleName(), e.getMessage());
         }
     }
+
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="49">
+ <tileset firstgid="1" name="tileset_1" tilewidth="16" tileheight="16" tilecount="49" columns="7">
+  <image source="tileset_1.png" width="112" height="112"/>
+ </tileset>
+ <tileset firstgid="50" name="player" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../../img/player_stand.png" width="32" height="36"/>
+ </tileset>
+ <tileset firstgid="51" name="scarab" tilewidth="64" tileheight="32" tilecount="1" columns="1">
+  <image source="../../img/scarab.png" width="64" height="32"/>
+ </tileset>
+ <layer name="background" width="20" height="15">
+  <data encoding="csv">
+1,4,4,4,4,4,3,3,3,3,3,3,3,3,3,23,24,26,27,7,
+11,11,11,11,13,4,9,10,10,10,10,10,10,10,10,41,24,26,27,14,
+18,18,18,19,27,4,23,17,18,18,18,18,18,18,18,18,25,26,20,21,
+32,32,25,26,27,4,23,24,25,25,25,25,25,32,32,32,25,26,20,21,
+39,13,24,26,27,4,23,24,25,25,25,25,26,9,39,13,24,26,20,21,
+15,23,24,26,27,4,23,24,25,25,25,25,26,27,46,23,24,26,20,21,
+29,23,24,26,27,4,23,24,25,25,25,25,26,27,46,23,24,26,20,21,
+29,23,24,26,27,4,23,24,25,25,25,25,26,27,46,23,24,26,20,21,
+29,23,24,26,27,4,23,24,25,25,25,25,26,27,46,23,24,26,20,21,
+29,23,24,26,27,4,23,24,25,25,25,25,26,27,46,23,24,26,20,21,
+29,23,24,26,37,11,41,24,25,25,25,25,26,27,46,23,24,25,37,11,
+29,23,24,25,18,18,18,25,25,25,25,25,26,27,46,23,24,25,25,25,
+29,23,24,25,32,32,32,32,32,32,32,32,33,27,46,23,24,25,32,32,
+36,23,24,26,9,39,40,40,40,40,40,40,40,41,46,37,39,39,39,39,
+22,23,24,26,27,46,47,47,47,47,47,47,47,47,46,46,46,46,46,46
+</data>
+ </layer>
+ <objectgroup name="enemies"/>
+ <objectgroup name="solids">
+  <object id="33" x="0" y="0" width="256" height="32"/>
+  <object id="34" x="64" y="32" width="48" height="144"/>
+  <object id="35" x="0" y="64" width="32" height="176"/>
+  <object id="36" x="64" y="208" width="256" height="32"/>
+  <object id="37" x="208" y="64" width="48" height="144"/>
+  <object id="38" x="288" y="0" width="32" height="176"/>
+ </objectgroup>
+ <objectgroup name="player"/>
+</map>

@@ -87,6 +87,14 @@ public class Player extends Actor implements Collideable {
             torsoAnims.play("player/body_stand_down", true);
         }
 
+      /*
+        //move camera's position to follow player
+        float lerp = 0.1f;
+        Vector3 position = PlayScreen.getCamera().position;
+        position.x += (this.x - position.x) * lerp * delta;
+        position.y += (Obj.y - position.y) * lerp * delta;
+      */
+
         // right stick = bullets
         float rightXAxis = InputManager.getRightXAxis();
         float rightYAxis = InputManager.getRightYAxis();
