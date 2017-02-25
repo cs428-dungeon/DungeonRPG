@@ -36,6 +36,7 @@ public class Assets {
         loadTexture("player/shadow");
 
         loadTexture("scarab_stand");
+        loadTexture("blue_flame");
         loadTexture("basic_bullet");
 
         loadTexture("effects/shadow_64");
