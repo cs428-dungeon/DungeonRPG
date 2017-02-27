@@ -36,6 +36,9 @@ public abstract class EnemyAttack extends Entity implements Updatable, Drawable,
     /** This bullet's hitbox */
     protected Body body;
 
+    /** This bullet's drawComponent **/
+    protected DrawComponent drawComponent;
+
     /** Local instance of bullet pool, used to deactivate this bullet on collision. */
     private Pool<EnemyAttack> pool;
 
@@ -62,7 +65,8 @@ public abstract class EnemyAttack extends Entity implements Updatable, Drawable,
 
         // add components
         add(new UpdateComponent(this));
-        add(new DrawComponent(this));
+        drawComponent = new DrawComponent(this);
+        add(drawComponent);
 
         // add to player bullet group
         world.add(group, this);
