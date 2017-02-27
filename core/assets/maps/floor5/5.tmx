@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="23">
  <tileset firstgid="1" name="tileset_1" tilewidth="16" tileheight="16" tilecount="49" columns="7">
-  <image source="tileset_1.png" width="112" height="112"/>
+  <image source="tileset_5.png" width="112" height="112"/>
  </tileset>
  <tileset firstgid="50" name="player" tilewidth="32" tileheight="32" tilecount="1" columns="1">
   <image source="../../img/player_stand.png" width="32" height="36"/>
