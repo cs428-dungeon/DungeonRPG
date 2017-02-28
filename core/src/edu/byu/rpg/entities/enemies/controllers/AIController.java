@@ -4,6 +4,7 @@ import edu.byu.rpg.entities.enemies.AI.Attacks.*;
 import edu.byu.rpg.entities.enemies.AI.Movement.MovementAI;
 import edu.byu.rpg.entities.enemies.AI.Movement.MovementType;
 import edu.byu.rpg.entities.enemies.AI.Movement.RandomMovementAI;
+import edu.byu.rpg.entities.enemies.AI.Movement.WallBounceMovementAI;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -29,7 +30,8 @@ public class AIController {
 
     public MovementAI getMovementAI(MovementType type){
         switch(type){
-            case Random: return new RandomMovementAI();
+            case RANDOM: return new RandomMovementAI();
+            case BOUNCE: return new WallBounceMovementAI();
         }
         return null;
     }

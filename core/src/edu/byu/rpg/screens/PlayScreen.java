@@ -84,7 +84,8 @@ public class PlayScreen extends ScreenBase {
             // TODO: need to create an enemy controller object that spawns a random enemy, given map location;
             //create an AIController and give it an attackAI and a movementAI;
             AIController aiController = new AIController();
-            aiController.addMovementAI(MovementType.Random);
+            //aiController.addMovementAI(MovementType.RANDOM);
+            aiController.addMovementAI(MovementType.BOUNCE);
             aiController.addAttackAI(AttackType.ONE_BULLET);
             aiController.addAttackAI(AttackType.THREE_BULLET);
             aiController.addAttackAI(AttackType.HOMING_BULLET);

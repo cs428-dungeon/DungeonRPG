@@ -16,7 +16,7 @@ public interface MovementAI extends EnemyAI {
      * @param enemyBody The {@link Body} that corresponds to where the enemy is at the moment move is called.
      * @param world The {@Link World} that world that contains all the other entities that can be used in calculations.
      */
-    public void move(Body enemyBody, World world);
+    public void move(Body enemyBody, World world, float delta);
 
     /**
      *

@@ -39,6 +39,8 @@ public class Body {
     /** Collisions are only registered if this body is collideable.  <tt>true</tt> by default. **/
     public boolean collideable;
 
+    public boolean hitSolid;
+
     /**
      * Sets the dimensions of this body, with no offset.  All other properties default to 0.
      * @param x The world x-position of the body.
@@ -52,6 +54,7 @@ public class Body {
         offset = Vector2.Zero;
         maxSpeed = 5.8f;
         collideable = true;
+        hitSolid = false;
         reset();
     }
 

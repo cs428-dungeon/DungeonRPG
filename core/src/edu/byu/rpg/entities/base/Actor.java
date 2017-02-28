@@ -76,6 +76,7 @@ public abstract class Actor extends DrawableEntity implements Collideable {
 
         // check for collision, and move back by steps if necessary
         while (world.collideCheck(World.Type.SOLID, body)) {
+            body.hitSolid = true;
             body.position.x = Utils.approach(body.position.x, prevX, 1);
         }
     }
@@ -92,6 +93,7 @@ public abstract class Actor extends DrawableEntity implements Collideable {
 
         // check for collision and move back if necessary
         while (world.collideCheck(World.Type.SOLID, body)) {
+            body.hitSolid = true;
             body.position.y = Utils.approach(body.position.y, prevY, 1);
         }
     }
