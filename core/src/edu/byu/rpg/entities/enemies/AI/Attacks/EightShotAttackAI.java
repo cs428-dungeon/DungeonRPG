@@ -1,22 +1,22 @@
 package edu.byu.rpg.entities.enemies.AI.Attacks;
 
-import edu.byu.rpg.entities.enemies.AI.Attacks.AttackAI;
 import edu.byu.rpg.entities.enemies.weapons.WeaponType;
 import edu.byu.rpg.entities.enemies.weapons.base.EnemyWeapon;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.World;
 
 /**
- * Created by Andrew on 2/8/2017.
+ * Created by Andrew on 3/1/2017.
  */
-public class BulletAttackAI implements AttackAI {
+public class EightShotAttackAI implements AttackAI {
     private float attackSpeed = 2.0f;
     private float attackDamage = 2.0f;
     private WeaponType weaponType = WeaponType.BULLET;
     private EnemyWeapon weapon;
     private float attackClock;
+    private float velocity = 2.0f;
 
-    public BulletAttackAI(){
+    public EightShotAttackAI(){
         attackClock = attackSpeed;
     }
 
@@ -25,6 +25,7 @@ public class BulletAttackAI implements AttackAI {
         //scale up attack speed and damage
         attackSpeed = attackSpeed * scaleAmount;
         attackDamage = attackDamage * scaleAmount;
+        velocity = velocity * scaleAmount;
         weapon.scale(scaleAmount);
     }
 
@@ -36,22 +37,33 @@ public class BulletAttackAI implements AttackAI {
         } else {
             attackClock -= delta;
         }
-
     }
 
     public void executeAttack(Body enemyBody, World world){
         if (weapon == null) return;
-
-        // get bullet direction and influence by player velocity
-        float xDir = world.xDistanceToPlayer(enemyBody);
-        float yDir = world.yDistanceToPlayer(enemyBody);
 
         // get center of hitbox
         float x = enemyBody.getCenterX();
         float y = enemyBody.position.y + enemyBody.size.y;
 
         // fire weapon
-        weapon.fire(x, y, xDir, yDir);
+        //0 degrees
+        weapon.fire(x, y, 0,velocity);
+        //45 degrees
+        weapon.fire(x, y, velocity, velocity);
+        //90 degrees
+        weapon.fire(x, y, velocity, 0);
+        //135 degrees
+        weapon.fire(x, y, velocity, -velocity);
+        //180 degrees
+        weapon.fire(x, y, 0, -velocity);
+        //225 degrees
+        weapon.fire(x, y, -velocity, -velocity);
+        //270 degrees
+        weapon.fire(x, y, -velocity, 0);
+        //315 degrees
+        weapon.fire(x, y, -velocity, velocity);
+
     }
     @Override
     public float getAttackSpeed() {

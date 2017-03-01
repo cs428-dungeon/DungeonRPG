@@ -15,8 +15,10 @@ public class ThreeBulletAttackAI implements AttackAI {
     private float attackDamage = 2.0f;
     private WeaponType weaponType = WeaponType.BULLET;
     private EnemyWeapon weapon;
+    private float attackClock;
 
     public ThreeBulletAttackAI(){
+        attackClock = attackSpeed;
     }
 
     @Override
@@ -27,11 +29,18 @@ public class ThreeBulletAttackAI implements AttackAI {
 }
 
     @Override
-    public void attack(Body enemyBody, World world) {
+    public void attack(Body enemyBody, World world, float delta) {
+        if(attackClock < 0){
+            executeAttack(enemyBody, world);
+            attackClock = attackSpeed;
+        } else {
+            attackClock -= delta;
+        }
 
+    }
+    public void executeAttack(Body enemyBody, World world){
         if (weapon == null) return;
 
-        weapon.setCooldownTime(0.0f);
         // get bullet direction and influence by player velocity
         float middleXDir = world.xDistanceToPlayer(enemyBody);
         float middleYDir = world.yDistanceToPlayer(enemyBody);

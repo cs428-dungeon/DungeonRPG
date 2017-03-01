@@ -14,8 +14,11 @@ public class FireTrailAI implements AttackAI {
     private float attackDamage = 1.0f;
     private WeaponType weaponType = WeaponType.TRAIL;
     private EnemyWeapon weapon;
+    private float attackClock;
 
-    public FireTrailAI(){}
+    public FireTrailAI(){
+        attackClock = attackSpeed;
+    }
 
     @Override
     public void scale(float scaleAmount) {
@@ -25,12 +28,18 @@ public class FireTrailAI implements AttackAI {
     }
 
     @Override
-    public void attack(Body enemyBody, World world) {
+    public void attack(Body enemyBody, World world, float delta) {
 
-        if (weapon == null) return;
+        if(attackClock < 0){
+            executeAttack(enemyBody, world);
+            attackClock = attackSpeed;
+        } else {
+            attackClock -= delta;
+        }
+    }
 
-        //if needed to reset cooldown time.
-        weapon.setCooldownTime(0.0f);
+    public void executeAttack(Body enemyBody, World world){
+        if (weapon == null) return;//if needed to reset cooldown time.
         // get bullet direction and influence by player velocity
         float XDir = enemyBody.velocity.x;
         float YDir = enemyBody.velocity.y;
@@ -42,7 +51,6 @@ public class FireTrailAI implements AttackAI {
         //place firetrail.
         weapon.fire(x, y, XDir, YDir);
     }
-
     @Override
     public float getAttackSpeed() {
         return attackSpeed;

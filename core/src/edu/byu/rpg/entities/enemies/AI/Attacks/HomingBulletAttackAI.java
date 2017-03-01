@@ -15,8 +15,10 @@ public class HomingBulletAttackAI implements AttackAI {
     private float attackDamage = 1.0f;
     private WeaponType weaponType = WeaponType.HOMING_BULLET;
     private EnemyWeapon weapon;
+    private float attackClock;
 
     public HomingBulletAttackAI(){
+        attackClock = attackSpeed;
     }
 
     @Override
@@ -28,8 +30,16 @@ public class HomingBulletAttackAI implements AttackAI {
     }
 
     @Override
-    public void attack(Body enemyBody, World world) {
+    public void attack(Body enemyBody, World world, float delta) {
+        if(attackClock < 0){
+            executeAttack(enemyBody, world);
+            attackClock = attackSpeed;
+        } else {
+            attackClock -= delta;
+        }
+    }
 
+    public void executeAttack(Body enemyBody, World world){
         if (weapon == null) return;
 
         //get the X distance to the player
@@ -45,8 +55,6 @@ public class HomingBulletAttackAI implements AttackAI {
         //fire middle bullet
         weapon.fire(x, y, XDir, YDir);
     }
-
-
     @Override
     public float getAttackSpeed() {
         return attackSpeed;

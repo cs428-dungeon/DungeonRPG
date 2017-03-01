@@ -43,6 +43,7 @@ public class AIController {
             case THREE_BULLET: return new ThreeBulletAttackAI();
             case HOMING_BULLET: return new HomingBulletAttackAI();
             case FIRE_TRAIL: return new FireTrailAI();
+            case EIGHT_SHOT: return new EightShotAttackAI();
         }
         return null;
     }

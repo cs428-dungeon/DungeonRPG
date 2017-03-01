@@ -18,6 +18,7 @@ public class EnemyBulletWeapon extends EnemyWeapon {
 
     public EnemyBulletWeapon(final RpgGame game, final World world) {
         super(game);
+        this.setCooldownTime(0.0f);
         attackPool = new Pool<EnemyAttack>() {
             @Override
             protected EnemyAttack newObject() {

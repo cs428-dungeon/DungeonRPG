@@ -86,10 +86,11 @@ public class PlayScreen extends ScreenBase {
             AIController aiController = new AIController();
             //aiController.addMovementAI(MovementType.RANDOM);
             aiController.addMovementAI(MovementType.BOUNCE);
-            aiController.addAttackAI(AttackType.ONE_BULLET);
-            aiController.addAttackAI(AttackType.THREE_BULLET);
-            aiController.addAttackAI(AttackType.HOMING_BULLET);
-            aiController.addAttackAI(AttackType.FIRE_TRAIL);
+            //aiController.addAttackAI(AttackType.ONE_BULLET);
+            //aiController.addAttackAI(AttackType.THREE_BULLET);
+            //aiController.addAttackAI(AttackType.HOMING_BULLET);
+            //aiController.addAttackAI(AttackType.FIRE_TRAIL);
+            aiController.addAttackAI(AttackType.EIGHT_SHOT);
             // create enemyController with the enemy tiles in it.
             EnemyController enemyController = new EnemyController(aiController, map.getLayers().get("enemies").getObjects().getByType(TiledMapTileMapObject.class));
             // add the types of monsters the enemyController should be able to spawn.
