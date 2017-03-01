@@ -8,12 +8,8 @@ import edu.byu.rpg.physics.World;
  */
 public class WallBounceMovementAI implements MovementAI {
     private float movementSpeed = 2.0f;
-    private float dirTime = 0.9f;
-    private float dirClock;
-    private boolean collided = false;
 
     public WallBounceMovementAI(){
-        dirClock = dirTime = movementSpeed;
     }
 
     @Override
@@ -41,9 +37,7 @@ public class WallBounceMovementAI implements MovementAI {
             y *= (Math.random() > 0.5) ? -1 : 1;
 
             enemyBody.acceleration.set(x, y);
-            if(collided){
-                collided = false;
-            }
+            //reset the hitSolid flag in the body
             enemyBody.hitSolid = false;
         }
     }

@@ -1,10 +1,7 @@
 package edu.byu.rpg.entities.enemies.controllers;
 
 import edu.byu.rpg.entities.enemies.AI.Attacks.*;
-import edu.byu.rpg.entities.enemies.AI.Movement.MovementAI;
-import edu.byu.rpg.entities.enemies.AI.Movement.MovementType;
-import edu.byu.rpg.entities.enemies.AI.Movement.RandomMovementAI;
-import edu.byu.rpg.entities.enemies.AI.Movement.WallBounceMovementAI;
+import edu.byu.rpg.entities.enemies.AI.Movement.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -32,6 +29,7 @@ public class AIController {
         switch(type){
             case RANDOM: return new RandomMovementAI();
             case BOUNCE: return new WallBounceMovementAI();
+            case FOLLOW: return new FollowMovementAI();
         }
         return null;
     }

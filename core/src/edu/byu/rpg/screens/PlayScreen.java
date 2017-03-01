@@ -85,7 +85,8 @@ public class PlayScreen extends ScreenBase {
             //create an AIController and give it an attackAI and a movementAI;
             AIController aiController = new AIController();
             //aiController.addMovementAI(MovementType.RANDOM);
-            aiController.addMovementAI(MovementType.BOUNCE);
+            //aiController.addMovementAI(MovementType.BOUNCE);
+            aiController.addMovementAI(MovementType.FOLLOW);
             //aiController.addAttackAI(AttackType.ONE_BULLET);
             //aiController.addAttackAI(AttackType.THREE_BULLET);
             //aiController.addAttackAI(AttackType.HOMING_BULLET);
