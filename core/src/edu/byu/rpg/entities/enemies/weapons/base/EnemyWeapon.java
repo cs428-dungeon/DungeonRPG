@@ -112,10 +112,4 @@ public abstract class EnemyWeapon extends UpdatableEntity {
             cooldownClock -= delta;
         }
     }
-
-    public void scale(float scaleAmount){
-        EnemyAttack attack = attackPool.obtain();
-        attack.setMaxSpeed(attack.getMaxSpeed() * scaleAmount);
-
-    }
 }

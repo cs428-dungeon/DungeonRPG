@@ -15,15 +15,15 @@ import edu.byu.rpg.tools.Utils;
  */
 public class EnemyHomingBullet extends EnemyAttack {
 
-    private float maxTimeToLive = 5;
+    private float maxTimeToLive = 10;
     private float TimeToLive;
+    private float health = 3;
     Texture bulletTexture;
 
     public EnemyHomingBullet(RpgGame game, World world, Pool<EnemyAttack> pool) {
         super(game, world, new Body(0, 0, 8, 8), pool, World.Type.ENEMY_BULLET);
         bulletTexture = game.assets.getTexture("basic_bullet");
         this.TimeToLive = maxTimeToLive;
-        this.body.maxSpeed = 3.5f;
     }
 
     @Override
@@ -44,6 +44,9 @@ public class EnemyHomingBullet extends EnemyAttack {
         body.updatePosition(delta);
         TimeToLive -=delta;
         // check for collisions
+        if(world.collideCheck(World.Type.PLAYER_BULLET, body)){
+
+        }
         if (collideCheck()) {
 
             // damage enemies if hit
@@ -66,5 +69,9 @@ public class EnemyHomingBullet extends EnemyAttack {
             pop();
             TimeToLive = maxTimeToLive;
         }
+    }
+
+    public void takeDamage(float damage){
+
     }
 }

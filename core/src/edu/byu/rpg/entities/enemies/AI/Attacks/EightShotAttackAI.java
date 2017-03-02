@@ -1,6 +1,7 @@
 package edu.byu.rpg.entities.enemies.AI.Attacks;
 
 import edu.byu.rpg.entities.enemies.weapons.WeaponType;
+import edu.byu.rpg.entities.enemies.weapons.attacks.EnemyBulletWeapon;
 import edu.byu.rpg.entities.enemies.weapons.base.EnemyWeapon;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.World;
@@ -12,7 +13,7 @@ public class EightShotAttackAI implements AttackAI {
     private float attackSpeed = 2.0f;
     private float attackDamage = 2.0f;
     private WeaponType weaponType = WeaponType.BULLET;
-    private EnemyWeapon weapon;
+    private EnemyBulletWeapon weapon;
     private float attackClock;
     private float velocity = 2.0f;
 
@@ -80,5 +81,5 @@ public class EightShotAttackAI implements AttackAI {
         return weaponType;
     }
     @Override
-    public void setWeapon(EnemyWeapon weapon){this.weapon = weapon;}
+    public void setWeapon(EnemyWeapon weapon){this.weapon = (EnemyBulletWeapon)weapon;}
 }
