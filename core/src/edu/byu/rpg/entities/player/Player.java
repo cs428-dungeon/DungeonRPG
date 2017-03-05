@@ -1,5 +1,6 @@
 package edu.byu.rpg.entities.player;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.byu.rpg.RpgGame;
 import edu.byu.rpg.audio.AudioManager;
@@ -14,6 +15,8 @@ import edu.byu.rpg.physics.Collideable;
 import edu.byu.rpg.physics.World;
 import java.lang.Math;
 
+import static java.lang.Math.abs;
+
 /**
  * The player-controlled character.
  */
@@ -27,7 +30,8 @@ public class Player extends Actor implements Collideable {
     // character stats
     private float health;
     private float maxHealth;
-    //private float hunger;
+    private float hunger;
+    private final float maxHunger = 200;
     private int playerExperience;
     private int playerLevel;
     private int luck;
@@ -55,7 +59,7 @@ public class Player extends Actor implements Collideable {
 
         // character stats
         maxHealth = health = 3;
-        //hunger = 100;
+        hunger = 0;
         playerExperience = 0;
         playerLevel = 1;
         luck = 1;
@@ -106,12 +110,21 @@ public class Player extends Actor implements Collideable {
         // right stick = bullets
         float rightXAxis = InputManager.getRightXAxis();
         float rightYAxis = InputManager.getRightYAxis();
-        if (Math.abs(rightXAxis) > 0 || Math.abs(rightYAxis) > 0) {
+        if (abs(rightXAxis) > 0 || abs(rightYAxis) > 0) {
             // fireBullets bullet in the direction of the input
             fireWeapon(rightXAxis, rightYAxis);
         }
 
+        float prevX = body.getCenterX();
+        float prevY = body.getCenterY();
+
         super.update(delta);
+
+        hunger += (abs(prevX - body.getCenterX()) + abs(prevY - body.getCenterY())) / 100.0;
+
+        if (hunger >= maxHunger){
+            die();
+        }
     }
 
     /**
@@ -180,6 +193,7 @@ public class Player extends Actor implements Collideable {
             weapon.destroy();
         }
         this.weapon = newWeapon;
+        Gdx.app.debug("Player", "New weapon!");
     }
 
     /**
@@ -215,6 +229,13 @@ public class Player extends Actor implements Collideable {
     private void heal(float recover) {
         health += recover;
         if (health > maxHealth) { health = maxHealth; }
+        Gdx.app.debug("Player", String.format("Healed! Health is now %1$d", health));
+    }
+
+    private void eat(float recover){
+        hunger -= recover;
+        if (hunger < 0) { hunger = 0; };
+        Gdx.app.debug("Player", String.format("Ate! Hunger is now %1$d", hunger));
     }
 
     // Levels are calculated using a square root, rounded down. Currently, there is no level cap.
@@ -234,6 +255,8 @@ public class Player extends Actor implements Collideable {
         */
         ++playerLevel;
 
+        Gdx.app.debug("Player", "Level up!");
+
         // Luck cannot increase more than 2 per level
         int luckIncrease = 0;
         for (int i = 0; i < luck; i++) {
@@ -250,6 +273,7 @@ public class Player extends Actor implements Collideable {
         }
         maxHealth += healthIncrease;
         health += healthIncrease;
+        Gdx.app.debug("Player", String.format("Stats are now: Luck = %1$d, Max health = %2$d", luck, maxHealth));
     }
 
     private double randomRollAverage(){ return (Math.random() + Math.random()) / 2; }
