@@ -13,7 +13,7 @@ public class FollowMovementAI implements MovementAI {
     }
 
     @Override
-    public void move(Body enemyBody, World world) {
+    public void move(Body enemyBody, World world, float delta) {
 
     }
 

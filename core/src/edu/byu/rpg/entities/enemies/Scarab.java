@@ -15,6 +15,7 @@ import edu.byu.rpg.graphics.AnimationManager;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.Collideable;
 import edu.byu.rpg.physics.World;
+import edu.byu.rpg.tools.Utils;
 
 /**
  * Enemy for testing out collisions/hurting player
@@ -23,9 +24,6 @@ public class Scarab extends Actor implements Collideable {
 
     private AnimationManager anims;
     private Shadow shadow;
-
-    private float dirTime = 0.9f;
-    private float dirClock;
 
     private float attackTime = 1.0f;
     private float attackClock;
@@ -44,6 +42,7 @@ public class Scarab extends Actor implements Collideable {
         // init body
         body.maxSpeed = 2f;
 
+
         // init animations and shadow
         anims = new AnimationManager(game);
         anims.add("scarab_stand", 1, 7, 10);
@@ -60,10 +59,6 @@ public class Scarab extends Actor implements Collideable {
 
         // setup random direction
         this.movementAI = movementAI;
-        // setup direction and direction timer from the movementAI.
-        dirClock = dirTime = movementAI.getMovementSpeed();
-        //grab the players body and pass it in for the AI to use.
-        movementAI.move(body, world);
 
 
         // init health
@@ -74,15 +69,7 @@ public class Scarab extends Actor implements Collideable {
     public void update(float delta) {
         // update position, etc.
         super.update(delta);
-
-        // movement timer
-        if (dirClock < 0) {
-            movementAI.move(body, world);
-            dirClock = dirTime;
-        } else {
-            dirClock -= delta;
-        }
-
+        movementAI.move(body, world, delta);
         //attack timer
         if(attackClock < 0){
             attackAI.attack(body, world);
@@ -90,15 +77,6 @@ public class Scarab extends Actor implements Collideable {
         } else {
             attackClock -= delta;
         }
-
-
-        // check for collisions with other enemies, change direction if hit.
-        // (this prevents overlap)
-
-        if (world.collideCheck(World.Type.ENEMY, body)) {
-            movementAI.move(body, world);
-        }
-
         // set animation
         if (body.velocity.x > 0) {
             anims.faceRight();
