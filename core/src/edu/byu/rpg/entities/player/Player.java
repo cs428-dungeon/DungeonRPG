@@ -253,10 +253,12 @@ public class Player extends Actor implements Collideable {
         TODO: Trigger events (animation, stat rolls, etc.)
         TODO: Return Array or Map of changes for UI to display (or trigger here)
         */
+        playerExperience -= experienceNeededToLevelUp();
         ++playerLevel;
 
-        Gdx.app.debug("Player", "Level up!");
-
+        Gdx.app.debug("Player", String.format("Level up! Now at: %1$d", playerLevel));
+        Gdx.app.debug("Player", String.format("XP needed for next level: %1$d", experienceNeededToLevelUp()));
+        
         // Luck cannot increase more than 2 per level
         int luckIncrease = 0;
         for (int i = 0; i < luck; i++) {
