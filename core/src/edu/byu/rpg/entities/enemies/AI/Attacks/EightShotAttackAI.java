@@ -1,8 +1,8 @@
 package edu.byu.rpg.entities.enemies.AI.Attacks;
 
-import edu.byu.rpg.entities.enemies.weapons.WeaponType;
-import edu.byu.rpg.entities.enemies.weapons.attacks.EnemyBulletWeapon;
-import edu.byu.rpg.entities.enemies.weapons.base.EnemyWeapon;
+import edu.byu.rpg.entities.enemies.offense.WeaponType;
+import edu.byu.rpg.entities.enemies.offense.weapons.EnemyBulletWeapon;
+import edu.byu.rpg.entities.enemies.offense.base.EnemyWeapon;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.World;
 

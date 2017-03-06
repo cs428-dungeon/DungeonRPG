@@ -1,13 +1,13 @@
-package edu.byu.rpg.entities.enemies.weapons.attacks;
+package edu.byu.rpg.entities.enemies.offense.weapons;
 
 import com.badlogic.gdx.utils.Pool;
 import edu.byu.rpg.RpgGame;
-import edu.byu.rpg.entities.enemies.weapons.base.EnemyAttack;
-import edu.byu.rpg.entities.enemies.weapons.base.EnemyWeapon;
+import edu.byu.rpg.entities.enemies.offense.attacks.BasicEnemyBullet;
+import edu.byu.rpg.entities.enemies.offense.base.EnemyAttack;
+import edu.byu.rpg.entities.enemies.offense.base.EnemyWeapon;
 import edu.byu.rpg.physics.World;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Created by Andrew on 2/14/2017.

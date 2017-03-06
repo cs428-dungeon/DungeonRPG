@@ -6,16 +6,16 @@ import edu.byu.rpg.entities.base.Actor;
 import edu.byu.rpg.entities.effects.Shadow;
 import edu.byu.rpg.entities.enemies.AI.Attacks.AttackAI;
 import edu.byu.rpg.entities.enemies.AI.Movement.MovementAI;
-import edu.byu.rpg.entities.enemies.weapons.WeaponType;
-import edu.byu.rpg.entities.enemies.weapons.attacks.EnemyBulletWeapon;
-import edu.byu.rpg.entities.enemies.weapons.attacks.EnemyHomingBulletWeapon;
-import edu.byu.rpg.entities.enemies.weapons.attacks.EnemyTrailWeapon;
-import edu.byu.rpg.entities.enemies.weapons.base.EnemyWeapon;
+import edu.byu.rpg.entities.enemies.offense.WeaponType;
+import edu.byu.rpg.entities.enemies.offense.weapons.EnemyBouncingBulletWeapon;
+import edu.byu.rpg.entities.enemies.offense.weapons.EnemyBulletWeapon;
+import edu.byu.rpg.entities.enemies.offense.weapons.EnemyHomingBulletWeapon;
+import edu.byu.rpg.entities.enemies.offense.weapons.EnemyTrailWeapon;
+import edu.byu.rpg.entities.enemies.offense.base.EnemyWeapon;
 import edu.byu.rpg.graphics.AnimationManager;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.Collideable;
 import edu.byu.rpg.physics.World;
-import edu.byu.rpg.tools.Utils;
 
 /**
  * Enemy for testing out collisions/hurting player
@@ -96,6 +96,7 @@ public class Scarab extends Actor implements Collideable {
                          break;
             case TRAIL:  this.weapon = new EnemyTrailWeapon(game, world);
                          break;
+            case BOUNCING_BULLET: this.weapon = new EnemyBouncingBulletWeapon(game, world);
         }
         attackAI.setWeapon(this.weapon);
     }

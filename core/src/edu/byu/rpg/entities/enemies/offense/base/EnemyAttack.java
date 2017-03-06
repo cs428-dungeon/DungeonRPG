@@ -1,4 +1,4 @@
-package edu.byu.rpg.entities.enemies.weapons.base;
+package edu.byu.rpg.entities.enemies.offense.base;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.utils.Pool;
@@ -8,7 +8,6 @@ import edu.byu.rpg.components.UpdateComponent;
 import edu.byu.rpg.entities.base.Actor;
 import edu.byu.rpg.entities.base.Drawable;
 import edu.byu.rpg.entities.base.Updatable;
-import edu.byu.rpg.entities.enemies.weapons.attacks.BasicFireTrail;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.Collideable;
 import edu.byu.rpg.physics.World;
@@ -57,7 +56,7 @@ public abstract class EnemyAttack extends Entity implements Updatable, Drawable,
      * Calls {@link Actor}'s constructor, initializes the body.
      * @param game Our game class.
      * @param world The physics world.
-     * @param body A physics {@link Body} that defines this attacks hitbox.
+     * @param body A physics {@link Body} that defines this weapons hitbox.
      * @param pool The bullet pool that this bullet belongs to.
      */
     public EnemyAttack(RpgGame game, World world, Body body, Pool<EnemyAttack> pool, World.Type group) {
@@ -200,7 +199,7 @@ public abstract class EnemyAttack extends Entity implements Updatable, Drawable,
     }
 
     /**
-     * Collision checking for attacks.
+     * Collision checking for weapons.
      * @param otherBody The other {@link Body} to check for collisions.
      * @return True if colliding, false if not colliding.
      */
@@ -210,7 +209,7 @@ public abstract class EnemyAttack extends Entity implements Updatable, Drawable,
     }
 
     /**
-     * attacks handle their own collision logic, so this function doesn't
+     * weapons handle their own collision logic, so this function doesn't
      * do anything.
      * @param damage (nothing)
      */

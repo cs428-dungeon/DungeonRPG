@@ -1,23 +1,28 @@
-package edu.byu.rpg.entities.enemies.weapons.attacks;
+package edu.byu.rpg.entities.enemies.offense.weapons;
 
 import com.badlogic.gdx.utils.Pool;
 import edu.byu.rpg.RpgGame;
-import edu.byu.rpg.entities.enemies.weapons.base.EnemyAttack;
-import edu.byu.rpg.entities.enemies.weapons.base.EnemyWeapon;
+import edu.byu.rpg.entities.enemies.offense.attacks.EnemyHomingBullet;
+import edu.byu.rpg.entities.enemies.offense.base.EnemyAttack;
+import edu.byu.rpg.entities.enemies.offense.base.EnemyWeapon;
 import edu.byu.rpg.physics.World;
 
-/**
- * Created by Andrew on 2/15/2017.
- */
-public class EnemyTrailWeapon extends EnemyWeapon {
+import java.util.ArrayList;
 
-    public EnemyTrailWeapon(final RpgGame game, final World world) {
+/**
+ * Created by Andrew on 2/14/2017.
+ */
+public class EnemyHomingBulletWeapon extends EnemyWeapon {
+
+    private ArrayList<EnemyAttack> attackType;
+
+    public EnemyHomingBulletWeapon(final RpgGame game, final World world) {
         super(game);
         this.setCooldownTime(0.0f);
         attackPool = new Pool<EnemyAttack>() {
             @Override
             protected EnemyAttack newObject() {
-                return new BasicFireTrail(game, world, attackPool);
+                return new EnemyHomingBullet(game, world, attackPool);
             }
         };
     }
