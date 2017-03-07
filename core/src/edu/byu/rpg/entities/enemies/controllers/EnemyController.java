@@ -37,10 +37,10 @@ public class EnemyController {
         }
     }
 
+    //This will spawn presets instead of random movmement and random Attack.
     public void spawnMonster(RpgGame game, World world, TiledMapTileMapObject enemyTile, MonsterType monsterType){
         switch(monsterType){
             case SCARAB: Scarab scarab = new Scarab(game, world, (int)enemyTile.getX(), (int)enemyTile.getY(), aiController.getRandomMovementAI(), aiController.getRandomAttackAI());
-
         }
     }
 }
