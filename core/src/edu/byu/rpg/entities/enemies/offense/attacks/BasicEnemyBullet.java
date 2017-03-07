@@ -1,10 +1,10 @@
-package edu.byu.rpg.entities.enemies.weapons.attacks;
+package edu.byu.rpg.entities.enemies.offense.attacks;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Pool;
 import edu.byu.rpg.RpgGame;
-import edu.byu.rpg.entities.enemies.weapons.base.EnemyAttack;
+import edu.byu.rpg.entities.enemies.offense.base.EnemyAttack;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.World;
 

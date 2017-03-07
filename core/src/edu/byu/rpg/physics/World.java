@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class World {
 
     /** Defines collision group classes. */
-    public static enum Type { SOLID, PLAYER, PLAYER_BULLET, ENEMY, ENEMY_BULLET, ENEMY_TRAIL }
+    public static enum Type { SOLID, PLAYER, PLAYER_BULLET, ENEMY, ENEMY_BULLET,HOMING_ENEMY, ENEMY_TRAIL }
 
     /** Private map of type to collision group. */
     private HashMap<Type, ArrayList<Collideable>> groups;

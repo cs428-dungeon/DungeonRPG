@@ -1,8 +1,8 @@
 package edu.byu.rpg.entities.enemies.AI.Attacks;
 
-import edu.byu.rpg.entities.enemies.AI.Attacks.AttackAI;
-import edu.byu.rpg.entities.enemies.weapons.WeaponType;
-import edu.byu.rpg.entities.enemies.weapons.base.EnemyWeapon;
+import edu.byu.rpg.entities.enemies.offense.WeaponType;
+import edu.byu.rpg.entities.enemies.offense.weapons.EnemyBulletWeapon;
+import edu.byu.rpg.entities.enemies.offense.base.EnemyWeapon;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.World;
 
@@ -13,9 +13,11 @@ public class BulletAttackAI implements AttackAI {
     private float attackSpeed = 2.0f;
     private float attackDamage = 2.0f;
     private WeaponType weaponType = WeaponType.BULLET;
-    private EnemyWeapon weapon;
+    private EnemyBulletWeapon weapon;
+    private float attackClock;
 
     public BulletAttackAI(){
+        attackClock = attackSpeed;
     }
 
     @Override
@@ -27,7 +29,17 @@ public class BulletAttackAI implements AttackAI {
     }
 
     @Override
-    public void attack(Body enemyBody, World world) {
+    public void attack(Body enemyBody, World world, float delta) {
+        if(attackClock < 0){
+            executeAttack(enemyBody, world);
+            attackClock = attackSpeed;
+        } else {
+            attackClock -= delta;
+        }
+
+    }
+
+    public void executeAttack(Body enemyBody, World world){
         if (weapon == null) return;
 
         // get bullet direction and influence by player velocity
@@ -40,9 +52,7 @@ public class BulletAttackAI implements AttackAI {
 
         // fire weapon
         weapon.fire(x, y, xDir, yDir);
-
     }
-
     @Override
     public float getAttackSpeed() {
         return attackSpeed;
@@ -58,5 +68,5 @@ public class BulletAttackAI implements AttackAI {
         return weaponType;
     }
     @Override
-    public void setWeapon(EnemyWeapon weapon){this.weapon = weapon;}
+    public void setWeapon(EnemyWeapon weapon){this.weapon =(EnemyBulletWeapon)weapon;}
 }

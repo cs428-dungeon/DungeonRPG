@@ -1,10 +1,10 @@
-package edu.byu.rpg.entities.enemies.weapons.attacks;
+package edu.byu.rpg.entities.enemies.offense.attacks;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Pool;
 import edu.byu.rpg.RpgGame;
-import edu.byu.rpg.entities.enemies.weapons.base.EnemyAttack;
+import edu.byu.rpg.entities.enemies.offense.base.EnemyAttack;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.Collideable;
 import edu.byu.rpg.physics.World;
@@ -15,15 +15,17 @@ import edu.byu.rpg.tools.Utils;
  */
 public class EnemyHomingBullet extends EnemyAttack {
 
-    private float maxTimeToLive = 5;
+    private float maxTimeToLive = 15;
     private float TimeToLive;
+    private float health = 3;
     Texture bulletTexture;
 
     public EnemyHomingBullet(RpgGame game, World world, Pool<EnemyAttack> pool) {
-        super(game, world, new Body(0, 0, 8, 8), pool, World.Type.ENEMY_BULLET);
+        super(game, world, new Body(0, 0, 8, 8), pool, World.Type.HOMING_ENEMY);
         bulletTexture = game.assets.getTexture("basic_bullet");
+        this.body.maxSpeed = 2.0f;
         this.TimeToLive = maxTimeToLive;
-        this.body.maxSpeed = 3.5f;
+        this.body.collideable = true;
     }
 
     @Override
@@ -65,6 +67,15 @@ public class EnemyHomingBullet extends EnemyAttack {
         else if(TimeToLive < 0){
             pop();
             TimeToLive = maxTimeToLive;
+        }
+    }
+
+    @Override
+    public void takeDamage(float damage){
+        health -= damage;
+        if(health <=0){
+            health = 3;
+            pop();
         }
     }
 }

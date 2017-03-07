@@ -1,32 +1,33 @@
 package edu.byu.rpg.entities.enemies.AI.Attacks;
 
 import edu.byu.rpg.entities.enemies.offense.WeaponType;
-import edu.byu.rpg.entities.enemies.offense.weapons.EnemyHomingBulletWeapon;
+import edu.byu.rpg.entities.enemies.offense.weapons.EnemyBulletWeapon;
 import edu.byu.rpg.entities.enemies.offense.base.EnemyWeapon;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.World;
 
 /**
- * Created by Andrew on 2/14/2017.
+ * Created by Andrew on 3/1/2017.
  */
-public class HomingBulletAttackAI implements AttackAI {
-
+public class EightShotAttackAI implements AttackAI {
     private float attackSpeed = 2.0f;
-    private float attackDamage = 1.0f;
-    private WeaponType weaponType = WeaponType.HOMING_BULLET;
-    private EnemyHomingBulletWeapon weapon;
+    private float attackDamage = 2.0f;
+    private WeaponType weaponType = WeaponType.BULLET;
+    private EnemyBulletWeapon weapon;
     private float attackClock;
+    private float velocity = 2.0f;
 
-    public HomingBulletAttackAI(){
+    public EightShotAttackAI(){
         attackClock = attackSpeed;
     }
 
     @Override
     public void scale(float scaleAmount) {
+        //scale up attack speed and damage
         attackSpeed = attackSpeed * scaleAmount;
         attackDamage = attackDamage * scaleAmount;
+        velocity = velocity * scaleAmount;
         weapon.scale(scaleAmount);
-
     }
 
     @Override
@@ -42,18 +43,28 @@ public class HomingBulletAttackAI implements AttackAI {
     public void executeAttack(Body enemyBody, World world){
         if (weapon == null) return;
 
-        //get the X distance to the player
-        float XDir =  world.xDistanceToPlayer(enemyBody);
-        //get the Y distance to the player
-        float YDir = world.yDistanceToPlayer(enemyBody);
-
         // get center of hitbox
         float x = enemyBody.getCenterX();
         float y = enemyBody.position.y + enemyBody.size.y;
 
-        // set up XDir and YDir for the right and left bullets
-        //fire middle bullet
-        weapon.fire(x, y, XDir, YDir);
+        // fire weapon
+        //0 degrees
+        weapon.fire(x, y, 0,velocity);
+        //45 degrees
+        weapon.fire(x, y, velocity, velocity);
+        //90 degrees
+        weapon.fire(x, y, velocity, 0);
+        //135 degrees
+        weapon.fire(x, y, velocity, -velocity);
+        //180 degrees
+        weapon.fire(x, y, 0, -velocity);
+        //225 degrees
+        weapon.fire(x, y, -velocity, -velocity);
+        //270 degrees
+        weapon.fire(x, y, -velocity, 0);
+        //315 degrees
+        weapon.fire(x, y, -velocity, velocity);
+
     }
     @Override
     public float getAttackSpeed() {
@@ -69,10 +80,6 @@ public class HomingBulletAttackAI implements AttackAI {
     public WeaponType getWeaponType() {
         return weaponType;
     }
-
     @Override
-    public void setWeapon(EnemyWeapon weapon) {
-        this.weapon = (EnemyHomingBulletWeapon)weapon;
-    }
-
+    public void setWeapon(EnemyWeapon weapon){this.weapon = (EnemyBulletWeapon)weapon;}
 }
