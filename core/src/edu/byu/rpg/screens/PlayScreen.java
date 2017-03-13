@@ -11,6 +11,7 @@ import edu.byu.rpg.RpgGame;
 import edu.byu.rpg.entities.base.Solid;
 import edu.byu.rpg.entities.enemies.AI.Attacks.AttackType;
 import edu.byu.rpg.entities.enemies.AI.Movement.MovementType;
+import edu.byu.rpg.entities.enemies.bosses.BossType;
 import edu.byu.rpg.entities.enemies.standard.MonsterType;
 import edu.byu.rpg.entities.enemies.controllers.AIController;
 import edu.byu.rpg.entities.enemies.controllers.EnemyController;
@@ -98,7 +99,8 @@ public class PlayScreen extends ScreenBase {
             // add the types of monsters the enemyController should be able to spawn.
             enemyController.addEnemy(MonsterType.SCARAB);
             // spawn the random monsters
-            enemyController.spawnRandomMonsters(game, world);
+//            enemyController.spawnRandomMonsters(game, world);
+            enemyController.spawnBoss(game, world, map.getLayers().get("enemies").getObjects().getByType(TiledMapTileMapObject.class).first(), BossType.BABI);
 
             // load solid level geometry
             for (MapObject rectMapObj : map.getLayers().get("solids").getObjects().getByType(RectangleMapObject.class)) {

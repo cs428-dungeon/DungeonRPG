@@ -24,7 +24,7 @@ public class BouncingBulletAttackAI implements AttackAI {
     @Override
     public void scale(float scaleAttackDamage, float scaleAttackSpeed, float scaleAttackVelocity) {
         //scale up attack speed and damage
-        attackSpeed = attackSpeed * scaleAttackSpeed;
+        attackSpeed = attackSpeed / scaleAttackSpeed;
         attackDamage = attackDamage * scaleAttackDamage;
         weapon.scale(scaleAttackVelocity);
     }

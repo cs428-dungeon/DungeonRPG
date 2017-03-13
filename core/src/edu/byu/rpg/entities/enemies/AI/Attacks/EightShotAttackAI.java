@@ -24,7 +24,7 @@ public class EightShotAttackAI implements AttackAI {
     @Override
     public void scale(float scaleAttackDamage, float scaleAttackSpeed, float scaleAttackVelocity) {
         //scale up attack speed and damage
-        attackSpeed = attackSpeed * scaleAttackSpeed;
+        attackSpeed = attackSpeed / scaleAttackSpeed;
         attackDamage = attackDamage * scaleAttackDamage;
         velocity = velocity * scaleAttackVelocity;
         weapon.scale(scaleAttackVelocity);

@@ -24,7 +24,7 @@ public class ThreeBulletAttackAI implements AttackAI {
 
     @Override
     public void scale(float scaleAttackDamage, float scaleAttackSpeed, float scaleAttackVelocity) {
-        attackSpeed = attackSpeed * scaleAttackSpeed;
+        attackSpeed = attackSpeed / scaleAttackSpeed;
         attackDamage = attackDamage * scaleAttackDamage;
         weapon.scale(scaleAttackVelocity);
 
