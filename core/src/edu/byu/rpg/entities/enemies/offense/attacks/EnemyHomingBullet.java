@@ -27,6 +27,13 @@ public class EnemyHomingBullet extends EnemyAttack {
         this.TimeToLive = maxTimeToLive;
         this.body.collideable = true;
     }
+    public EnemyHomingBullet(EnemyHomingBullet oldBullet, Pool<EnemyAttack> pool) {
+        super(oldBullet.game, oldBullet.world, new Body(0, 0, 8, 8), pool, World.Type.HOMING_ENEMY);
+        bulletTexture = game.assets.getTexture("basic_bullet");
+        this.body.maxSpeed = oldBullet.getMaxSpeed();
+        this.TimeToLive = maxTimeToLive;
+        this.body.collideable = true;
+    }
 
     @Override
     public void draw(float delta, SpriteBatch batch) {

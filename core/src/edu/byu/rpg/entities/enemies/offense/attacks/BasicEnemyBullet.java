@@ -20,6 +20,11 @@ public class BasicEnemyBullet extends EnemyAttack {
         bulletTexture = game.assets.getTexture("basic_bullet");
         this.body.maxSpeed = 5.5f;
     }
+    public BasicEnemyBullet(BasicEnemyBullet oldBullet, Pool<EnemyAttack> pool) {
+        super(oldBullet.game, oldBullet.world, new Body(0, 0, 8, 8), pool, World.Type.ENEMY_BULLET);
+        bulletTexture = game.assets.getTexture("basic_bullet");
+        this.body.maxSpeed = oldBullet.getMaxSpeed();
+    }
 
     @Override
     public void draw(float delta, SpriteBatch batch) {

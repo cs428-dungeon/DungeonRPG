@@ -11,7 +11,7 @@ import edu.byu.rpg.RpgGame;
 import edu.byu.rpg.entities.base.Solid;
 import edu.byu.rpg.entities.enemies.AI.Attacks.AttackType;
 import edu.byu.rpg.entities.enemies.AI.Movement.MovementType;
-import edu.byu.rpg.entities.enemies.MonsterType;
+import edu.byu.rpg.entities.enemies.standard.MonsterType;
 import edu.byu.rpg.entities.enemies.controllers.AIController;
 import edu.byu.rpg.entities.enemies.controllers.EnemyController;
 import edu.byu.rpg.entities.player.Player;

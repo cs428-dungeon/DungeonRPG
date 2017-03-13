@@ -3,8 +3,8 @@ package edu.byu.rpg.entities.enemies.controllers;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.utils.Array;
 import edu.byu.rpg.RpgGame;
-import edu.byu.rpg.entities.enemies.MonsterType;
-import edu.byu.rpg.entities.enemies.Scarab;
+import edu.byu.rpg.entities.enemies.standard.MonsterType;
+import edu.byu.rpg.entities.enemies.standard.Scarab;
 import edu.byu.rpg.physics.World;
 
 import java.util.ArrayList;

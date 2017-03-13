@@ -21,11 +21,11 @@ public class BulletAttackAI implements AttackAI {
     }
 
     @Override
-    public void scale(float scaleAmount) {
+    public void scale(float scaleAttackDamage, float scaleAttackSpeed, float scaleAttackVelocity) {
         //scale up attack speed and damage
-        attackSpeed = attackSpeed * scaleAmount;
-        attackDamage = attackDamage * scaleAmount;
-        weapon.scale(scaleAmount);
+        attackSpeed = attackSpeed * scaleAttackSpeed;
+        attackDamage = attackDamage * scaleAttackDamage;
+        weapon.scale(scaleAttackVelocity);
     }
 
     @Override

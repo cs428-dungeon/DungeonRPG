@@ -35,12 +35,12 @@ public class EnemyBouncingBulletWeapon extends EnemyWeapon {
     }
 
     public void scale(float scaleAmount){
-        final EnemyAttack attack = attackPool.obtain();
+        final BouncingEnemyBullet attack = (BouncingEnemyBullet)attackPool.obtain();
         attack.setMaxSpeed(attack.getMaxSpeed() * scaleAmount);
         attackPool = new Pool<EnemyAttack>() {
             @Override
             protected EnemyAttack newObject() {
-                return attack;
+                return new BouncingEnemyBullet(attack, attackPool);
             }
         };
     }

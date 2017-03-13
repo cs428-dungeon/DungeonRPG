@@ -28,15 +28,4 @@ public class EnemyTrailWeapon extends EnemyWeapon {
         EnemyAttack attack = attackPool.obtain();
         attack.init(x, y, xDir, yDir, damage);
     }
-
-    public void scale(float scaleAmount){
-        final EnemyAttack attack = attackPool.obtain();
-        attack.setMaxSpeed(attack.getMaxSpeed() * scaleAmount);
-        attackPool = new Pool<EnemyAttack>() {
-            @Override
-            protected EnemyAttack newObject() {
-                return attack;
-            }
-        };
-    }
 }

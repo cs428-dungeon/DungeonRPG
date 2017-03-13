@@ -1,6 +1,5 @@
 package edu.byu.rpg.entities.enemies.AI.Movement;
 
-import edu.byu.rpg.entities.enemies.AI.EnemyAI;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.World;
 
@@ -9,8 +8,13 @@ import edu.byu.rpg.physics.World;
  * An object that implements {@link MovementAI) will be able to calculate and change position of the {@link Body}
  * of an object in the {@Link World}
  */
-public interface MovementAI extends EnemyAI {
+public interface MovementAI{
 
+    /**
+     * Contains logic that will scale the moving parts of an AI through different AIypes.
+     * @param scaleAmount the amount to scale monster stats by.
+     */
+    public void scale(float scaleAmount);
     /**
      * changes the X and Y coordinates for the Body passed in.
      * @param enemyBody The {@link Body} that corresponds to where the enemy is at the moment move is called.
