@@ -22,11 +22,10 @@ public class HomingBulletAttackAI implements AttackAI {
     }
 
     @Override
-    public void scale(float scaleAmount) {
-        attackSpeed = attackSpeed * scaleAmount;
-        attackDamage = attackDamage * scaleAmount;
-        weapon.scale(scaleAmount);
-
+    public void scale(float scaleAttackDamage, float scaleAttackSpeed, float scaleAttackVelocity) {
+        attackSpeed = attackSpeed / scaleAttackSpeed;
+        attackDamage = attackDamage * scaleAttackDamage;
+        weapon.scale(scaleAttackVelocity);
     }
 
     @Override

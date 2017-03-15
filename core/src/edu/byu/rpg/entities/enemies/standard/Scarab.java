@@ -1,4 +1,4 @@
-package edu.byu.rpg.entities.enemies;
+package edu.byu.rpg.entities.enemies.standard;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import edu.byu.rpg.RpgGame;
@@ -33,11 +33,14 @@ public class Scarab extends Actor implements Collideable {
     private EnemyWeapon weapon;
 
     private float health;
+    private float level;
 
     public Scarab(RpgGame game, World world, int x, int y, MovementAI movementAI, AttackAI attackAI) {
         super(game, world, new Body(x, y, 11, 8, 45, 16));
         // add to enemies collision group
         world.add(World.Type.ENEMY, this);
+        //TODO: figure out a way to provide level on initialization once the world manager is complete.
+        level = 1.0f;
 
         // init body
         body.maxSpeed = 2f;
@@ -55,6 +58,8 @@ public class Scarab extends Actor implements Collideable {
         equipWeapon(attackAI.getWeaponType());
         //set weapon damage
         weapon.setDamage(attackAI.getAttackDamage());
+        //TODO: Change these numbers to some algorithm based off of the enemy level.
+        attackAI.scale(2.0f,2.0f, 2.0f);
 
 
         // setup random direction

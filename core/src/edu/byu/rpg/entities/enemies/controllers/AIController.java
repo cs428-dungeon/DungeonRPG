@@ -30,6 +30,7 @@ public class AIController {
             case RANDOM: return new RandomMovementAI();
             case BOUNCE: return new WallBounceMovementAI();
             case FOLLOW: return new FollowMovementAI();
+            case STATIONARY: return new StationaryMovementAI();
         }
         return null;
     }

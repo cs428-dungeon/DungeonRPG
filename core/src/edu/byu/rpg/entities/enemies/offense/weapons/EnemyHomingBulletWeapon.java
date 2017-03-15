@@ -34,12 +34,12 @@ public class EnemyHomingBulletWeapon extends EnemyWeapon {
     }
 
     public void scale(float scaleAmount){
-        final EnemyAttack attack = attackPool.obtain();
+        final EnemyHomingBullet attack =(EnemyHomingBullet) attackPool.obtain();
         attack.setMaxSpeed(attack.getMaxSpeed() * scaleAmount);
         attackPool = new Pool<EnemyAttack>() {
             @Override
             protected EnemyAttack newObject() {
-                return attack;
+                return new EnemyHomingBullet(attack, attackPool);
             }
         };
     }

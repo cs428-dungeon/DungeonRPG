@@ -13,7 +13,8 @@ import edu.byu.rpg.RpgGame;
 import edu.byu.rpg.entities.base.Solid;
 import edu.byu.rpg.entities.enemies.AI.Attacks.AttackType;
 import edu.byu.rpg.entities.enemies.AI.Movement.MovementType;
-import edu.byu.rpg.entities.enemies.MonsterType;
+import edu.byu.rpg.entities.enemies.bosses.BossType;
+import edu.byu.rpg.entities.enemies.standard.MonsterType;
 import edu.byu.rpg.entities.enemies.controllers.AIController;
 import edu.byu.rpg.entities.enemies.controllers.EnemyController;
 import edu.byu.rpg.entities.player.Player;
@@ -143,7 +144,8 @@ public class PlayScreen extends ScreenBase {
             AIController aiController = new AIController();
             //aiController.addMovementAI(MovementType.RANDOM);
             //aiController.addMovementAI(MovementType.BOUNCE);
-            aiController.addMovementAI(MovementType.FOLLOW);
+            //aiController.addMovementAI(MovementType.FOLLOW);
+            aiController.addMovementAI(MovementType.STATIONARY);
             //aiController.addAttackAI(AttackType.ONE_BULLET);
             //aiController.addAttackAI(AttackType.THREE_BULLET);
             //aiController.addAttackAI(AttackType.HOMING_BULLET);
@@ -156,6 +158,7 @@ public class PlayScreen extends ScreenBase {
             enemyController.addEnemy(MonsterType.SCARAB);
             // spawn the random monsters
             enemyController.spawnRandomMonsters(game, world);
+            //enemyController.spawnBoss(game, world, map.getLayers().get("enemies").getObjects().getByType(TiledMapTileMapObject.class).first(), BossType.BABI);
 
             // load solid level geometry
             for (MapObject rectMapObj : map.getLayers().get("solids").getObjects().getByType(RectangleMapObject.class)) {

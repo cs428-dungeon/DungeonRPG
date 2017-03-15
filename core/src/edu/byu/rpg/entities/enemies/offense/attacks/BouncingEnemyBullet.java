@@ -27,6 +27,13 @@ public class BouncingEnemyBullet extends EnemyAttack {
         this.TimeToLive = maxTimeToLive;
         body.hitSolid = false;
     }
+    public BouncingEnemyBullet(BouncingEnemyBullet oldBullet, Pool<EnemyAttack> pool) {
+        super(oldBullet.game, oldBullet.world, new Body(0, 0, 8, 8), pool, World.Type.ENEMY_BULLET);
+        bulletTexture = game.assets.getTexture("basic_bullet");
+        this.body.maxSpeed = oldBullet.getMaxSpeed();
+        this.TimeToLive = maxTimeToLive;
+        body.hitSolid = false;
+    }
 
     @Override
     public void draw(float delta, SpriteBatch batch) {
