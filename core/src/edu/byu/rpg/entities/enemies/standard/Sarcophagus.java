@@ -18,9 +18,9 @@ import edu.byu.rpg.physics.Collideable;
 import edu.byu.rpg.physics.World;
 
 /**
- * Enemy for testing out collisions/hurting player
+ * its a rolling sarcophagous
  */
-public class PotViper extends Actor implements Collideable {
+public class Sarcophagus extends Actor implements Collideable {
 
     private AnimationManager anims;
     private Shadow shadow;
@@ -35,7 +35,7 @@ public class PotViper extends Actor implements Collideable {
     private float health;
     private float level;
 
-    public PotViper(RpgGame game, World world, int x, int y, MovementAI movementAI, AttackAI attackAI) {
+    public Sarcophagus(RpgGame game, World world, int x, int y, MovementAI movementAI, AttackAI attackAI) {
         super(game, world, new Body(x, y, 11, 8, 45, 16));
         // add to enemies collision group
         world.add(World.Type.ENEMY, this);
@@ -43,8 +43,8 @@ public class PotViper extends Actor implements Collideable {
         //TODO: figure out a way to provide level on initialization once the world manager is complete.
         level = 1.0f;
 
-        // init body, potvipers are stationary enemies.
-        body.maxSpeed = 0.0f;
+        // init body
+        body.maxSpeed = 2f;
 
 
         // init animations and shadow
