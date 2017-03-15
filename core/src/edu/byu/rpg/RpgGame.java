@@ -15,9 +15,9 @@ import edu.byu.rpg.tools.Assets;
 public class RpgGame extends Game {
 
 	/** The viewport width for our game. */
-	public static int VIRTUAL_WIDTH = 320;
+	public static int VIRTUAL_WIDTH = 640;
 	/** The viewport height for our game. */
-	public static int VIRTUAL_HEIGHT = 240;
+	public static int VIRTUAL_HEIGHT = 480;
 
 	/** The single asset loader that will be used to load all assets, and retrieve them throughout the game */
 	public Assets assets;

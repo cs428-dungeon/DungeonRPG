@@ -36,7 +36,8 @@ public class PlayScreen extends ScreenBase {
     /** Local instance of player, used for camera following. */
     private Player player;
 
-    /** Map width and height, for camera clamping. */
+    /** Map width and height, for camera clamping. Initialize to view size, but
+     * these will be reset when the map is loaded/generated. */
     private int mapWidth = RpgGame.VIRTUAL_WIDTH;
     private int mapHeight = RpgGame.VIRTUAL_HEIGHT;
 
@@ -47,7 +48,7 @@ public class PlayScreen extends ScreenBase {
      */
     public PlayScreen(final RpgGame game) {
         super(game);
-        loadMap("floor1/1");
+        loadMap("floor1/0");
     }
 
     /**
@@ -74,6 +75,22 @@ public class PlayScreen extends ScreenBase {
     }
 
     /**
+     * Clamps the camera to the edge of the map, if the camera is out-of-bounds.
+     */
+    private void clampCamera() {
+        if (camera.position.x > mapWidth - (camera.viewportWidth / 2)) {
+            camera.position.x = mapWidth - (camera.viewportWidth / 2);
+        } else if (camera.position.x < camera.viewportWidth / 2) {
+            camera.position.x = camera.viewportWidth / 2;
+        }
+        if (camera.position.y > mapHeight - (camera.viewportHeight / 2)) {
+            camera.position.y = mapHeight - (camera.viewportHeight / 2);
+        } else if (camera.position.y < camera.viewportHeight / 2) {
+            camera.position.y = camera.viewportHeight / 2;
+        }
+    }
+
+    /**
      * Smoothly moves the {@link PlayScreen#camera} to follow the {@link PlayScreen#player}.
      * @param delta The time between frames.
      */
@@ -85,17 +102,7 @@ public class PlayScreen extends ScreenBase {
         camera.position.y += (playerPos.y - camera.position.y) * lerp * delta;
 
         // clamp camera position to edges of map
-        if (camera.position.x > mapWidth - (camera.viewportWidth / 2)) {
-            camera.position.x = mapWidth - (camera.viewportWidth / 2);
-        } else if (camera.position.x < camera.viewportWidth / 2) {
-            camera.position.x = camera.viewportWidth / 2;
-        }
-        if (camera.position.y > mapHeight - (camera.viewportHeight / 2)) {
-            camera.position.y = mapHeight - (camera.viewportHeight / 2);
-        } else if (camera.position.y < camera.viewportHeight / 2) {
-            camera.position.y = camera.viewportHeight / 2;
-        }
-
+        clampCamera();
     }
 
     // TODO: Refactor map loading/generating logic into its own class.
@@ -124,6 +131,11 @@ public class PlayScreen extends ScreenBase {
             // load player
             for (TiledMapTileMapObject playerTile : map.getLayers().get("player").getObjects().getByType(TiledMapTileMapObject.class)) {
                 player = new Player(game, world, (int)playerTile.getX(), (int)playerTile.getY());
+
+                // center camera on player right away, and clamp to edges of room
+                camera.position.x = player.body.position.x;
+                camera.position.y = player.body.position.y;
+                clampCamera();
             }
 
             // TODO: need to create an enemy controller object that spawns a random enemy, given map location;
