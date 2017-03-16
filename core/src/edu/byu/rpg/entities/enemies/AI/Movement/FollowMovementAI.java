@@ -24,7 +24,7 @@ public class FollowMovementAI implements MovementAI {
         float xDistanceToPlayer = world.xDistanceToPlayer(enemyBody);
         float yDistanceToPlayer = world.yDistanceToPlayer(enemyBody);
 
-        float distanceToPlayer = (float)Math.sqrt(Math.pow(xDistanceToPlayer,2) + Math.pow(yDistanceToPlayer, 2));
+        float distanceToPlayer = world.DistanceToPlayer(enemyBody);
 
         if(distanceToPlayer <= radius){
             enemyBody.acceleration.set(xDistanceToPlayer, yDistanceToPlayer);

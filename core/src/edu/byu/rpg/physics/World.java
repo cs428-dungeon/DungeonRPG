@@ -104,6 +104,13 @@ public class World {
         }
         return 0.0f;
     }
+
+    public float DistanceToPlayer(Body otherBody){
+        float yDistance = yDistanceToPlayer(otherBody);
+        float xDistance = xDistanceToPlayer(otherBody);
+
+        return (float)Math.sqrt(Math.pow(xDistance,2) + Math.pow(yDistance, 2));
+    }
 //    /**
 //     * Checks for collisions against all the specified groups.  <strong>Note:</strong> This
 //     * function will only return the first <tt>collideable</tt> to intersect <tt>otherBody</tt>,

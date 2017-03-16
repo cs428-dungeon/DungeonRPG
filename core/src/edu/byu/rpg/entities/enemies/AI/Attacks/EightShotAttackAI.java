@@ -16,6 +16,7 @@ public class EightShotAttackAI implements AttackAI {
     private EnemyBulletWeapon weapon;
     private float attackClock;
     private float velocity = 2.0f;
+    private final float attackDistance = 200.0f;
 
     public EightShotAttackAI(){
         attackClock = attackSpeed;
@@ -32,7 +33,7 @@ public class EightShotAttackAI implements AttackAI {
 
     @Override
     public void attack(Body enemyBody, World world, float delta) {
-        if(attackClock < 0){
+        if(attackClock < 0 && world.DistanceToPlayer(enemyBody) <  attackDistance){
             executeAttack(enemyBody, world);
             attackClock = attackSpeed;
         } else {

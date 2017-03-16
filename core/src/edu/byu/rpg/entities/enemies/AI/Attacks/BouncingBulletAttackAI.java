@@ -16,6 +16,7 @@ public class BouncingBulletAttackAI implements AttackAI {
     private WeaponType weaponType = WeaponType.BOUNCING_BULLET;
     private EnemyBouncingBulletWeapon weapon;
     private float attackClock;
+    private final float attackDistance = 200.0f;
 
     public BouncingBulletAttackAI(){
         attackClock = attackSpeed;
@@ -31,7 +32,7 @@ public class BouncingBulletAttackAI implements AttackAI {
 
     @Override
     public void attack(Body enemyBody, World world, float delta) {
-        if(attackClock < 0){
+        if(attackClock < 0 && world.DistanceToPlayer(enemyBody) <  attackDistance){
             executeAttack(enemyBody, world);
             attackClock = attackSpeed;
         } else {

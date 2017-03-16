@@ -16,6 +16,8 @@ public class HomingBulletAttackAI implements AttackAI {
     private WeaponType weaponType = WeaponType.HOMING_BULLET;
     private EnemyHomingBulletWeapon weapon;
     private float attackClock;
+    private final float attackDistance = 200.0f;
+
 
     public HomingBulletAttackAI(){
         attackClock = attackSpeed;
@@ -30,7 +32,7 @@ public class HomingBulletAttackAI implements AttackAI {
 
     @Override
     public void attack(Body enemyBody, World world, float delta) {
-        if(attackClock < 0){
+        if(attackClock < 0 && world.DistanceToPlayer(enemyBody) <  attackDistance){
             executeAttack(enemyBody, world);
             attackClock = attackSpeed;
         } else {
