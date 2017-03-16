@@ -76,7 +76,8 @@ public class PlayScreen extends ScreenBase {
     }
 
     /**
-     * Clamps the camera to the edge of the map, if the camera is out-of-bounds.
+     * Clamps the camera to the edge of the map, if the camera is out-of-bounds.  Also clamps camera to integer value,
+     * so that we don't have sub-pixel movement.
      */
     private void clampCamera() {
         if (camera.position.x > mapWidth - (camera.viewportWidth / 2)) {
@@ -89,6 +90,9 @@ public class PlayScreen extends ScreenBase {
         } else if (camera.position.y < camera.viewportHeight / 2) {
             camera.position.y = camera.viewportHeight / 2;
         }
+
+        camera.position.x = (int)camera.position.x;
+        camera.position.y = (int)camera.position.y;
     }
 
     /**
