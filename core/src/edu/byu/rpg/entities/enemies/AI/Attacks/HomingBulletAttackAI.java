@@ -11,7 +11,7 @@ import edu.byu.rpg.physics.World;
  */
 public class HomingBulletAttackAI implements AttackAI {
 
-    private float attackSpeed = 2.0f;
+    private float attackSpeed = 4.0f;
     private float attackDamage = 1.0f;
     private WeaponType weaponType = WeaponType.HOMING_BULLET;
     private EnemyHomingBulletWeapon weapon;
