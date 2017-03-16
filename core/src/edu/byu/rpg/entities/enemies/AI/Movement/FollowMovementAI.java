@@ -8,14 +8,13 @@ import edu.byu.rpg.physics.World;
  */
 public class FollowMovementAI implements MovementAI {
     private float movementSpeed = 2.0f;
-    private float radius = 100.0f;
+    private final float radius = 300.0f;
 
     public FollowMovementAI(){
     }
     @Override
     public void scale(float scaleAmount) {
         movementSpeed = movementSpeed * scaleAmount;
-        radius = radius * scaleAmount;
     }
 
     @Override
@@ -24,7 +23,7 @@ public class FollowMovementAI implements MovementAI {
         float xDistanceToPlayer = world.xDistanceToPlayer(enemyBody);
         float yDistanceToPlayer = world.yDistanceToPlayer(enemyBody);
 
-        float distanceToPlayer = (float)Math.sqrt(Math.pow(xDistanceToPlayer,2) + Math.pow(yDistanceToPlayer, 2));
+        float distanceToPlayer = world.DistanceToPlayer(enemyBody);
 
         if(distanceToPlayer <= radius){
             enemyBody.acceleration.set(xDistanceToPlayer, yDistanceToPlayer);

@@ -146,15 +146,15 @@ public class PlayScreen extends ScreenBase {
             // TODO: need to create an enemy controller object that spawns a random enemy, given map location;
             //create an AIController and give it an attackAI and a movementAI;
             AIController aiController = new AIController();
-            //aiController.addMovementAI(MovementType.RANDOM);
-            //aiController.addMovementAI(MovementType.BOUNCE);
-            //aiController.addMovementAI(MovementType.FOLLOW);
+            aiController.addMovementAI(MovementType.RANDOM);
+            aiController.addMovementAI(MovementType.BOUNCE);
+            aiController.addMovementAI(MovementType.FOLLOW);
             aiController.addMovementAI(MovementType.STATIONARY);
-            //aiController.addAttackAI(AttackType.ONE_BULLET);
-            //aiController.addAttackAI(AttackType.THREE_BULLET);
-            //aiController.addAttackAI(AttackType.HOMING_BULLET);
-            //aiController.addAttackAI(AttackType.FIRE_TRAIL);
-            //aiController.addAttackAI(AttackType.EIGHT_SHOT);
+            aiController.addAttackAI(AttackType.ONE_BULLET);
+            aiController.addAttackAI(AttackType.THREE_BULLET);
+            aiController.addAttackAI(AttackType.HOMING_BULLET);
+            aiController.addAttackAI(AttackType.FIRE_TRAIL);
+            aiController.addAttackAI(AttackType.EIGHT_SHOT);
             aiController.addAttackAI(AttackType.BOUNCING_BULLET);
             // create enemyController with the enemy tiles in it.
             EnemyController enemyController = new EnemyController(aiController, map.getLayers().get("enemies").getObjects().getByType(TiledMapTileMapObject.class));
