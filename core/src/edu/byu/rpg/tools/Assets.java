@@ -36,6 +36,7 @@ public class Assets {
         loadTexture("player/shadow");
 
         loadTexture("scarab_stand");
+        loadTexture("blue_flame");
         loadTexture("basic_bullet");
 
         loadTexture("effects/shadow_64");
@@ -43,6 +44,8 @@ public class Assets {
         // load maps
         manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         manager.load("maps/floor1/1.tmx", TiledMap.class);
+        manager.load("maps/floor1/0.tmx", TiledMap.class);
+
 
         // load music
         loadMusic("floor 1");

@@ -1,7 +1,7 @@
 package edu.byu.rpg.entities.enemies.controllers;
 
-import edu.byu.rpg.entities.enemies.AI.AttackAI;
-import edu.byu.rpg.entities.enemies.AI.MovementAI;
+import edu.byu.rpg.entities.enemies.AI.Attacks.*;
+import edu.byu.rpg.entities.enemies.AI.Movement.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -11,51 +11,56 @@ import java.util.Random;
  */
 public class AIController {
     private Random randomGenerator = new Random();
-    private ArrayList<MovementAI> movementAIs = new ArrayList<MovementAI>();
-    private ArrayList<AttackAI> attackAIs = new ArrayList<AttackAI>();
+    private ArrayList<MovementType> movementAIs = new ArrayList<MovementType>();
+    private ArrayList<AttackType> attackAIs = new ArrayList<AttackType>();
 
     public AIController(){
     }
 
-    public void addMovementAI(MovementAI movementAI){
-        movementAIs.add(movementAI);
+    public void addMovementAI(MovementType type){
+        movementAIs.add(type);
     }
 
-    public void addAttackAI(AttackAI attackAI){
-        attackAIs.add(attackAI);
+    public void addAttackAI(AttackType type){
+        attackAIs.add(type);
     }
 
-    public MovementAI getMovementAI(String movementAI){
-        for(MovementAI AI : movementAIs){
-            if(AI.getClass().getSimpleName() == movementAI){
-                return AI;
-            }
+    public MovementAI getMovementAI(MovementType type){
+        switch(type){
+            case RANDOM: return new RandomMovementAI();
+            case BOUNCE: return new WallBounceMovementAI();
+            case FOLLOW: return new FollowMovementAI();
+            case STATIONARY: return new StationaryMovementAI();
         }
         return null;
     }
 
-    public AttackAI getAttackAI(String attackAI){
-        for(AttackAI AI : attackAIs){
-            if(AI.getClass().getSimpleName() == attackAI){
-                return AI;
-            }
+    public AttackAI getAttackAI(AttackType type){
+
+        switch(type){
+            case ONE_BULLET: return new BulletAttackAI();
+            case THREE_BULLET: return new ThreeBulletAttackAI();
+            case HOMING_BULLET: return new HomingBulletAttackAI();
+            case FIRE_TRAIL: return new FireTrailAI();
+            case EIGHT_SHOT: return new EightShotAttackAI();
+            case BOUNCING_BULLET: return new BouncingBulletAttackAI();
         }
         return null;
     }
 
     public MovementAI getRandomMovementAI(){
-        return movementAIs.get(randomGenerator.nextInt(movementAIs.size()));
+        return getMovementAI(movementAIs.get(randomGenerator.nextInt(movementAIs.size())));
     }
 
     public AttackAI getRandomAttackAI(){
-        return attackAIs.get(randomGenerator.nextInt(attackAIs.size()));
+        return getAttackAI(attackAIs.get(randomGenerator.nextInt(attackAIs.size())));
     }
 
-    public ArrayList<MovementAI> getMovementAIs(){
+    public ArrayList<MovementType> getMovementTypes(){
         return movementAIs;
     }
 
-    public ArrayList<AttackAI> getAttackAIs(){
+    public ArrayList<AttackType> getAttackTypes(){
         return attackAIs;
     }
 }

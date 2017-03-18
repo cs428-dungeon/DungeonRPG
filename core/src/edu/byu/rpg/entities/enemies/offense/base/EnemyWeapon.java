@@ -1,11 +1,11 @@
-package edu.byu.rpg.entities.enemies.weapons.base;
+package edu.byu.rpg.entities.enemies.offense.base;
 
 import com.badlogic.gdx.utils.Pool;
 import edu.byu.rpg.RpgGame;
 import edu.byu.rpg.entities.base.UpdatableEntity;
 
 /**
- * Contains an attack pool and any logic needed to fire off attacks from the enemy.
+ * Contains an attack pool and any logic needed to fire off weapons from the enemy.
  */
 public abstract class EnemyWeapon extends UpdatableEntity {
 
@@ -17,7 +17,7 @@ public abstract class EnemyWeapon extends UpdatableEntity {
      * whenever the weapon is fired.  Defaults to 0.35.
      */
     private float cooldownTime;
-    /** Cooldown clock.  If greater than 0, weapon will not fire attacks. */
+    /** Cooldown clock.  If greater than 0, weapon will not fire weapons. */
     private float cooldownClock;
 
     /** The amount of damage each attack does. Defaults to 1 */
@@ -37,7 +37,7 @@ public abstract class EnemyWeapon extends UpdatableEntity {
 
     /**
      * Sets the cooldown time for this weapon.  Useful if the player gets
-     * an upgrade that increases rate of fire attacks.
+     * an upgrade that increases rate of fire weapons.
      * @param cooldownTime The new cooldown time.
      */
     public void setCooldownTime(float cooldownTime) {
@@ -75,7 +75,7 @@ public abstract class EnemyWeapon extends UpdatableEntity {
 
     /**
      * Checks cooldown and then fires if cooldown has is at 0.  This function
-     * is called whenever the enemy attacks
+     * is called whenever the enemy weapons
      * @param x The starting x-position for the attack.
      * @param y The starting y-position for the attack.
      * @param xDir The x-component of the direction vector the player is firing in.
@@ -92,7 +92,7 @@ public abstract class EnemyWeapon extends UpdatableEntity {
     }
 
     /**
-     * launches the attack (or attacks).  This function is called automatically by
+     * launches the attack (or weapons).  This function is called automatically by
      * {@link EnemyWeapon#attack(float, float, float, float)}
      * @param x The starting x-position for the attack.
      * @param y The starting y-position for the attack.

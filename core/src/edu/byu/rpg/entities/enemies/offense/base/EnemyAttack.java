@@ -1,4 +1,4 @@
-package edu.byu.rpg.entities.enemies.weapons.base;
+package edu.byu.rpg.entities.enemies.offense.base;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.utils.Pool;
@@ -35,6 +35,9 @@ public abstract class EnemyAttack extends Entity implements Updatable, Drawable,
     /** This bullet's hitbox */
     protected Body body;
 
+    /** This bullet's drawComponent **/
+    protected DrawComponent drawComponent;
+
     /** Local instance of bullet pool, used to deactivate this bullet on collision. */
     private Pool<EnemyAttack> pool;
 
@@ -45,7 +48,7 @@ public abstract class EnemyAttack extends Entity implements Updatable, Drawable,
     /** The time that this bullet is allowed to live(just in case something happens and it gets stuck etc...)
      *  This is final and cannot be changed.
      */
-    private final float maxTimeToLive = 7;
+    private float maxTimeToLive = 7;
     private float TimeToLive;
 
 
@@ -53,18 +56,19 @@ public abstract class EnemyAttack extends Entity implements Updatable, Drawable,
      * Calls {@link Actor}'s constructor, initializes the body.
      * @param game Our game class.
      * @param world The physics world.
-     * @param body A physics {@link Body} that defines this attacks hitbox.
+     * @param body A physics {@link Body} that defines this weapons hitbox.
      * @param pool The bullet pool that this bullet belongs to.
      */
-    public EnemyAttack(RpgGame game, World world, Body body, Pool<EnemyAttack> pool) {
+    public EnemyAttack(RpgGame game, World world, Body body, Pool<EnemyAttack> pool, World.Type group) {
         this.game = game;
 
         // add components
         add(new UpdateComponent(this));
-        add(new DrawComponent(this));
+        drawComponent = new DrawComponent(this);
+        add(drawComponent);
 
         // add to player bullet group
-        world.add(World.Type.ENEMY_ATTACK, this);
+        world.add(group, this);
         this.world = world;
 
         // init body
@@ -111,6 +115,21 @@ public abstract class EnemyAttack extends Entity implements Updatable, Drawable,
         pool.free(this);
     }
 
+    /**
+     * This method is called when the attack needs to be scaled up.
+     * @param maxSpeed the new speed of the attack.
+     */
+    public void setMaxSpeed(float maxSpeed){
+        this.body.maxSpeed = maxSpeed;
+    }
+
+    /**
+     * this method returns the max speed of this attack
+     * @return the speed of the body.
+     */
+    public float getMaxSpeed(){
+        return this.body.maxSpeed;
+    }
     /**
      * Callback method for when the object is "freed", or removed from the game to go back to the {@link Pool}.
      * This is called automatically by {@link Pool#free(Object)} within {@link EnemyAttack#pop()}.  It simply
@@ -165,13 +184,22 @@ public abstract class EnemyAttack extends Entity implements Updatable, Drawable,
      * Helper method, wraps collision logic into a single method for use by {@link EnemyAttack#update(float)}
      * @return <tt>true</tt> if this bullet is overlapping enemies or solids, <tt>false</tt> if no.
      */
-    private boolean collideCheck() {
+    public boolean collideCheck() {
         return (world.collideCheck(World.Type.PLAYER, body)
                 || world.collideCheck(World.Type.SOLID, body));
     }
 
     /**
-     * Collision checking for attacks.
+     * sets the time to live of the attack. Currently this does not scale, but it can if need be in the future.
+     * @param maxTimeToLive the maximum time fo this attack to live.
+     */
+    public void setTimeToLive(float maxTimeToLive){
+        TimeToLive = maxTimeToLive;
+        this.maxTimeToLive = maxTimeToLive;
+    }
+
+    /**
+     * Collision checking for weapons.
      * @param otherBody The other {@link Body} to check for collisions.
      * @return True if colliding, false if not colliding.
      */
@@ -181,7 +209,7 @@ public abstract class EnemyAttack extends Entity implements Updatable, Drawable,
     }
 
     /**
-     * attacks handle their own collision logic, so this function doesn't
+     * weapons handle their own collision logic, so this function doesn't
      * do anything.
      * @param damage (nothing)
      */

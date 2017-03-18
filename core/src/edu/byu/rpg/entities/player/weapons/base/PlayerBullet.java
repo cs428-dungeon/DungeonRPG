@@ -136,6 +136,10 @@ public abstract class PlayerBullet extends Entity implements Updatable, Drawable
             if (enemy != null) {
                 enemy.takeDamage(damage);
             }
+            Collideable homingBullet = world.collide(World.Type.HOMING_ENEMY, body);
+            if(homingBullet != null){
+                homingBullet.takeDamage(damage);
+            }
 
             // step backwards as long as bullet is still colliding
             while(collideCheck() && body.position.x != prevX && body.position.y != prevY) {
@@ -154,7 +158,8 @@ public abstract class PlayerBullet extends Entity implements Updatable, Drawable
      */
     private boolean collideCheck() {
         return (world.collideCheck(World.Type.ENEMY, body)
-                || world.collideCheck(World.Type.SOLID, body));
+                || world.collideCheck(World.Type.SOLID, body)
+                || world.collideCheck(World.Type.HOMING_ENEMY,body));
     }
 
     /**

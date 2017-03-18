@@ -2,18 +2,19 @@ package edu.byu.rpg.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import edu.byu.rpg.RpgGame;
-import edu.byu.rpg.audio.AudioManager;
 import edu.byu.rpg.entities.base.Solid;
-import edu.byu.rpg.entities.enemies.AI.RandomAttackAI;
-import edu.byu.rpg.entities.enemies.AI.RandomMovementAI;
-import edu.byu.rpg.entities.enemies.AI.ThreeBulletAttackAI;
-import edu.byu.rpg.entities.enemies.MonsterType;
+import edu.byu.rpg.entities.enemies.AI.Attacks.AttackType;
+import edu.byu.rpg.entities.enemies.AI.Movement.MovementType;
+import edu.byu.rpg.entities.enemies.bosses.BossType;
+import edu.byu.rpg.entities.enemies.standard.MonsterType;
 import edu.byu.rpg.entities.enemies.controllers.AIController;
 import edu.byu.rpg.entities.enemies.controllers.EnemyController;
 import edu.byu.rpg.entities.player.Player;
@@ -33,6 +34,14 @@ public class PlayScreen extends ScreenBase {
 
     private String music = "floor 1";
 
+    /** Local instance of player, used for camera following. */
+    private Player player;
+
+    /** Map width and height, for camera clamping. Initialize to view size, but
+     * these will be reset when the map is loaded/generated. */
+    private int mapWidth = RpgGame.VIRTUAL_WIDTH;
+    private int mapHeight = RpgGame.VIRTUAL_HEIGHT;
+
     /**
      * Loads the player into the first room of the dungeon.
      *
@@ -40,7 +49,7 @@ public class PlayScreen extends ScreenBase {
      */
     public PlayScreen(final RpgGame game) {
         super(game);
-        loadMap("floor1/1");
+        loadMap("floor1/0");
     }
 
     /**
@@ -54,6 +63,7 @@ public class PlayScreen extends ScreenBase {
     public void render(float delta) {
         super.render(delta);
 
+        moveCamera(delta);
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
@@ -63,6 +73,41 @@ public class PlayScreen extends ScreenBase {
         game.batch.begin();
         game.engine.update(delta);
         game.batch.end();
+    }
+
+    /**
+     * Clamps the camera to the edge of the map, if the camera is out-of-bounds.  Also clamps camera to integer value,
+     * so that we don't have sub-pixel movement.
+     */
+    private void clampCamera() {
+        if (camera.position.x > mapWidth - (camera.viewportWidth / 2)) {
+            camera.position.x = mapWidth - (camera.viewportWidth / 2);
+        } else if (camera.position.x < camera.viewportWidth / 2) {
+            camera.position.x = camera.viewportWidth / 2;
+        }
+        if (camera.position.y > mapHeight - (camera.viewportHeight / 2)) {
+            camera.position.y = mapHeight - (camera.viewportHeight / 2);
+        } else if (camera.position.y < camera.viewportHeight / 2) {
+            camera.position.y = camera.viewportHeight / 2;
+        }
+
+        camera.position.x = (int)camera.position.x;
+        camera.position.y = (int)camera.position.y;
+    }
+
+    /**
+     * Smoothly moves the {@link PlayScreen#camera} to follow the {@link PlayScreen#player}.
+     * @param delta The time between frames.
+     */
+    private void moveCamera(float delta) {
+        // lerp 90% of the distance to the player.
+        float lerp = 0.9f;
+        Vector2 playerPos = player.body.position;
+        camera.position.x += (playerPos.x - camera.position.x) * lerp * delta;
+        camera.position.y += (playerPos.y - camera.position.y) * lerp * delta;
+
+        // clamp camera position to edges of map
+        clampCamera();
     }
 
     // TODO: Refactor map loading/generating logic into its own class.
@@ -76,25 +121,48 @@ public class PlayScreen extends ScreenBase {
         world = new World();
         TiledMap map = game.assets.getMap(name);
         mapRenderer = new OrthogonalTiledMapRenderer(map);
+
+        // get width and height of map in pixels (for camera clamping)
+        MapProperties props = map.getProperties();
+        int tileMapWidth = props.get("width", Integer.class);
+        int tileMapHeight = props.get("height", Integer.class);
+        int tilePxWidth = props.get("tilewidth", Integer.class);
+        int tilePxHeight = props.get("tileheight", Integer.class);
+        mapWidth = tileMapWidth * tilePxWidth;
+        mapHeight = tileMapHeight * tilePxHeight;
+
         // Loads objects from tiled map
         try {
             // load player
             for (TiledMapTileMapObject playerTile : map.getLayers().get("player").getObjects().getByType(TiledMapTileMapObject.class)) {
-                new Player(game, world, (int)playerTile.getX(), (int)playerTile.getY());
+                player = new Player(game, world, (int)playerTile.getX(), (int)playerTile.getY());
+
+                // center camera on player right away, and clamp to edges of room
+                camera.position.x = player.body.position.x;
+                camera.position.y = player.body.position.y;
+                clampCamera();
             }
 
             // TODO: need to create an enemy controller object that spawns a random enemy, given map location;
             //create an AIController and give it an attackAI and a movementAI;
             AIController aiController = new AIController();
-            aiController.addMovementAI(new RandomMovementAI());
-            aiController.addAttackAI(new RandomAttackAI());
-            aiController.addAttackAI(new ThreeBulletAttackAI());
+            aiController.addMovementAI(MovementType.RANDOM);
+            aiController.addMovementAI(MovementType.BOUNCE);
+            aiController.addMovementAI(MovementType.FOLLOW);
+            aiController.addMovementAI(MovementType.STATIONARY);
+            aiController.addAttackAI(AttackType.ONE_BULLET);
+            aiController.addAttackAI(AttackType.THREE_BULLET);
+            aiController.addAttackAI(AttackType.HOMING_BULLET);
+            aiController.addAttackAI(AttackType.FIRE_TRAIL);
+            aiController.addAttackAI(AttackType.EIGHT_SHOT);
+            aiController.addAttackAI(AttackType.BOUNCING_BULLET);
             // create enemyController with the enemy tiles in it.
             EnemyController enemyController = new EnemyController(aiController, map.getLayers().get("enemies").getObjects().getByType(TiledMapTileMapObject.class));
             // add the types of monsters the enemyController should be able to spawn.
             enemyController.addEnemy(MonsterType.SCARAB);
             // spawn the random monsters
             enemyController.spawnRandomMonsters(game, world);
+            //enemyController.spawnBoss(game, world, map.getLayers().get("enemies").getObjects().getByType(TiledMapTileMapObject.class).first(), BossType.BABI);
 
             // load solid level geometry
             for (MapObject rectMapObj : map.getLayers().get("solids").getObjects().getByType(RectangleMapObject.class)) {
