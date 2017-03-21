@@ -8,13 +8,15 @@ import edu.byu.rpg.physics.World;
  */
 public class FollowMovementAI implements MovementAI {
     private float movementSpeed = 2.0f;
-    private final float radius = 300.0f;
+    private float radius = 300.0f;
 
     public FollowMovementAI(){
     }
     @Override
     public void scale(float scaleAmount) {
+
         movementSpeed = movementSpeed * scaleAmount;
+        this.radius = radius * scaleAmount * .35f;
     }
 
     @Override
