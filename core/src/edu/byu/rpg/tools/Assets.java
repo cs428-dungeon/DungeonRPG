@@ -54,6 +54,7 @@ public class Assets {
         manager.load("maps/floor1/8.tmx", TiledMap.class);
         manager.load("maps/floor1/9.tmx", TiledMap.class);
         manager.load("maps/floor1/10.tmx", TiledMap.class);
+        manager.load("maps/floor1/11.tmx", TiledMap.class);
 
 
         // load music

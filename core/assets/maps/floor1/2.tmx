@@ -69,7 +69,7 @@
   <object id="39" x="96" y="32" width="48" height="512"/>
   <object id="40" x="448" y="32" width="32" height="544"/>
  </objectgroup>
- <objectgroup name="player" offsetx="16" offsety="16">
+ <objectgroup name="player">
   <object id="48" gid="1201" x="32" y="240" width="32" height="32"/>
  </objectgroup>
 </map>

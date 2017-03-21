@@ -49,7 +49,7 @@ public class PlayScreen extends ScreenBase {
      */
     public PlayScreen(final RpgGame game) {
         super(game);
-        loadMap("floor1/10");
+        loadMap("floor1/11");
     }
 
     /**
