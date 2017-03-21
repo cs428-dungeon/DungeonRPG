@@ -143,11 +143,11 @@ public class Scarab extends Actor implements Collideable {
         this.movementAI.scale(scaleMovement);
     }
 
-    public void scaleDown(){
-        float scaleAttackDamage = .5f;
-        float scaleAttackSpeed = .5f;
-        float scaleAttackVelocity = .5f;
-        float scaleMovement = .5f;
+    public void scaleDown(float scaleDownAmount){
+        float scaleAttackDamage = scaleDownAmount;
+        float scaleAttackSpeed = scaleDownAmount;
+        float scaleAttackVelocity = scaleDownAmount;
+        float scaleMovement = scaleDownAmount;
 
         this.attackAI.scale(scaleAttackDamage, scaleAttackSpeed, scaleAttackVelocity);
         this.movementAI.scale(scaleMovement);
