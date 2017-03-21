@@ -59,7 +59,7 @@ public class Scarab extends Actor implements Collideable {
         //set weapon damage
         weapon.setDamage(attackAI.getAttackDamage());
         //TODO: Change these numbers to some algorithm based off of the enemy level.
-        attackAI.scale(2.0f,2.0f, 2.0f);
+        scaleUp();
 
 
         // setup random direction
@@ -131,5 +131,25 @@ public class Scarab extends Actor implements Collideable {
         super.destroy();
         shadow.destroy();
         world.remove(this);
+    }
+
+    public void scaleUp(){
+        float scaleAttackDamage = this.level * 2.0f;
+        float scaleAttackSpeed = this.level * 2.0f;
+        float scaleAttackVelocity = this.level * 2.0f;
+        float scaleMovement = this.level * 2.0f;
+
+        this.attackAI.scale(scaleAttackDamage, scaleAttackSpeed, scaleAttackVelocity);
+        this.movementAI.scale(scaleMovement);
+    }
+
+    public void scaleDown(){
+        float scaleAttackDamage = .5f;
+        float scaleAttackSpeed = .5f;
+        float scaleAttackVelocity = .5f;
+        float scaleMovement = .5f;
+
+        this.attackAI.scale(scaleAttackDamage, scaleAttackSpeed, scaleAttackVelocity);
+        this.movementAI.scale(scaleMovement);
     }
 }
