@@ -59,13 +59,13 @@ public class PotViper extends Actor implements Collideable {
         equipWeapon(attackAI.getWeaponType());
         //set weapon damage
         weapon.setDamage(attackAI.getAttackDamage());
-        //TODO: Change these numbers to some algorithm based off of the enemy level.
-        scaleUp();
 
 
         // setup random direction
         this.movementAI = movementAI;
 
+        //TODO: Change these numbers to some algorithm based off of the enemy level.
+        scaleUp();
 
         // init health
         health = 5;
