@@ -45,6 +45,15 @@ public class Assets {
         manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         manager.load("maps/floor1/1.tmx", TiledMap.class);
         manager.load("maps/floor1/0.tmx", TiledMap.class);
+        manager.load("maps/floor1/2.tmx", TiledMap.class);
+        manager.load("maps/floor1/3.tmx", TiledMap.class);
+        manager.load("maps/floor1/4.tmx", TiledMap.class);
+        manager.load("maps/floor1/5.tmx", TiledMap.class);
+        manager.load("maps/floor1/6.tmx", TiledMap.class);
+        manager.load("maps/floor1/7.tmx", TiledMap.class);
+        manager.load("maps/floor1/8.tmx", TiledMap.class);
+        manager.load("maps/floor1/9.tmx", TiledMap.class);
+        manager.load("maps/floor1/10.tmx", TiledMap.class);
 
 
         // load music
