@@ -23,6 +23,7 @@ import edu.byu.rpg.physics.World;
 public class Bat extends Actor implements Collideable {
 
     private AnimationManager anims;
+    private final String animKey = "bat";
     private Shadow shadow;
 
     private float attackTime = 1.0f;
@@ -36,7 +37,7 @@ public class Bat extends Actor implements Collideable {
     private float level;
 
     public Bat(RpgGame game, World world, int x, int y, MovementAI movementAI, AttackAI attackAI) {
-        super(game, world, new Body(x, y, 11, 8, 45, 16));
+        super(game, world, new Body(x, y, 3, 7, 14, 12));
         // add to enemies collision group
         world.add(World.Type.ENEMY, this);
 
@@ -49,8 +50,8 @@ public class Bat extends Actor implements Collideable {
 
         // init animations and shadow
         anims = new AnimationManager(game);
-        anims.add("scarab_stand", 1, 7, 10);
-        shadow = new Shadow(game, game.assets.getTexture("effects/shadow_64"), body);
+        anims.add(animKey, 1, 20, 24);
+        shadow = new Shadow(game, game.assets.getTexture("effects/shadow_16"), body);
 
         //set up the attack AI and get attack speed and damage.
         this.attackAI = attackAI;
@@ -68,7 +69,7 @@ public class Bat extends Actor implements Collideable {
         scaleUp();
 
         // init health
-        health = 5;
+        health = 2;
     }
 
     @Override
@@ -83,7 +84,7 @@ public class Bat extends Actor implements Collideable {
         } else {
             anims.faceLeft();
         }
-        anims.play("scarab_stand", true);
+        anims.play(animKey, true);
     }
 
     /**
