@@ -18,6 +18,7 @@ import edu.byu.rpg.entities.enemies.standard.MonsterType;
 import edu.byu.rpg.entities.enemies.controllers.AIController;
 import edu.byu.rpg.entities.enemies.controllers.EnemyController;
 import edu.byu.rpg.entities.player.Player;
+import edu.byu.rpg.input.InputManager;
 import edu.byu.rpg.physics.Body;
 import edu.byu.rpg.physics.World;
 
@@ -90,9 +91,9 @@ public class PlayScreen extends ScreenBase {
         } else if (camera.position.y < camera.viewportHeight / 2) {
             camera.position.y = camera.viewportHeight / 2;
         }
-
-        camera.position.x = (int)camera.position.x;
-        camera.position.y = (int)camera.position.y;
+//
+//        camera.position.x = Math.round(camera.position.x);
+//        camera.position.y = Math.round(camera.position.y);
     }
 
     /**
@@ -100,11 +101,15 @@ public class PlayScreen extends ScreenBase {
      * @param delta The time between frames.
      */
     private void moveCamera(float delta) {
-        // lerp 90% of the distance to the player.
-        float lerp = 0.9f;
+        // Get offset from the where player is aiming so that the camera "leads" the player.
+        float offsetX = InputManager.getRightXAxis() * 30f;
+        float offsetY = InputManager.getRightYAxis() * 30f;
+
+        // move camera smoothly using a linear interpolation constant (lerp)
+        float lerp = 4f * delta;
         Vector2 playerPos = player.body.position;
-        camera.position.x += (playerPos.x - camera.position.x) * lerp * delta;
-        camera.position.y += (playerPos.y - camera.position.y) * lerp * delta;
+        camera.position.x += (playerPos.x + offsetX - camera.position.x) * lerp;
+        camera.position.y += (playerPos.y + offsetY - camera.position.y) * lerp;
 
         // clamp camera position to edges of map
         clampCamera();

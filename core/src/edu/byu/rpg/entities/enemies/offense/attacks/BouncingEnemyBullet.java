@@ -96,7 +96,7 @@ public class BouncingEnemyBullet extends EnemyAttack {
         body.position.x += body.velocity.x * delta * Body.PIXELS_PER_METER;
 
         // check for collision, and move back by steps if necessary
-        while (world.collideCheck(World.Type.SOLID, body)) {
+        while (world.collideCheck(World.Type.SOLID, body) && !world.collideCheck(World.Type.HOMING_ENEMY, body)) {
             body.hitSolid = true;
             body.position.x = Utils.approach(body.position.x, prevX, 1);
         }
@@ -113,7 +113,7 @@ public class BouncingEnemyBullet extends EnemyAttack {
         body.position.y += body.velocity.y * delta * Body.PIXELS_PER_METER;
 
         // check for collision and move back if necessary
-        while (world.collideCheck(World.Type.SOLID, body)) {
+        while (world.collideCheck(World.Type.SOLID, body)&& !world.collideCheck(World.Type.HOMING_ENEMY, body)) {
             body.hitSolid = true;
             body.position.y = Utils.approach(body.position.y, prevY, 1);
         }
