@@ -36,10 +36,12 @@ public class Assets {
         loadTexture("player/shadow");
 
         loadTexture("scarab_stand");
+        loadTexture("bat");
         loadTexture("blue_flame");
         loadTexture("basic_bullet");
 
         loadTexture("effects/shadow_64");
+        loadTexture("effects/shadow_16");
 
         // load maps
         manager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
