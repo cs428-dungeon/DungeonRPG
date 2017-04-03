@@ -165,6 +165,7 @@ public class PlayScreen extends ScreenBase {
             EnemyController enemyController = new EnemyController(aiController, map.getLayers().get("enemies").getObjects().getByType(TiledMapTileMapObject.class));
             // add the types of monsters the enemyController should be able to spawn.
             enemyController.addEnemy(MonsterType.SCARAB);
+            enemyController.addEnemy(MonsterType.BAT);
             // spawn the random monsters
             enemyController.spawnRandomMonsters(game, world);
             //enemyController.spawnBoss(game, world, map.getLayers().get("enemies").getObjects().getByType(TiledMapTileMapObject.class).first(), BossType.BABI);

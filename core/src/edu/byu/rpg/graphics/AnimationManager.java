@@ -26,8 +26,8 @@ public class AnimationManager {
     /** Flag for whether or not current animation should loop. */
     private boolean loop;
 
-    /** Whether or not the animation should face right or be flipped. */
-    private boolean faceRight;
+    /** Whether or not the animation should face left or be flipped. */
+    private boolean faceLeft;
 
     /** Sets local instance of {@link RpgGame} and resets the animations map.
      * @param game Our main game class.
@@ -122,8 +122,8 @@ public class AnimationManager {
         TextureRegion frame = animation.getKeyFrame(totalTime, loop);
 
         // draw animation
-        float modX = faceRight ? x : x + frame.getRegionWidth() - 2;
-        float xScale = faceRight ? 1 : -1;
+        float modX = faceLeft ? x : x + frame.getRegionWidth() - 2;
+        float xScale = faceLeft ? 1 : -1;
         game.batch.draw(frame, modX, y, 0, 0, frame.getRegionWidth(), frame.getRegionHeight(), xScale, 1, 0);
     }
 
@@ -153,22 +153,22 @@ public class AnimationManager {
      * Flips the animation to the left.
      */
     public void faceLeft() {
-        faceRight = false;
+        faceLeft = true;
     }
 
     /**
      * Flips the animation to the right.
      */
     public void faceRight() {
-        faceRight = true;
+        faceLeft = false;
     }
 
     /**
-     * Clears all animations from this manager, and resets the time and {@link AnimationManager#faceRight}
+     * Clears all animations from this manager, and resets the time and {@link AnimationManager#faceLeft}
      */
     public void reset() {
         animations = new HashMap<String, Animation<TextureRegion>>();
         totalTime = 0;
-        faceRight = true;
+        faceLeft = true;
     }
 }
