@@ -39,7 +39,12 @@ public class EnemyController {
     public void spawnRandomMonsters(RpgGame game, World world){
         for (TiledMapTileMapObject enemyTile : EnemyTiles) {
             switch(monsterTypes.get(monsterGenerator.nextInt(monsterTypes.size()))){
-                case SCARAB: new Scarab(game, world, (int)enemyTile.getX(), (int)enemyTile.getY(), aiController.getRandomMovementAI(), aiController.getRandomAttackAI());
+                case SCARAB:
+                    new Scarab(game, world, (int)enemyTile.getX(), (int)enemyTile.getY(), aiController.getRandomMovementAI(), aiController.getRandomAttackAI());
+                    break;
+                case BAT:
+                    new Bat(game, world, (int)enemyTile.getX(), (int)enemyTile.getY(), aiController.getRandomMovementAI(), aiController.getRandomAttackAI());
+                    break;
             }
         }
     }
