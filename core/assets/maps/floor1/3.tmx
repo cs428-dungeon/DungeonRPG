@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="45" height="30" tilewidth="16" tileheight="16" nextobjectid="66">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="45" height="30" tilewidth="16" tileheight="16" nextobjectid="77">
  <tileset firstgid="1" name="tileset_1" tilewidth="16" tileheight="16" tilecount="1200" columns="40">
   <image source="tileset_1.png" width="640" height="480"/>
  </tileset>
@@ -43,7 +43,14 @@
 201,203,203,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,283,123,124,281,204,206
 </data>
  </layer>
- <objectgroup name="enemies"/>
+ <objectgroup name="enemies">
+  <object id="71" gid="1202" x="352" y="80" width="64" height="32"/>
+  <object id="72" gid="1202" x="160" y="192" width="64" height="32"/>
+  <object id="73" gid="1202" x="240" y="432" width="64" height="32"/>
+  <object id="74" gid="1202" x="496" y="320" width="64" height="32"/>
+  <object id="75" gid="1202" x="608" y="192" width="64" height="32"/>
+  <object id="76" gid="1202" x="48" y="320" width="64" height="32"/>
+ </objectgroup>
  <objectgroup name="solids">
   <object id="49" x="0" y="0" width="48" height="32"/>
   <object id="50" x="0" y="32" width="32" height="368"/>

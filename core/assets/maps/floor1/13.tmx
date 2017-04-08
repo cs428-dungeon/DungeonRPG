@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="45" tilewidth="16" tileheight="16" nextobjectid="79">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="45" tilewidth="16" tileheight="16" nextobjectid="87">
  <tileset firstgid="1" name="tileset_1" tilewidth="16" tileheight="16" tilecount="1200" columns="40">
   <image source="tileset_1.png" width="640" height="480"/>
  </tileset>
@@ -58,7 +58,15 @@
 201,202,201,283,123,124,281,206,203,206,282,282,282,6,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,205,205,206
 </data>
  </layer>
- <objectgroup name="enemies"/>
+ <objectgroup name="enemies">
+  <object id="79" gid="1202" x="272" y="656" width="64" height="32"/>
+  <object id="80" gid="1202" x="224" y="368" width="64" height="32"/>
+  <object id="81" gid="1202" x="80" y="160" width="64" height="32"/>
+  <object id="82" gid="1202" x="240" y="80" width="64" height="32"/>
+  <object id="83" gid="1202" x="512" y="144" width="64" height="32"/>
+  <object id="84" gid="1202" x="432" y="288" width="64" height="32"/>
+  <object id="85" gid="1202" x="672" y="512" width="64" height="32"/>
+ </objectgroup>
  <objectgroup name="solids">
   <object id="58" x="128" y="192" width="112" height="112"/>
   <object id="59" x="336" y="112" width="112" height="112"/>
@@ -78,5 +86,7 @@
   <object id="76" x="608" y="32" width="192" height="48"/>
   <object id="78" x="768" y="80" width="32" height="256"/>
  </objectgroup>
- <objectgroup name="player"/>
+ <objectgroup name="player">
+  <object id="86" gid="1201" x="0" y="368" width="32" height="32"/>
+ </objectgroup>
 </map>

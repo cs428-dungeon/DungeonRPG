@@ -46,7 +46,7 @@ public class Player extends Actor implements Collideable {
         world.add(World.Type.PLAYER, this);
 
         // damage variables
-        health = 3;
+        health = 100;
         invincibleClock = 0;
         flashClock = 0;
         flashing = false;

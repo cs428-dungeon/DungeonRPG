@@ -98,7 +98,7 @@
   <object id="39" x="928" y="176" width="32" height="720"/>
  </objectgroup>
  <objectgroup name="player">
-  <object id="22" gid="1201" x="544" y="496" width="32" height="32"/>
+  <object id="22" gid="1201" x="0" y="688" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="enemies">
   <object id="23" gid="1202" x="352" y="128" width="64" height="32"/>
