@@ -12,7 +12,7 @@ import edu.byu.rpg.physics.World;
  */
 public class BouncingBulletAttackAI implements AttackAI {
     private float attackSpeed = 2.0f;
-    private float attackDamage = 2.0f;
+    private float attackDamage = 10.0f;
     private WeaponType weaponType = WeaponType.BOUNCING_BULLET;
     private EnemyBouncingBulletWeapon weapon;
     private float attackClock;

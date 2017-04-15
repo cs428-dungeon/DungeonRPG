@@ -11,7 +11,7 @@ import edu.byu.rpg.physics.World;
  */
 public class FireTrailAI implements AttackAI {
     private float attackSpeed = 2.0f;
-    private float attackDamage = 1.0f;
+    private float attackDamage = 20.0f;
     private WeaponType weaponType = WeaponType.TRAIL;
     private EnemyTrailWeapon weapon;
     private float attackClock;

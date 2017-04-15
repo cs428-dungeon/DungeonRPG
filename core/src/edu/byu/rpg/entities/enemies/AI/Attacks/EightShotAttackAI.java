@@ -11,7 +11,7 @@ import edu.byu.rpg.physics.World;
  */
 public class EightShotAttackAI implements AttackAI {
     private float attackSpeed = 2.0f;
-    private float attackDamage = 2.0f;
+    private float attackDamage = 11.0f;
     private WeaponType weaponType = WeaponType.BULLET;
     private EnemyBulletWeapon weapon;
     private float attackClock;
