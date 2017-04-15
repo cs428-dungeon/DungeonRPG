@@ -22,6 +22,9 @@ public class RpgGame extends Game {
 	/** The single asset loader that will be used to load all assets, and retrieve them throughout the game */
 	public Assets assets;
 
+	/** The single world manager that will be used to manage game flow, including menuScreen to playScreen and room to room **/
+	public WorldManager worldManager;
+
 	/** The single audio manager that will be used to play and manage any and all audio*/
 	public AudioManager audio;
 
@@ -37,6 +40,9 @@ public class RpgGame extends Game {
 		batch = new SpriteBatch();
 		assets = new Assets();
 		audio = new AudioManager(assets);
+		worldManager = new WorldManager(this);
+
+
 		// TODO: When we're ready to draw a loading/splash screen, this is where we'll do it.
 		assets.load();
 		// TODO: When we have a menu screen, we'll launch into that instead of going straight to PlayScreen

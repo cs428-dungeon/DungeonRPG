@@ -110,6 +110,14 @@ public class PlayScreen extends ScreenBase {
         clampCamera();
     }
 
+    public void activate() {
+        this.world.activate();
+    }
+
+    public void deactivate() {
+        this.world.deactivate();
+    }
+
     // TODO: Refactor map loading/generating logic into its own class.
 
     /**
@@ -117,7 +125,7 @@ public class PlayScreen extends ScreenBase {
      *
      * @param name The name of the map (without filepath or extension).
      */
-    private void loadMap(String name) {
+    public void loadMap(String name) {
         world = new World();
         TiledMap map = game.assets.getMap(name);
         mapRenderer = new OrthogonalTiledMapRenderer(map);
@@ -162,7 +170,7 @@ public class PlayScreen extends ScreenBase {
             enemyController.addEnemy(MonsterType.SCARAB);
             // spawn the random monsters
             enemyController.spawnRandomMonsters(game, world);
-            //enemyController.spawnBoss(game, world, map.getLayers().get("enemies").getObjects().getByType(TiledMapTileMapObject.class).first(), BossType.BABI);
+            enemyController.spawnBoss(game, world, map.getLayers().get("enemies").getObjects().getByType(TiledMapTileMapObject.class).first(), BossType.BABI);
 
             // load solid level geometry
             for (MapObject rectMapObj : map.getLayers().get("solids").getObjects().getByType(RectangleMapObject.class)) {

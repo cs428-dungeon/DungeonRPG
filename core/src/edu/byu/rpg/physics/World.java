@@ -1,6 +1,7 @@
 package edu.byu.rpg.physics;
 
 import edu.byu.rpg.entities.player.Player;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,6 +57,14 @@ public class World {
         for (Type type : Type.values()) {
             remove(type, collideable);
         }
+    }
+
+    public void activate() {
+        throw new NotImplementedException();
+    }
+
+    public void deactivate() {
+        throw new NotImplementedException();
     }
 
     /**
